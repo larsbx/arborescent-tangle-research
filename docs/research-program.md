@@ -59,3 +59,19 @@ formula by number of ternary forks. **Neither passing W/F/S nor matching
 presentation codes establishes an arborescent isotopy equivalence.**
 A2 (full (P)/(N) conditions, exceptional cases, flips/ring/boundary
 plumbing moves and certified quotient computation) remains open.
+
+## A2.1 — rigorous partial plumbing-move quotient (implemented)
+
+[Proof and exact Burnside results](flip-subgroup-a2-1.md): F1/F2
+reflect cyclic orders on weighted planar trees and, by the bipartition
+of any connected tree, generate a group with at most four elements.
+This subsystem preserves W/F/S, admits exact bounded-orbit enumeration,
+and has **algebraic** quotient generating series with the same
+`μ^n n^(-3/2)` growth as the syntactic grammar, up to a factor `1/4`
+for fixed leaf alphabet size at least two. Distinguish this theorem
+from the still-open growth problem for the **full** Bonahon–Siebenmann
+equivalence and from pointwise boundary-fixing of tangles.
+
+Issue #4 tracks the remaining sourced, topology-certified moves,
+positive/negative canonicity and exceptions. The A2 completion bar is
+**not** met by this partial group action.
