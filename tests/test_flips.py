@@ -6,7 +6,7 @@ plane-rotation-system implementation and tests complete small orbits.
 import unittest
 
 from arborescent.flips import (
-    bipartition, flip_f1, flip_f2, flip_orbit_codes, flip_orbit_key,
+    bipartition, burnside_flip_counts, flip_f1, flip_f2, flip_orbit_codes, flip_orbit_key,
     flip_quotient_count, flip_vertices, parity_flip_representatives,
     reverse_vertex,
 )
@@ -118,6 +118,24 @@ class FlipSubgroupTests(unittest.TestCase):
                     self.assertEqual(len(specs), raw)
                     self.assertEqual(independent, expected)
                     self.assertEqual(flip_quotient_count(n, labels), independent)
+
+    def test_burnside_exact_counts_independent_of_orbit_search(self):
+        # Analytic-combinatorics fixed-point recurrence, compared against
+        # the completely independent exhaustive weighted-plane-tree orbit.
+        expected_2 = (2, 9, 81, 1251, 26688, 669420)
+        expected_3 = (3, 24, 432, 14688, 678132, 36032040)
+        for m, wanted in ((2, expected_2), (3, expected_3)):
+            rows = burnside_flip_counts(5, m)
+            self.assertEqual(tuple(row[-1] for row in rows), wanted)
+            self.assertEqual(rows[0], (m, m, m, m, m))
+            for n in range(1, 4 if m == 2 else 3):
+                labels = tuple(range(2, m + 2))
+                self.assertEqual(rows[n][-1], flip_quotient_count(n, labels))
+                self.assertGreaterEqual(rows[n][-1] * 4, rows[n][0])
+        with self.assertRaises(ValueError):
+            burnside_flip_counts(-1, 2)
+        with self.assertRaises(ValueError):
+            burnside_flip_counts(3, 0)
 
     def test_lower_bound_ninety_proportion_and_single_vertex(self):
         # Each orbit has at most four elements. A bound, not an
