@@ -28,7 +28,7 @@ class TangleLabelTests(unittest.TestCase):
         ))
 
     def test_tangle_flip_involutions_and_composition(self):
-        spec = Fork((Leaf(2), Fork((Leaf(2), Leaf(3)), Leaf(3))))
+        spec = Fork((Leaf(2), Fork((Leaf(2), Leaf(3))), Leaf(3)))
         obj = label_free_ports(to_weighted_tree(spec), ETA)
         self.assertEqual(tangle_flip_f1(tangle_flip_f1(obj)), obj)
         self.assertEqual(tangle_flip_f2(tangle_flip_f2(obj, 0), 0), obj)
