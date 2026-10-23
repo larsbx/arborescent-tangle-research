@@ -183,3 +183,84 @@ def tangle_grammar_orbit_count(n: int, labels: tuple[int, ...] = (2, 3)) -> int:
                 V4LabeledTree(tree, (("f0", v4),))
             ))
     return len(keys)
+
+
+def tangle_flip_f3prime(
+    source: V4LabeledTree, pivot: int, branch_edge: str, *,
+    from_side: str = "before",
+) -> V4LabeledTree:
+    """Restricted W-preserving F3' move across an internal edge.
+
+    Bonahon--Siebenmann §§12.4, 12.7.3, printed pp.155,167:
+    relocate the single nonzero sector a across an incident branch
+    edge. If a is odd, reverse rotations at vertices *within that
+    branch* at odd distance from the pivot. For tangles, multiply
+    V4 free labels in the branch by xi (even distance) or eta
+    (odd distance). No boundary label outside that branch changes.
+
+    This implementation requires that one of the two angular sectors
+    adjacent to branch_edge has nonzero weight a and the other zero.
+    It is a deliberately *strict* subset of the depicted general
+    move; F3'', ring, and generalized weight transport are absent.
+    """
+    if type(pivot) is not int or pivot < 0 or pivot >= len(source.tree.vertices):
+        raise ValueError("invalid pivot")
+    if from_side not in ("before", "after"):
+        raise ValueError("from_side must be before or after")
+    v = source.tree.vertices[pivot]
+    if branch_edge not in v.slots or not branch_edge.startswith("e"):
+        raise ValueError("choose an incident internal edge")
+    idx = v.slots.index(branch_edge)
+    before, after = (idx - 1) % len(v.slots), idx
+    old_slot = before if from_side == "before" else after
+    new_slot = after if from_side == "before" else before
+    a = v.sectors[old_slot]
+    if a == 0 or v.sectors[new_slot] != 0:
+        raise ValueError("weight transport requires one nonzero adjacent sector")
+    if before == after:
+        raise ValueError("no distinct adjacent sectors at pivot")
+
+    adjacency = [set() for _ in source.tree.vertices]
+    owner: dict[str, int] = {}
+    for u, vertex in enumerate(source.tree.vertices):
+        for s in vertex.slots:
+            if s.startswith("e"):
+                if s in owner:
+                    other = owner[s]
+                    adjacency[u].add(other)
+                    adjacency[other].add(u)
+                else:
+                    owner[s] = u
+    # The branch is exactly the component on the other side of edge
+    # branch_edge after deleting its incidence to the pivot.
+    other = next(j for j, vertex in enumerate(source.tree.vertices)
+                 if j != pivot and branch_edge in vertex.slots)
+    distance = {other: 1}
+    pending = [other]
+    for u in pending:
+        for w in sorted(adjacency[u]):
+            if w == pivot or w in distance:
+                continue
+            distance[w] = distance[u] + 1
+            pending.append(w)
+
+    sectors = list(v.sectors)
+    sectors[old_slot] = 0
+    sectors[new_slot] = a
+    new_vertices = list(source.tree.vertices)
+    new_vertices[pivot] = Vertex(v.slots, tuple(sectors))
+    if a % 2:
+        from .flips import reverse_vertex
+        for u, depth in distance.items():
+            if depth % 2:
+                new_vertices[u] = reverse_vertex(new_vertices[u])
+    transformed = WeightedPlaneTree(tuple(new_vertices))
+    port_owners = {
+        s: u for u, vertex in enumerate(source.tree.vertices)
+        for s in vertex.slots if s.startswith("f")
+    }
+    return V4LabeledTree(transformed, tuple(
+        (name, label ^ (ETA if distance[port_owners[name]] % 2 else XI)
+         if a % 2 and port_owners[name] in distance else label)
+        for name, label in source.labels
+    ))
