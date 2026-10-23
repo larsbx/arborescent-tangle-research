@@ -92,3 +92,19 @@ The §12.4 Free-Bond canonicity condition **F** pertains to the *pair*
 calculus; §12.7.2 omits it for *tangles*. Tangle W/S/P/N and ring
 equivalence remain open; the existing `wfs_failures()` must not be
 interpreted as a tangle-canonicality certificate.
+
+## A2.3: bounded replayable move search and new obstruction
+
+[The A2.3 exact audit](docs/partial-move-closure-a2-3.md) fixes a
+previously merged A2.2 test-fixture bug that caused hosted CI to fail.
+It adds bounded exhaustive search under only implemented F1/F2/strict
+F3′ moves on fixed indexed graphs, with replayable shortest move traces
+and explicit incomplete status when the budget is reached.
+
+**New exact obstruction:** The A1 grammar places nonzero weights only
+at valence-one leaves. The strict F3′ weight-transport move requires two
+distinct adjacent sectors at a weighted vertex. Therefore **F3′ is
+inapplicable on every A1 syntax tree, even after F1/F2**. Its earlier
+implementation must not be used to infer quotient behavior on A1.
+Future nontrivial enumeration requires a different, predeclared grammar
+with weighted internal forks and topology-valid tangle W/S/P/N conditions.
