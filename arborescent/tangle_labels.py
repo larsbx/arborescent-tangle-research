@@ -215,8 +215,9 @@ def tangle_flip_f3prime(
     old_slot = before if from_side == "before" else after
     new_slot = after if from_side == "before" else before
     a = v.sectors[old_slot]
-    if a == 0 or v.sectors[new_slot] != 0:
-        raise ValueError("weight transport requires one nonzero adjacent sector")
+    if (a == 0 or any(w != 0 for i, w in enumerate(v.sectors)
+                      if i != old_slot)):
+        raise ValueError("strict F3-prime requires one nonzero sector at pivot")
     if before == after:
         raise ValueError("no distinct adjacent sectors at pivot")
 
