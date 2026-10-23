@@ -108,3 +108,20 @@ inapplicable on every A1 syntax tree, even after F1/F2**. Its earlier
 implementation must not be used to infer quotient behavior on A1.
 Future nontrivial enumeration requires a different, predeclared grammar
 with weighted internal forks and topology-valid tangle W/S/P/N conditions.
+
+## A2.5: ring-move readiness and a conserved-weight obstruction
+
+[Exact necessary-signature detector and proof](docs/ring-signature-a2-5.md):
+Bonahon–Siebenmann's modified R± diagrams require a central
+weight ±1 with a pair of matching ±2 terminal weights.
+The A1 and existing A2.4 *default grammars have no unit-weight
+vertex*. All implemented F1/F2/strict-F3′ moves preserve individual
+vertex total weights; hence **no sequence of those moves can make
+R± applicable in those grammars**. This is an exact structural
+obstruction, not a conjecture or isotopy theorem.
+
+The new `ring_signatures` API deliberately returns only **necessary
+candidate motifs**; it does *not* perform an R± move. A minimal
+ring-ready extension with internal +1 and terminal +2 labels has
+positive candidates. Full diagrams, boundary bookkeeping and an
+independently justified replacement remain open.
