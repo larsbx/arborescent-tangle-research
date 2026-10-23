@@ -137,7 +137,7 @@ class TangleLabelTests(unittest.TestCase):
         t = label_free_ports(tree)
         for pivot, edge, side in (
             (-1, "e0", "before"), (True, "e0", "before"),
-            (0, "e1", "before"), (0, "e0", "after"),
+            (0, "e1", "before"), (0, "e0", "before"),
             (0, "f0", "before"), (0, "e99", "before"),
             (1, "e0", "middle"),
         ):
