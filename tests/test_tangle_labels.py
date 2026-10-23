@@ -6,7 +6,7 @@ from arborescent.tangle_labels import (
     IDENTITY, XI, ETA, ZETA, V4LabeledTree,
     label_free_ports, normalize_root_label, tangle_flip_f1,
     tangle_flip_f2, tangle_flip_group, tangle_flip_orbit_key,
-    tangle_grammar_orbit_count,
+    tangle_grammar_orbit_count, tangle_flip_f3prime,
 )
 from arborescent.weighted_trees import (
     Fork, Leaf, Vertex, WeightedPlaneTree, syntax_counts, to_weighted_tree,
@@ -86,6 +86,64 @@ class TangleLabelTests(unittest.TestCase):
         self.assertEqual(fixed.label("f0"), 0)
         self.assertEqual(tangle_flip_orbit_key(fixed),
                          tangle_flip_orbit_key(source))
+
+    def test_restricted_f3prime_parity_and_inverse(self):
+        # Two free ports in the moved branch witness respectively:
+        # distance 1 => eta, distance 2 => xi. f0 is outside.
+        tree = WeightedPlaneTree((
+            Vertex(("f0", "e0", "e1"), (3, 0, 0)),
+            Vertex(("e0", "e2", "f1"), (0, 0, 0)),
+            Vertex(("e1",), (2,)),
+            Vertex(("e2", "f2"), (0, 0)),
+        ))
+        t = V4LabeledTree(
+            tree, (("f0", XI), ("f1", ETA), ("f2", ZETA))
+        )
+        u = tangle_flip_f3prime(t, 0, "e0", from_side="before")
+        self.assertEqual(u.tree.vertices[0].sectors, (0, 3, 0))
+        self.assertEqual(u.label("f0"), XI)
+        self.assertEqual(u.label("f1"), ETA ^ ETA)
+        self.assertEqual(u.label("f2"), ZETA ^ XI)
+        self.assertEqual(u.tree.vertices[1].slots,
+                         ("e0", "f1", "e2"))
+        self.assertEqual(u.tree.vertices[3].slots,
+                         tree.vertices[3].slots)
+        self.assertEqual(
+            tangle_flip_f3prime(u, 0, "e0", from_side="after"), t
+        )
+        self.assertEqual(
+            tuple(sorted(v.weight for v in t.tree.vertices)),
+            tuple(sorted(v.weight for v in u.tree.vertices)),
+        )
+
+    def test_restricted_f3prime_even_no_flip(self):
+        tree = WeightedPlaneTree((
+            Vertex(("f0", "e0", "e1"), (4, 0, 0)),
+            Vertex(("e0", "f1"), (0, 0)),
+            Vertex(("e1",), (2,)),
+        ))
+        t = V4LabeledTree(tree, (("f0", 0), ("f1", 1)))
+        u = tangle_flip_f3prime(t, 0, "e0")
+        self.assertEqual(u.tree.vertices[0].sectors, (0, 4, 0))
+        self.assertEqual(u.tree.vertices[1], t.tree.vertices[1])
+        self.assertEqual(u.labels, t.labels)
+        self.assertEqual(tangle_flip_f3prime(u, 0, "e0", from_side="after"), t)
+
+    def test_restricted_f3prime_preconditions(self):
+        tree = WeightedPlaneTree((
+            Vertex(("f0", "e0", "e1"), (0, 3, 2)),
+            Vertex(("e0",), (2,)), Vertex(("e1",), (3,)),
+        ))
+        t = label_free_ports(tree)
+        for pivot, edge, side in (
+            (-1, "e0", "before"), (True, "e0", "before"),
+            (0, "e1", "before"), (0, "e0", "after"),
+            (0, "f0", "before"), (0, "e99", "before"),
+            (1, "e0", "middle"),
+        ):
+            with self.subTest(pivot=pivot, edge=edge, side=side):
+                with self.assertRaises(ValueError):
+                    tangle_flip_f3prime(t, pivot, edge, from_side=side)
 
     def test_label_and_root_invalid_guards(self):
         tree = to_weighted_tree(Fork((Leaf(2), Leaf(3))))
