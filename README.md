@@ -71,3 +71,24 @@ are still outstanding. Reproduce with:
 python -m arborescent.flips --max-n 6 --alphabet-size 2
 python -m unittest discover -s tests -v
 ```
+
+## A2.2: Klein-four boundary labels and a strict F3′ move
+
+[The A2.2 tangle-calculus note](docs/v4-tangle-moves-a2-2.md) records a
+critical distinction from A2.1: Bonahon–Siebenmann §12.7 requires **V4
+labels on every free bond**. Its tangle F1 and F2 moves alter those labels
+(ζ globally; ξ at even distance and η at odd distance). A restricted
+W-preserving **F3′** weight transport is now implemented, including the
+odd/even parity effect on the attached subtree and its boundary labels.
+
+**New exact correction:** adding all four root-boundary labels makes
+the F1/F2 action free on the A1 one-root-port grammar. Its correctly
+V4-labelled presentation quotient has coefficients **a_n**, not the
+unlabelled pair-presentation quotient **Q_n**. For m=2,n=2: raw=192,
+unlabelled pair quotient=81, labelled tangle presentation quotient=192.
+Neither is a full arborescent isotopy enumeration.
+
+The §12.4 Free-Bond canonicity condition **F** pertains to the *pair*
+calculus; §12.7.2 omits it for *tangles*. Tangle W/S/P/N and ring
+equivalence remain open; the existing `wfs_failures()` must not be
+interpreted as a tangle-canonicality certificate.
