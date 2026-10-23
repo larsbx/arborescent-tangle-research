@@ -161,3 +161,21 @@ python -m arborescent.ring_grammar --max-n 6 --leaf-labels 2 --max-rings-per-for
 
 The result is an exact taxonomy of **syntactic growth laws**, not
 an unconditional Catalan theorem about all non-rational tangles.
+
+## A3 negative control: syntactically distinct ring locations coalesce
+
+A regression fixture places a single `+2—+1—+2` ring subtree in two
+different cyclic wedges of the same valence-four base. The other
+two child branches and the marked free root port remain in the same
+relative cyclic order, and all adjacent base sectors are zero.
+The *original* marked weighted-plane-tree codes differ (because the
+cap positions differ). After applying the source-style **restricted
+abbreviation** to each, the codes **agree**: both have ring number
+one at the base and exactly the same two residual branches.
+
+This is an explicit example of why a source-ring-numbered
+representation suppresses placement data. It is still **not** an
+independent proof that the two corresponding tangles are isotopic:
+topological equivalence is supplied only by the source's properly
+applicable ring-move theorem, whose complete hypotheses and
+exceptional cases are not checked by this synthetic fixture.
