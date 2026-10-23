@@ -3,7 +3,7 @@ import unittest
 from math import comb
 from itertools import product
 
-from arborescent.ring_abbreviation import Abbreviated
+from arborescent.ring_abbreviation import Abbreviated, abbreviate_disjoint_rings
 from arborescent.ring_grammar import (
     annotate_abbreviated, bounded_ring_counts, enumerate_abbreviated,
     ring_number_poly, total_bounded_rings, unbounded_fixed_ring_count,
@@ -91,6 +91,34 @@ class RingGrammarTests(unittest.TestCase):
             abbr.rings[::-1], +1,
         )
         self.assertEqual(abbr.rooted_code(), shifted.rooted_code())
+
+    def test_two_distinct_ring_placements_have_identical_abbreviation(self):
+        # Distinct *marked* weighted-plane presentations. The ring cap
+        # attaches at a different wedge on a valence-4 base. After
+        # §12.5 representation change, their ring counts and residual
+        # cyclic child orders agree. This does NOT independently prove
+        # the associated tangles are isotopic.
+        rest = (
+            Vertex(("e0", "e1", "e2"), (0, 1, 0)),
+            Vertex(("e1",), (2,)),
+            Vertex(("e2",), (2,)),
+            Vertex(("e3",), (3,)),
+            Vertex(("e4",), (4,)),
+        )
+        one = V4LabeledTree(WeightedPlaneTree((
+            Vertex(("f0", "e0", "e3", "e4"), (0, 0, 0, 0)),
+            *rest,
+        )), (("f0", 0),))
+        two = V4LabeledTree(WeightedPlaneTree((
+            Vertex(("f0", "e3", "e0", "e4"), (0, 0, 0, 0)),
+            *rest,
+        )), (("f0", 0),))
+        self.assertNotEqual(one.labelled_rooted_code(),
+                            two.labelled_rooted_code())
+        abbr_one = abbreviate_disjoint_rings(one, +1)
+        abbr_two = abbreviate_disjoint_rings(two, +1)
+        self.assertEqual(abbr_one.rings, (1, 0, 0))
+        self.assertEqual(abbr_one.rooted_code(), abbr_two.rooted_code())
 
     def test_invalid_inputs_fail_closed(self):
         for fn, args in (
