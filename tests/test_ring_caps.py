@@ -6,7 +6,7 @@ picture preconditions.
 """
 import unittest
 
-from arborescent.internal_forks import InternalFork, Tip, Port, compile_fork, tangle_screen
+from arborescent.internal_forks import InternalFork, Tip, Port, compile_fork, generate, tangle_screen
 from arborescent.ring_caps import (
     StrictRingCap, contract_ring_cap, expand_ring_cap, strict_ring_caps,
 )
@@ -106,6 +106,19 @@ class StrictRingCapTests(unittest.TestCase):
         reduced = contract_ring_cap(labeled, strict_ring_caps(labeled)[0])
         self.assertEqual(dict(reduced.labels), {"f0": 1, "f1": 3})
         self.assertEqual(reduced.tree.vertices[0].slots, ("f0", "f1"))
+
+    def test_small_ring_ready_generator_strict_vs_permissive(self):
+        # Independent bounded grammar search: the strict source picture
+        # must be realizable, and must reject some necessary-only motifs.
+        seeds = generate(
+            2, tips=(2, -3), weights=(0, 1, 3), extra_ports=0
+        )
+        self.assertEqual(len(seeds), 784)
+        necessary = sum(bool(ring_signatures(s)) for s in seeds)
+        exact = sum(bool(strict_ring_caps(s)) for s in seeds)
+        self.assertGreater(exact, 0)
+        self.assertLess(exact, necessary)
+        self.assertIn(witness(1), seeds)
 
     def test_guards_for_unsourced_replacements(self):
         s = witness(1)
