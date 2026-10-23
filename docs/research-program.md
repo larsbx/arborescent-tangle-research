@@ -95,3 +95,18 @@ Importantly, pair-canonicity condition F is **absent** from tangle
 canonicity in §12.7.2. Do not apply the A1 pair W/F/S screen to certify
 a tangle. This stage corrects the mathematical interpretation of A2.1
 without retracting its valid syntactic unlabelled enumeration result.
+
+## A2.3 — evidence correction and partial-move exploration
+
+[A2.3 note](partial-move-closure-a2-3.md) records that A2.2's hosted
+Python tests initially **failed after merge**, from an incorrectly
+constructed `Fork` fixture. The fix is part of A2.3.
+
+The exact structural result A2.3.1 demonstrates that **strict F3′ is
+vacuous on the original A1 leaf-weight-only grammar**, including its
+F1/F2 orbit. This blocks treating A2.2's implemented F3′ as new
+quotient evidence for the A1 growth law. The source-scoped finite
+move explorer supplies shortest, replayable certificates on fixed
+indexed graphs, including an actual weighted-internal-vertex example.
+The results are proofs about formal presentation moves; full tangle
+canonicality, modified ring moves, and isotopy quotient remain open.
