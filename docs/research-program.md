@@ -110,3 +110,19 @@ move explorer supplies shortest, replayable certificates on fixed
 indexed graphs, including an actual weighted-internal-vertex example.
 The results are proofs about formal presentation moves; full tangle
 canonicality, modified ring moves, and isotopy quotient remain open.
+
+## Stage A2.4 — non-vacuous strict-F3′ presentation quotient
+
+[The A2.4 proof and exact results](root-pivot-a2-4.md) addresses
+A2.3's obstruction by fixing a finite grammar with precisely one
+nonzero sector at a root fork and zero-weight descendant forks.
+This gives a nontrivial, reversible strict-F3′ move on a genuinely
+weighted internal vertex. The exact syntax series are
+`H=p*x*(3F²+4F³)` and `J=p*x*(F²+F³)=p*(F-m)` for the quotient
+under root-sector strict F3′ moves **alone**. Independent exhaustive
+normalization checks small cases. The same square-root exponent
+survives this *restricted presentation* quotient.
+
+This is **not** the full Theorem 12.21 quotient: independent checks of
+positive/negative tangle canonicality, exceptional forms, R± and
+boundary-parametrized isotopy remain outstanding.

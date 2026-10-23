@@ -108,3 +108,24 @@ inapplicable on every A1 syntax tree, even after F1/F2**. Its earlier
 implementation must not be used to infer quotient behavior on A1.
 Future nontrivial enumeration requires a different, predeclared grammar
 with weighted internal forks and topology-valid tangle W/S/P/N conditions.
+
+## A2.4: non-vacuous strict F3′ root-pivot quotient
+
+[The exact root-pivot grammar and proof](docs/root-pivot-a2-4.md)
+adds **one weighted internal root fork** to the A1 zero-weight-fork
+language. Its strict root-F3′ transport is genuinely applicable,
+unlike the old leaf-weight-only A1 grammar. With `m` distinct leaf
+weights and `p` nonzero root weights, we have the *presentation*
+generating functions:
+
+```text
+F = m + x(F² + F³)
+H = p*x*(3F² + 4F³)        # all positions of the root weight
+J = p*x*(F² + F³) = p*(F-m)  # quotient by root F3′ only
+```
+
+The quotient has an exact sector-zero normal form because the allowed
+root-sector moves form a path. It preserves the same square-root
+syntax asymptotic but does **not** establish a complete arborescent
+isotopy-class enumeration or Bonahon–Siebenmann canonicality.
+Reproduce with `python -m arborescent.root_pivot --max-n 6`.
