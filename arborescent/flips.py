@@ -115,3 +115,64 @@ def flip_quotient_count(n: int, labels: tuple[int, ...] = (2, 3)) -> int:
         flip_orbit_key(to_weighted_tree(spec, labels))
         for spec in enumerate_specs(n, labels)
     })
+
+
+def burnside_flip_counts(max_n: int, m: int) -> tuple[tuple[int, int, int, int, int], ...]:
+    """Exact Burnside table by the algebraic 4-element flip subgroup.
+
+    Each row is (raw, Fix(even), Fix(odd), Fix(both), orbits).
+    For full ordered 2/3-ary trees: F=m+x(F^2+F^3).
+    Let S(x)=F(x^2). Then the fixed-point series obey:
+        E=m+x*S*(1+O)
+        O=m+x*(E^2+E^3)
+        G=m+x*S*(1+G)
+    Burnside: Q=(F+E+O+G)/4.
+
+    These are formulas for presentations modulo just F1 and F2.
+    """
+    from .weighted_trees import syntax_counts
+
+    if (type(max_n) is not int or max_n < 0
+            or type(m) is not int or m < 1):
+        raise ValueError("max_n >= 0 and m >= 1 are required")
+    raw = syntax_counts(max_n, m)
+    even = [m]
+    odd = [m]
+    global_mirror = [m]
+    for n in range(1, max_n + 1):
+        # S[k]=[x^k] F(x^2), hence zero for odd k.
+        s = lambda k: raw[k // 2] if k % 2 == 0 else 0
+        even.append(
+            s(n - 1) + sum(s(i) * odd[n - 1 - i] for i in range(n))
+        )
+        odd.append(
+            sum(even[i] * even[n - 1 - i] for i in range(n))
+            + sum(even[i] * even[j] * even[n - 1 - i - j]
+                  for i in range(n) for j in range(n - i))
+        )
+        global_mirror.append(
+            s(n - 1)
+            + sum(s(i) * global_mirror[n - 1 - i] for i in range(n))
+        )
+    rows = []
+    for n in range(max_n + 1):
+        total = raw[n] + even[n] + odd[n] + global_mirror[n]
+        if total % 4:
+            raise AssertionError("Burnside count must be integral")
+        rows.append((raw[n], even[n], odd[n], global_mirror[n], total // 4))
+    return tuple(rows)
+
+
+def main() -> None:
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--max-n", type=int, default=6)
+    parser.add_argument("--alphabet-size", type=int, default=2)
+    args = parser.parse_args()
+    print("n,raw,fix_even,fix_odd,fix_global,F1_F2_orbits")
+    for n, row in enumerate(burnside_flip_counts(args.max_n, args.alphabet_size)):
+        print(",".join(map(str, (n, *row))))
+
+
+if __name__ == "__main__":
+    main()
