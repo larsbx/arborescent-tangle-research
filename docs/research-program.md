@@ -136,3 +136,17 @@ detector returns necessary ±1 center/±2-tip graph motifs. Source
 diagram sector locations and direct R± replacement remain future
 verification obligations; the present detector is not sufficient
 to declare a topologically allowed ring move.
+
+## A2.6 — diagram-exact ring-cap subsystem and false-positive correction
+
+[Source-pictured R± cap audit](strict-ring-cap-a2-6.md): the true
+diagram has a **separate lower attachment vertex**, not simply a
+unit-weight vertex with two ±2 tips and a free stem. The A2.5
+signature detector remains a **necessary but not sufficient** check.
+The A2.6 guarded formal rewrite deletes an attached three-vertex
+±2–±1–±2 cap only when the weight is in the correct central
+angular wedge and the base's two adjacent sectors are both zero.
+An inverse expansion and exhaustive fixed-pattern guards are
+implemented; V4 labels on surviving free bonds do not change.
+Full R± cases and *independent* 3D plumbing soundness, exceptional
+canonicality and isotopy quotient remain open.
