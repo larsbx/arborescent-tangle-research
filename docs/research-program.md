@@ -75,3 +75,23 @@ equivalence and from pointwise boundary-fixing of tangles.
 Issue #4 tracks the remaining sourced, topology-certified moves,
 positive/negative canonicity and exceptions. The A2 completion bar is
 **not** met by this partial group action.
+
+## Stage A2.2 — boundary-label repair and strict F3′ (implemented)
+
+[Full definitions, source audit, exact theorem and tests](v4-tangle-moves-a2-2.md).
+The §12.7 *tangle* calculus requires a V4 element on each free bond,
+and F1/F2 **change** those elements. The ordinary unlabelled A2.1
+quotient Q is a **pair-presentation** result and not a
+boundary-parametrized tangle quotient. With exactly one marked free
+root bond and all four labels, F1/F2 acts freely; the finite labelled
+quotient count is exactly the A1 raw syntax count a_n.
+
+A source-restricted W-preserving F3′ moves a single nonzero sector
+weight across an internal edge, and when odd reflects selected
+subtree vertices and updates free-bond V4 labels by distance parity.
+The complete F3′/ring equivalence is **not** implemented.
+
+Importantly, pair-canonicity condition F is **absent** from tangle
+canonicity in §12.7.2. Do not apply the A1 pair W/F/S screen to certify
+a tangle. This stage corrects the mathematical interpretation of A2.1
+without retracting its valid syntactic unlabelled enumeration result.
