@@ -148,3 +148,17 @@ the base. The new software provides explicit RingCount data and
 refuses source-described adjacent-ring exceptions. Full R± diagram
 moves, topology soundness/completeness, and true quotient growth remain
 open in issue #4.
+
+## A3 — exact bivariate counting laws for ring-numbered syntax
+
+[Proof and reproducible exact data](ring-number-grammar-a3.md):
+assign bounded independent nonnegative ring numbers to vertices of
+the A1 2/3-ary fork grammar, as a restricted family of **abbreviated
+presentations** in the sense of §12.5. Its bivariate generating series
+is `F=m+x(1+...+y^R)(F²+F³)` and exact coefficient factorization
+is `a_n(m)[y^q](1+...+y^R)^n`. This is a predeclared structural
+multiplicative count, not the earlier vacuous arbitrary sequence
+factor. For fixed q, the polynomial prefactor changes to
+`n^(q-3/2)`; summing all q keeps `n^(-3/2)` but changes
+exponential growth to `(R+1)*mu_m`. None of these claims yet
+identifies isotopy classes under the full modified ring calculus.
