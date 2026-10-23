@@ -47,3 +47,27 @@ controls have tests. This is still **not** the full Bonahon–Siebenmann
 calculus, a topological canonical form, or an isotopy-class enumeration.
 
 Run all tests: `python -m unittest discover -s tests -v`.
+
+## A2.1: sourced elementary plumbing flips and exact restricted quotient
+
+The [A2.1 flip-subgroup proof and experiment](docs/flip-subgroup-a2-1.md)
+implements the Bonahon–Siebenmann **F1/F2** moves on weighted planar-tree
+rotation systems, respecting angular sectors. On a connected tree these
+moves generate a subgroup of size **at most four**: independent reflection
+of the two vertex-bipartition classes. The quotient of the A1 finite
+2/3-fork grammar is **exactly algebraic**, with fixed-point series
+`E=m+x F(x²)(1+O)`, `O=m+x(E²+E³)`, `G=m+x F(x²)(1+G)`,
+and `Q=(F+E+O+G)/4`. For m=2, the first positive-size F1/F2
+presentation orbit counts are **9, 81, 1251, 26688, 669420**.
+A square-root singularity proof shows the quotient's leading
+asymptotic is one quarter of the raw syntax count.
+
+These are **pair-isomorphism** moves from §12.3, not general
+boundary-fixed-tangle isotopies. **A2 is not complete:** F3'/F3'', ring,
+boundary and arithmetic moves, P/N canonicality and exceptional trees
+are still outstanding. Reproduce with:
+
+```sh
+python -m arborescent.flips --max-n 6 --alphabet-size 2
+python -m unittest discover -s tests -v
+```
