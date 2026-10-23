@@ -155,7 +155,7 @@ def brute_pivot_counts(n: int, leaf_weights: tuple[int, ...] = (2, 3),
                        root_weights: tuple[int, ...] = (3, 4)) -> tuple[int, int]:
     """Independent exhaustive enumeration + computed move-orbit keys."""
     specs = pivot_specs(n, leaf_weights, root_weights)
-    raw_codes = [compile_pivot(s) for s in specs]
+    raw_codes = [compile_pivot(s, leaf_weights) for s in specs]
     return (
         len({s.labelled_rooted_code() for s in raw_codes}),
         len({pivot_orbit_key(s) for s in raw_codes}),
