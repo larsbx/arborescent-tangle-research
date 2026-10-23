@@ -180,3 +180,14 @@ modified (F3'), (F3''), (R±), boundary/arithmetic moves; (P)/(N)
 and exceptional canonicity; the underlying plumbing pair and marked
 boundary requirements; independent tests of the pair-isomorphism
 implication; topological completeness and true isotopy-class growth.
+
+## Addendum: do not misidentify the unlabelled quotient with a tangle quotient
+
+The A2.1 system Q counts **unlabelled weighted-tree presentation orbits**.
+Bonahon–Siebenmann §12.7.1 prescribes additional Klein-four V4
+free-bond labels for tangles, with explicit relabeling under F1/F2.
+The correct labelled counting experiment is derived in
+[A2.2](v4-tangle-moves-a2-2.md). With one free root bond taking all
+four V4 labels, the F1/F2 action is free, so the labelled presentation
+quotient counts a_n rather than Q_n. This does *not* alter the A2.1
+theorem about its originally specified unlabelled quotient.
