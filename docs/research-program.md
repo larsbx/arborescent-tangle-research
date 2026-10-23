@@ -111,16 +111,18 @@ indexed graphs, including an actual weighted-internal-vertex example.
 The results are proofs about formal presentation moves; full tangle
 canonicality, modified ring moves, and isotopy quotient remain open.
 
-## A2.5 — modified-ring signature obstruction
+## Stage A2.4 — non-vacuous strict-F3′ presentation quotient
 
-[The A2.5 source audit](ring-signature-a2-5.md) proves that all existing
-grammars whose weights omit ±1 are closed under *no-ring-signature*
-when restricted to implemented F1, F2, F3′ moves, because those moves
-preserve vertexwise total weights. The source's modified R± motif
-requires a ±1 central vertex with matching ±2 tips. In particular,
-A1, PR #8's root-weight-(3,4) grammar, and PR #9's default
-internal-weight-(0,3) grammar have **no R± candidate**. The new
-source-scoped checker only identifies necessary local patterns, not
-actual allowed ring rewrites. First eligible candidate alphabets
-require weighted internal ±1 and terminal ±2, under actual canonicality
-conditions and V4 boundary bookkeeping.
+[The A2.4 proof and exact results](root-pivot-a2-4.md) addresses
+A2.3's obstruction by fixing a finite grammar with precisely one
+nonzero sector at a root fork and zero-weight descendant forks.
+This gives a nontrivial, reversible strict-F3′ move on a genuinely
+weighted internal vertex. The exact syntax series are
+`H=p*x*(3F²+4F³)` and `J=p*x*(F²+F³)=p*(F-m)` for the quotient
+under root-sector strict F3′ moves **alone**. Independent exhaustive
+normalization checks small cases. The same square-root exponent
+survives this *restricted presentation* quotient.
+
+This is **not** the full Theorem 12.21 quotient: independent checks of
+positive/negative tangle canonicality, exceptional forms, R± and
+boundary-parametrized isotopy remain outstanding.

@@ -109,19 +109,23 @@ implementation must not be used to infer quotient behavior on A1.
 Future nontrivial enumeration requires a different, predeclared grammar
 with weighted internal forks and topology-valid tangle W/S/P/N conditions.
 
-## A2.5: ring-move readiness and a conserved-weight obstruction
+## A2.4: non-vacuous strict F3′ root-pivot quotient
 
-[Exact necessary-signature detector and proof](docs/ring-signature-a2-5.md):
-Bonahon–Siebenmann's modified R± diagrams require a central
-weight ±1 with a pair of matching ±2 terminal weights.
-The A1 and existing A2.4 *default grammars have no unit-weight
-vertex*. All implemented F1/F2/strict-F3′ moves preserve individual
-vertex total weights; hence **no sequence of those moves can make
-R± applicable in those grammars**. This is an exact structural
-obstruction, not a conjecture or isotopy theorem.
+[The exact root-pivot grammar and proof](docs/root-pivot-a2-4.md)
+adds **one weighted internal root fork** to the A1 zero-weight-fork
+language. Its strict root-F3′ transport is genuinely applicable,
+unlike the old leaf-weight-only A1 grammar. With `m` distinct leaf
+weights and `p` nonzero root weights, we have the *presentation*
+generating functions:
 
-The new `ring_signatures` API deliberately returns only **necessary
-candidate motifs**; it does *not* perform an R± move. A minimal
-ring-ready extension with internal +1 and terminal +2 labels has
-positive candidates. Full diagrams, boundary bookkeeping and an
-independently justified replacement remain open.
+```text
+F = m + x(F² + F³)
+H = p*x*(3F² + 4F³)        # all positions of the root weight
+J = p*x*(F² + F³) = p*(F-m)  # quotient by root F3′ only
+```
+
+The quotient has an exact sector-zero normal form because the allowed
+root-sector moves form a path. It preserves the same square-root
+syntax asymptotic but does **not** establish a complete arborescent
+isotopy-class enumeration or Bonahon–Siebenmann canonicality.
+Reproduce with `python -m arborescent.root_pivot --max-n 6`.
