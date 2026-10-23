@@ -139,3 +139,19 @@ grammars have no ±1 vertex; since F1/F2/strict-F3′ preserve individual
 vertex totals, they cannot acquire this necessary modified-ring motif.
 The new unit-weight/±2-tip test alphabet offers a concrete next input
 for a figure-exact ring rewrite with V4 boundary bookkeeping.
+
+## A2.6 — strict picture-matched modified ring-cap rewrite
+
+[The new source-image audit](docs/strict-ring-cap-a2-6.md) finds a
+nontrivial correction to A2.5's necessary candidate detector: the
+actual R± diagram deletes a three-vertex ±2–±1–±2 cap *attached by
+an edge to a separate lower base vertex*. A single ±1 fork with
+two ±2 tips and a free-bond stem is not the complete depicted move.
+
+A strict reversible **formal** local rewrite and inverse now
+operate on these full source-pattern caps, requiring correctly
+placed angular sectors and two zero sectors at the base's stem
+attachment. All surviving V4 free-bond labels persist. Tests
+check both signs, false positives, F1/F2 orientation, and inverse
+replay. This is not a complete plumbing calculus, an independent
+topological soundness verification, or an isotopy decision procedure.
