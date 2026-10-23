@@ -126,3 +126,13 @@ survives this *restricted presentation* quotient.
 This is **not** the full Theorem 12.21 quotient: independent checks of
 positive/negative tangle canonicality, exceptional forms, R± and
 boundary-parametrized isotopy remain outstanding.
+
+## A2.5 — necessary ring signature, not an R± rewrite
+
+[The A2.5 note](ring-signature-a2-5.md) audits the modified R±
+diagrams and derives an exact *unit vertex weight* obstruction for
+all partial F1/F2/F3′-reachable grammars omitting ±1. A permissive
+detector returns necessary ±1 center/±2-tip graph motifs. Source
+diagram sector locations and direct R± replacement remain future
+verification obligations; the present detector is not sufficient
+to declare a topologically allowed ring move.
