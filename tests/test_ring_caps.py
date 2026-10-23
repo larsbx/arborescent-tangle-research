@@ -47,7 +47,7 @@ class StrictRingCapTests(unittest.TestCase):
                 # tangle screens; their completeness is NOT claimed.
                 polarity = "+" if sign > 0 else "-"
                 self.assertTrue(tangle_screen(source, polarity).passed)
-                self.assertTrue(tangle_screen(contracted, polarity).passed)
+                self.assertTrue(tangle_screen(contracted, polarity).unresolved)  # whole unbranched tree
 
     def test_ring_inverse_replays_up_to_marked_plane_isomorphism(self):
         for sign in (1, -1):
