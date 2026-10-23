@@ -110,3 +110,17 @@ move explorer supplies shortest, replayable certificates on fixed
 indexed graphs, including an actual weighted-internal-vertex example.
 The results are proofs about formal presentation moves; full tangle
 canonicality, modified ring moves, and isotopy quotient remain open.
+
+## A2.5 — modified-ring signature obstruction
+
+[The A2.5 source audit](ring-signature-a2-5.md) proves that all existing
+grammars whose weights omit ±1 are closed under *no-ring-signature*
+when restricted to implemented F1, F2, F3′ moves, because those moves
+preserve vertexwise total weights. The source's modified R± motif
+requires a ±1 central vertex with matching ±2 tips. In particular,
+A1, PR #8's root-weight-(3,4) grammar, and PR #9's default
+internal-weight-(0,3) grammar have **no R± candidate**. The new
+source-scoped checker only identifies necessary local patterns, not
+actual allowed ring rewrites. First eligible candidate alphabets
+require weighted internal ±1 and terminal ±2, under actual canonicality
+conditions and V4 boundary bookkeeping.
