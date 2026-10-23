@@ -129,3 +129,13 @@ root-sector moves form a path. It preserves the same square-root
 syntax asymptotic but does **not** establish a complete arborescent
 isotopy-class enumeration or Bonahon–Siebenmann canonicality.
 Reproduce with `python -m arborescent.root_pivot --max-n 6`.
+
+## A2.5 — ring-signature obstruction
+
+[The source-scoped necessary-pattern detector](docs/ring-signature-a2-5.md)
+locates ±1-weight valence-three vertices with adjacent matching ±2
+terminal weights. It does **not** implement R±. A1 and default A2.4
+grammars have no ±1 vertex; since F1/F2/strict-F3′ preserve individual
+vertex totals, they cannot acquire this necessary modified-ring motif.
+The new unit-weight/±2-tip test alphabet offers a concrete next input
+for a figure-exact ring rewrite with V4 boundary bookkeeping.
