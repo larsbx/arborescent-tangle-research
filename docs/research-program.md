@@ -47,3 +47,15 @@ Drop the unconstrained universality claim. Fix the grammar and a specific state-
 ## Validation ladder
 
 S0: verify Catalan raw syntax. S1: verify reassociation to words. S2: verify bracelet Burnside against independent orbit enumeration (this PR). S3: verify the applicable Montesinos-link theorem and exceptions before treating counts as isotopy classes. S4: implement actual reduced weighted-tree calculus and test soundness/completeness. S5: perform singularity analysis and independent geometric verification. **The present PR stops at S2.**
+
+## Stage A1 — completed exact combinatorial platform
+
+The [A1 weighted-plane-tree note](weighted-tree-a1.md) gives a literal
+rotation/sector/free-bond representation, a marked-plane-tree *presentation*
+isomorphism code, strict nonexceptional screens for (W),(F),(S), and an
+independently checked finite binary/ternary branching grammar. The exact
+syntax generating series is F=m+x(F²+F³), with a cycle-lemma coefficient
+formula by number of ternary forks. **Neither passing W/F/S nor matching
+presentation codes establishes an arborescent isotopy equivalence.**
+A2 (full (P)/(N) conditions, exceptional cases, flips/ring/boundary
+plumbing moves and certified quotient computation) remains open.
