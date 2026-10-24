@@ -126,3 +126,25 @@ survives this *restricted presentation* quotient.
 This is **not** the full Theorem 12.21 quotient: independent checks of
 positive/negative tangle canonicality, exceptional forms, R± and
 boundary-parametrized isotopy remain outstanding.
+
+## A2.5 — necessary ring signature, not an R± rewrite
+
+[The A2.5 note](ring-signature-a2-5.md) audits the modified R±
+diagrams and derives an exact *unit vertex weight* obstruction for
+all partial F1/F2/F3′-reachable grammars omitting ±1. A permissive
+detector returns necessary ±1 center/±2-tip graph motifs. Source
+diagram sector locations and direct R± replacement remain future
+verification obligations; the present detector is not sufficient
+to declare a topologically allowed ring move.
+
+## Corrected A2.6 — ring-number abstraction (not R± deletion)
+
+[Primary-source image audit and restricted abbreviation](correct-ring-abbreviation-a2-6.md)
+retracts the false claim in closed, unmerged PR #11 that R± deletes a
+three-vertex cap. The §12.4 diagram relocates the ring; §12.5 creates
+a **different ring-numbered abbreviated tree notation**, where
+non-overlapping caps may be erased *as an abstraction* and counted at
+the base. The new software provides explicit RingCount data and
+refuses source-described adjacent-ring exceptions. Full R± diagram
+moves, topology soundness/completeness, and true quotient growth remain
+open in issue #4.

@@ -129,3 +129,28 @@ root-sector moves form a path. It preserves the same square-root
 syntax asymptotic but does **not** establish a complete arborescent
 isotopy-class enumeration or Bonahon–Siebenmann canonicality.
 Reproduce with `python -m arborescent.root_pivot --max-n 6`.
+
+## A2.5 — ring-signature obstruction
+
+[The source-scoped necessary-pattern detector](docs/ring-signature-a2-5.md)
+locates ±1-weight valence-three vertices with adjacent matching ±2
+terminal weights. It does **not** implement R±. A1 and default A2.4
+grammars have no ±1 vertex; since F1/F2/strict-F3′ preserve individual
+vertex totals, they cannot acquire this necessary modified-ring motif.
+The new unit-weight/±2-tip test alphabet offers a concrete next input
+for a figure-exact ring rewrite with V4 boundary bookkeeping.
+
+## A2.6 source correction: ring number is *not* a ring move
+
+[The A2.6 ring-abbreviation audit](docs/correct-ring-abbreviation-a2-6.md)
+corrects closed, **unmerged** PR #11. The source's modified R± moves
+**relocate** an attached ±2–±1–±2 ring subtree in the plane; they do
+**not delete its three vertices**. The source *separately* introduces
+ring-numbered abbreviated trees (§12.5), erasing suitable **disjoint**
+ring subtrees and storing their multiplicity at attachment vertices.
+
+`ring_abbreviation.py` implements only a conservative, lossful
+**notation change**, preserving weighted sectors, surviving V4 labels,
+and explicit ring multiplicities. The exceptional case of one ring
+attached to another is rejected, not silently normalized. No full R±
+move, tangle isotopy classifier, or general Catalan quotient is claimed.
