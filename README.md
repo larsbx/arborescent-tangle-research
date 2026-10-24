@@ -666,3 +666,24 @@ The positive result concerns the *chosen-coordinate candidate*,
 not the source's full framed Fig12.10 isomorphism or isotopy.
 The `MARKED_KNOT_SOURCE_UNVERIFIED` and A5.1
 `UNVERIFIED_GEOMETRY` guards remain mandatory.
+
+
+## A5.2e2b4c1 — actual local ambient tetrahedral plumbing slit
+
+[Source Figure 12.5 local 3D product-ball slit](docs/local-plumbing-slit-a5-2e2b4c1.md)
+uses the paper's **two transverse directed arrows** to select
+an oriented rectangular patch that is *actually two faces of
+the existing PL ribbon mesh*. It triangulates an exact-rational
+local product 3-ball around that patch into 12 **positive-volume
+tetrahedra**, then independently replays a cut along the middle
+two-triangle disk, duplicating its four vertices into distinct
+upper/lower 3D boundary sides. A typed inverse reglue checks
+reconstruction of the exact original tetrahedral incidence,
+oriented cut faces and physical coordinates.
+
+This is the **first actual local 3D ambient-cell slitting
+operation** in the program, but **NOT** the source's complete
+S³ slit into actual four-punctured Conway tangle components,
+nor a source-identified Figure 12.5 patch or global isotopy.
+The proof status is `LOCAL_SLIT_REGLUE_ONLY`; original
+`UNVERIFIED_GEOMETRY` remains unchanged under issue #52.
