@@ -123,6 +123,14 @@ def abbreviate_disjoint_rings(source: V4LabeledTree, sign: int) -> Abbreviated:
     """
     caps = strict_ring_caps(source, sign)
     tree = source.tree
+    # Inspect both signs before erasing anything. Selecting one sign must
+    # not hide a second center whose cap uses the selected center as base.
+    # Necessary signatures deliberately overapproximate the exceptional
+    # configuration: refusing unsupported inputs is safer than partially
+    # abbreviating an adjacent pair outside the canonical source domain.
+    possible_centers = {motif.center for motif in ring_signatures(source)}
+    if any(cap.base in possible_centers for cap in caps):
+        raise ValueError("rings attached to rings need exceptional handling")
     deleted = set()
     for cap in caps:
         region = {cap.center, *cap.tips}
