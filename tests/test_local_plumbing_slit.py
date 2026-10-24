@@ -7,7 +7,7 @@ from arborescent.atomic_plumbing_contract import AtomicInstruction
 from arborescent.exterior_conway_collars import build_exterior_collared_band
 from arborescent.local_plumbing_slit import (
     LocalPlumbingPatch, CutVertex, collar_plumbing_chart,
-    product_neighborhood, slit_product, _vec, _cross,
+    product_neighborhood, slit_product, _vec, _cross, _audit_cut_halves,
 )
 from arborescent.spatial_twist_blocks import Point3
 
@@ -77,6 +77,8 @@ class ExactLocalPlumbingSlitTests(unittest.TestCase):
             self.assertEqual(len(cut.cut_tetrahedra),12)
             self.assertEqual(len(cut.lower_cut),2)
             self.assertEqual(len(cut.upper_cut),2)
+            self.assertTrue(_audit_cut_halves(
+                cut.cut_tetrahedra,cut.lower_cut,cut.upper_cut))
             lower={v for f in cut.lower_cut for v in f}
             upper={v for f in cut.upper_cut for v in f}
             self.assertEqual(len(lower),4)
@@ -114,6 +116,8 @@ class ExactLocalPlumbingSlitTests(unittest.TestCase):
             replace(cut,upper_cut=tuple(wrong_upper))
         with self.assertRaises(ValueError):
             replace(cut,status="SOURCE_ISOTOPY")
+        self.assertFalse(_audit_cut_halves(
+            cut.cut_tetrahedra[:-1],cut.lower_cut,cut.upper_cut))
         with self.assertRaises(ValueError):
             CutVertex(4,"WRONG")
         with self.assertRaises(ValueError):
