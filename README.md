@@ -175,6 +175,22 @@ Holding total ring number q fixed instead yields a
 presentation results**, not classification of canonical tangles or
 a proven complete R± isotopy quotient.
 
+## A3.1: finite-local ring compatibility alters growth
+
+[The exact constrained grammar theorem](docs/local-ring-constraints-a3-1.md)
+adds a **synthetic** (not source-canonical) local exclusion rule:
+adjacent fork vertices may not both have positive ring numbers.
+Its finite two-state algebraic equations are
+`Z=m+x((Z+P)^2+(Z+P)^3)`,
+`P=x(y+...+y^R)(Z^2+Z^3)`.
+For `m=2,R=1,n=2` the guarded syntax count is **576**, versus
+**768** under independent ring numbers. At *fixed total ring grade* q,
+the leading factor remains `n^q/q!` (up to lower order);
+when all grades are counted, a matching argument proves a **strict
+exponential deficit** relative to the unrestricted grammar.
+This is a falsifiable demonstration of finite-local sequence
+classification, not a Bonahon–Siebenmann canonicality theorem.
+
 ## A3.2: exact exponential *presentation* fibers of ring abbreviation
 
 [The explicit ring-location fiber theorem](docs/ring-placement-fibers-a3-2.md)
