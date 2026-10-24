@@ -119,7 +119,62 @@ a polynomial uniform fiber bound for the map from these raw
 marked placements to this abbreviated syntax language when base
 valence grows without bound.**
 
-**Important qualifications:**
+## Theorem A3.2.3 — bounded valence does NOT fix raw fibers
+
+There is a stronger family with exactly the same permitted
+three-vertex signed ring caps, one ring **per attachment base**, and
+**maximum bond valence four independently of size**.
+
+For every integer `k>=2`, form a path of `k` base vertices. Attach
+exactly one ring cap and one V4-labelled free port `f_i` at every base.
+One end carries the marked root `f0`; the base vertices along the
+path are canonically ordered by distance from the root. Every base
+has zero angular sector weights.
+
+At the root and final base, bond valence is exactly three: a free
+port, one path edge, one ring cap. Interior bases have valence four:
+a free port, two path edges, one ring cap. All cap centers have
+valence three, and their terminals valence one. Thus the maximum
+bond valence is at most four.
+
+At each base there are **two** permitted cyclic placements of the cap,
+distinguished by which side of a fixed ordinary incident bond its
+stem occupies. These choices are independent at all `k` bases and
+define `2^k` marked rooted weighted-plane-tree codes.
+
+**Proof.** The root `f0` fixes the path's direction, so no automorphism
+can exchange base vertices at different root distances. Within each
+base's fixed rooted cyclic order the cap subtree is distinguishable
+from an ordinary free port or from the continuation spine edge:
+it carries a valence-three ±1 center and ±2 tips. Changing either
+local cyclic placement therefore changes the marked rooted code.
+The `k` binary choices give `2^k` different presentation codes.
+Every source-style §12.5 abbreviation erases the `k` disjoint
+caps *as a representation change* and records ring number **one**
+at each surviving base. All remaining zero-sector path and free-port
+data agree, producing exactly **one** abbreviated code. □
+
+Consequently, with original vertex count `N=4k`, a single
+ring-numbered code has at least
+
+```
+2^k = 2^(N/4)
+```
+
+preimage **presentation codes**, even though **every** vertex has
+degree at most four and every integer weight belongs to the finite
+alphabet `{0,±1,±2}` for the fixed-sign family.
+
+This decisively shows that **bounded valence alone** does not ensure
+polynomial fibers from unreduced weighted planar presentations
+to abbreviated ring-numbered representations. One must quotient
+ring-location syntax *before* making a controlled-fiber conjecture.
+
+The family is realized by
+`bounded_valence_chain_presentations(k, sign)`; the independent
+abbreviation execution compares all `2^k` codes for small `k`.
+
+**Important qualifications:
 
 - This does **not** refute a polynomial-fiber conjecture for an
   *already reduced, fixed bounded-valence* grammar. Our base's
@@ -137,7 +192,7 @@ valence grows without bound.**
 ## Next: isolate bounded-valence canonical subclasses
 
 This negative control narrows the research objective: predeclare
-a canonical weighted planar-tree subclass with bounded valence,
+a canonical weighted planar-tree subclass with declared local labels,
 precise tangle W/S/P/N and exceptional hypotheses, and an explicit
 R± relocation calculus. Count representations **after** §12.5
 abbreviation, not their discarded raw ring placements; test the
