@@ -94,9 +94,27 @@ class PureConwayMappingClass:
             self.c*p + self.d*q,
         )
 
+    def branch_point_action(
+        self,
+    ) -> tuple[tuple[int, int], tuple[int, int],
+               tuple[int, int], tuple[int, int]]:
+        """Act explicitly on the four 2-torsion classes of the torus cover.
+
+        These are the four double-cover branch points. Every Gamma(2)
+        matrix MUST fix each point, independent of our chosen V4
+        coordinate convention for the Conway boundary.
+        """
+        return tuple(
+            ((self.a*x + self.b*y) % 2,
+             (self.c*x + self.d*y) % 2)
+            for x, y in ((0, 0), (1, 0), (0, 1), (1, 1))
+        )
+
     def fixes_four_punctures(self) -> bool:
-        """Gamma(2) fixes each of the four torus 2-torsion branch points."""
-        return True  # guaranteed by strict constructor congruence
+        """Independently compute action on the double-cover branch points."""
+        return self.branch_point_action() == (
+            (0, 0), (1, 0), (0, 1), (1, 1)
+        )
 
     def require_verified_conway_gluing(self) -> None:
         raise NotImplementedError(
