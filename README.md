@@ -570,3 +570,24 @@ The quotient is **abstract only**: the glued caps remain physically
 disjoint in Q³ until a source-checked 3D attaching construction is
 provided. The result is `ABSTRACT_SURFACE_SOURCE_UNVERIFIED`,
 never a Conway/plumbing or ambient-isotopy certificate.
+
+
+## A5.2e2b2 — physically joined cubical Conway collar candidate (not source verified)
+
+The [exact Q³ Conway roof-collar construction](docs/spatial-conway-collars-a5-2e2b2.md)
+adds **real 2D triangle meshes** joining all n earlier ribbon
+disks along the actual, exactly coincident end-cap edges on
+their Conway cubes. Unlike A5.2e2b1's abstract cap quotient,
+the new surface has physical shared 3D vertices and mesh edges.
+A separate coordinate-only checker welds those points and
+verifies manifold vertex links, connected components, Euler
+characteristic, boundary circles and orientability. Its output
+is a connected χ=0 **chosen coordinate-model band candidate**.
+
+This does **not** establish the source's Fig.12.10 framing or
+transverse Conway plumbing: the roof collars currently lie on
+the cubical Conway boundary over **2D regions**. Their
+source-canonical off-boundary realization, local triangle
+intersection certification and band-preserving cyclic
+rotation witnesses are open. `COLLARED_BAND_SOURCE_UNVERIFIED`
+and A5.1 `UNVERIFIED_GEOMETRY` are unchanged by this progress.
