@@ -88,8 +88,13 @@ class PhysicalConwayCollarTests(unittest.TestCase):
         triangles=obj.triangles()
         with self.assertRaisesRegex(ValueError,"duplicate"):
             verify_spatial_surface(triangles+(triangles[0],))
-        with self.assertRaises(ValueError):
-            verify_spatial_surface(triangles[:-1])
+        # Removing a boundary face can still leave a valid 2-manifold;
+        # the generic topology verifier must not fabricate a failure.
+        # The high-level physical collar constructor enforces ALL
+        # expected faces separately.
+        trimmed=verify_spatial_surface(triangles[:-1])
+        self.assertEqual(trimmed.faces,len(triangles)-1)
+        self.assertEqual(trimmed.vertices-trimmed.edges+trimmed.faces,trimmed.euler)
         with self.assertRaises(ValueError):
             verify_spatial_surface(())
 
