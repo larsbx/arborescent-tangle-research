@@ -192,8 +192,20 @@ def _ribbon(kind: Literal["EXTERIOR_RETURN","SECTOR_CORRIDOR"],
     for i in range(len(first)-1):
         a=3*i
         b=a+3
-        faces.extend(((a,a+1,b+1),(a,b+1,b),
-                      (a+1,a+2,b+2),(a+1,b+2,b+1)))
+        if kind=="EXTERIOR_RETURN" and i==3:
+            # Outer left U-turn: the far y=-6 boundary and the
+            # low central ridge at the next station are collinear.
+            # Flip this diagonal to avoid an exact zero-area face.
+            side_a=((a,a+1,b),(a+1,b+1,b))
+        else:
+            side_a=((a,a+1,b+1),(a,b+1,b))
+        if kind=="EXTERIOR_RETURN" and i==1:
+            # Outer right U-turn has the symmetric degeneracy on
+            # the other half-strip; flip that diagonal instead.
+            side_b=((a+1,a+2,b+1),(a+2,b+2,b+1))
+        else:
+            side_b=((a+1,a+2,b+2),(a+1,b+2,b+1))
+        faces.extend((*side_a,*side_b))
     return TriangulatedRibbon(kind,first,second,ridge,tuple(faces))
 
 
