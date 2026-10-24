@@ -687,3 +687,27 @@ S³ slit into actual four-punctured Conway tangle components,
 nor a source-identified Figure 12.5 patch or global isotopy.
 The proof status is `LOCAL_SLIT_REGLUE_ONLY`; original
 `UNVERIFIED_GEOMETRY` remains unchanged under issue #52.
+
+
+## A5.2e2b4c2a — exact disjoint atlas of local 3D slits, NOT global S³
+
+[The n-site tetrahedral slit-atlas construction](docs/disjoint-3d-slit-atlas-a5-2e2b4c2a.md)
+now places **all n real local 3D product charts** on the SAME
+verified chosen-coordinate band and independently checks their
+physical separation, 3D volumes, candidate-port correspondence,
+both local cut-boundary spheres, and exact inverse reglue.
+Even for zero-weight sectors, chart gap is **at least 1/2** in
+exact rational coordinates; with `h≤1/4` all charts lie above
+both the Conway balls and the physically marked knot K.
+
+This deliberately exposes the missing *global* theorem: these
+are **n disconnected product 3-balls**, which slit into **2n
+unpunctured local 3-balls**. Neither the local cut disks nor
+their boundary spheres contain a K puncture. They therefore
+are **not** the source's *four-punctured* Conway boundaries,
+and cannot be treated as a recovered global tangle. The typed
+status `DISJOINT_LOCAL_ATLAS_NOT_GLOBAL_MANIFOLD` and the
+original `UNVERIFIED_GEOMETRY` remain enforced. Issue #54
+still requires a globally connected ambient manifold, real
+source plumbing patch positions and four actual knot piercings
+per source Conway boundary.
