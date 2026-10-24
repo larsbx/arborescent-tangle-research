@@ -352,3 +352,26 @@ specific F3′/formal-ring-slide commuting diamond (both ring signs,
 positive/negative odd/even root weights); zero-weight corollas
 recover the earlier finite formal flip+slide orbit. No 3D
 isotopy or source-complete R±/F3′ claim is made.
+
+## A4.8 — necessary invariants and honest four-valued formal reachability
+
+[The A4.8 proof and negative controls](docs/mixed-necessary-invariants-a4-8.md)
+add an exact **rooted unordered weighted-ring skeleton fingerprint**:
+retain each surviving vertex's *total* integer weight, per-base
+ring number, incidence tree and count of incident unmarked free
+legs, while forgetting cyclic slot positions and individual V4
+labels that the declared F1/F2/F3′ moves may change. Every A4.7
+**partial formal** move preserves this code, so unequal codes
+supply a mathematically valid *necessary-invariant exclusion*
+without search. Equality is neither sufficient nor evidence of
+3D tangle isotopy.
+
+A dedicated four-way API distinguishes `reachable_formally`
+(with replayable typed trace), `excluded_by_necessary_invariant`,
+`not_reached_in_complete_indexed_graph`, and
+`undetermined_cutoff`. An independent negative control
+proves why even a **complete indexed BFS** is not a presentation
+isomorphism quotient: renaming internal edges and reordering
+vertex storage can yield the *same* marked plane presentation
+outside that indexed orbit. No isotopy-class nonreachability
+or complete F3′/R± classification is claimed.
