@@ -5,6 +5,7 @@ from arborescent.abbreviated_f3prime import (
     abbreviated_f3prime, f3prime_abbreviation_square,
 )
 from arborescent.abbreviated_flips import flip_abbreviation_square
+from arborescent.internal_forks import tangle_screen
 from arborescent.ring_abbreviation import abbreviate_disjoint_rings
 from arborescent.tangle_labels import (
     V4LabeledTree, tangle_flip_f3prime,
@@ -20,8 +21,8 @@ def witness(weight: int, sign: int) -> V4LabeledTree:
         Vertex(("e2", "e4", "e5"), (0, sign, 0)),
         Vertex(("e4",), (2*sign,)),
         Vertex(("e5",), (2*sign,)),
-        Vertex(("e3",), (3,)),
-        Vertex(("e1",), (2,)),
+        Vertex(("e3",), (3*sign,)),
+        Vertex(("e1",), (2*sign,)),
     )), (("f0", 1), ("f1", 2)))
 
 
@@ -31,6 +32,11 @@ class AbbreviatedF3PrimeTests(unittest.TestCase):
             for sign in (-1, 1):
                 with self.subTest(weight=weight, sign=sign):
                     source = witness(weight, sign)
+                    polarity = "+" if sign == 1 else "-"
+                    # These examples pass the *implemented branched*
+                    # tangle W/S/P-or-N structural screen. This is not
+                    # a proof that every source exception is modeled.
+                    self.assertTrue(tangle_screen(source, polarity).passed)
                     self.assertTrue(f3prime_abbreviation_square(
                         source, sign, "f0", "e0", from_side="before"
                     ))
@@ -46,6 +52,7 @@ class AbbreviatedF3PrimeTests(unittest.TestCase):
                             reduced_before, "f0", "e0", from_side="before"
                         ), reduced_after,
                     )
+                    self.assertTrue(tangle_screen(direct, polarity).passed)
                     self.assertEqual(direct.label("f0"), source.label("f0"))
                     if weight % 2:
                         self.assertEqual(direct.label("f1"), source.label("f1") ^ 2)
