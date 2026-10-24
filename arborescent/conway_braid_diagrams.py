@@ -204,6 +204,12 @@ class Braid2Diagram:
             paths[left].extend(((1.0, i + .5), (2.0, i + 1.0)))
             paths[right].extend(((1.0, i + .5), (0.0, i + 1.0)))
             left, right = right, left
+        # Extend each physical strand to its actual SOUTH boundary
+        # puncture. Without this segment a zero-crossing picture would
+        # contain only the two northern points and no full boundary arcs.
+        y_end = float(self.crossing_count + 1)
+        paths[left].append((0.0, y_end))
+        paths[right].append((2.0, y_end))
         return tuple(tuple(paths[name]) for name in ("NW", "NE"))
 
     def render_svg(self) -> str:
