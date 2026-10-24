@@ -93,6 +93,63 @@ No 3-dimensional tangle isotopy claim enters this
 construction: it is an exact model of **boundary surface
 mapping classes** only.
 
+## Explicit affine lift unifies the chosen V4 convention with pure twists
+
+A5.2a chose the clockwise puncture order
+`(NW,NE,SE,SW)`. We now assign these names, in that
+order, to the actual four torus branch-point
+classes
+
+```
+ NW=(0,0), NE=(1,0), SE=(1,1), SW=(0,1)
+       in (Z/2Z)^2.
+```
+
+For each pure `M∈Gamma(2)` and binary vector
+`t=(t_x,t_y)∈(Z/2Z)^2`, define the affine torus
+map `z↦Mz+t/2`. This descends through the torus
+hyperelliptic involution because `t` is integral;
+its induced 2-torsion action is
+
+```
+ (x,y) ↦ (M mod 2)(x,y)+t = (x,y)+t.
+```
+
+The four half-translations are **exactly** the V4
+double-transpositions declared in A5.2a:
+
+```
+ t=(0,0): identity
+ t=(1,0): ξ = (NW NE)(SE SW)
+ t=(0,1): η = (NW SW)(NE SE)
+ t=(1,1): ζ = (NW SE)(NE SW).
+```
+
+The combined algebra is
+`(M,t)(N,u)=(MN,t+u)` *inside this restricted
+congruence subgroup*, since every `M≡I(mod2)`.
+The new typed `AffineConwayBoundaryClass` derives
+the four-point permutation **from the actual
+2-torsion coordinates**, rather than assuming
+it matches a lookup table; the tests verify all
+compositions, inverses and the agreed V4 map.
+
+The half-translations do **not** act on torus
+homology slopes, but the pure component M does.
+Hence a *fixed* V4 coordinate map t coexists
+with infinitely many distinguishable
+`(T_n,t)` projective classes. This strengthens
+the seam-information obstruction and precisely
+separates finite boundary point matching from
+infinite boundary mapping-class twists.
+
+**Not established:** this affine coordinate choice
+has not yet been verified as the source's exact
+choice of 4-punctured Conway parametrization,
+and a descended orientation-preserving boundary
+self-map is not the orientation-reversing
+plumbing gluing between atomic pieces.
+
 ## Theorem A5.2b.1 — infinitely many undetected pure seam twists
 
 For each signed integer `n ∈ Z`, set
