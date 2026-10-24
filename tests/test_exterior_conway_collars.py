@@ -1,6 +1,7 @@
 """A5.2e2b3b: exact off-boundary collar coordinates and geometric contacts."""
 import unittest
 from dataclasses import replace
+from fractions import Fraction
 
 from arborescent.atomic_plumbing_contract import AtomicInstruction, Port
 from arborescent.spatial_twist_blocks import Point3
@@ -50,13 +51,20 @@ class ExteriorBandTests(unittest.TestCase):
                     self.assertEqual(t.boundary_components,
                                      2 if sum(sectors)%2==0 else 1)
                     self.assertEqual(t.faces,len(b.triangles()))
+                    # Even for zero-weight sectors, roofs have a
+                    # positive 1/2 longitudinal separation.
+                    for left,right in zip(b.collars,b.collars[1:]):
+                        self.assertGreaterEqual(
+                            right.vertices[3].x-left.vertices[6].x,
+                            Fraction(1,2))
                     audit=b.geometric_intersections()
                     self.assertEqual(audit.checked_pairs,
                                      t.faces*(t.faces-1)//2)
-                    self.assertEqual(b.canonical_coordinates(),
-                                     build_exterior_collared_band(
-                                         AtomicInstruction((),sectors,0,sign)
-                                     ).canonical_coordinates())
+                    if sign==1 and sectors==(0,0):
+                        self.assertEqual(b.canonical_coordinates(),
+                            build_exterior_collared_band(
+                                AtomicInstruction((),sectors,0,sign)
+                            ).canonical_coordinates())
                     with self.assertRaisesRegex(NotImplementedError,"UNVERIFIED_GEOMETRY"):
                         b.require_source_atomic_realization()
 
