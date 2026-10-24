@@ -90,6 +90,29 @@ class FormalNecessaryInvariantTests(unittest.TestCase):
         self.assertIsNone(decision.trace)
         self.assertFalse(decision.verify_positive())
 
+    def test_same_vertex_weight_multiset_different_rooted_shape_excluded(self):
+        balanced = Fork((
+            Fork((Leaf(2), Leaf(2))),
+            Fork((Leaf(2), Leaf(2))),
+        ))
+        path = Fork((
+            Leaf(2),
+            Fork((Leaf(2), Fork((Leaf(2), Leaf(2))))),
+        ))
+        a = label_free_ports(to_weighted_tree(balanced, (2,)))
+        b = label_free_ports(to_weighted_tree(path, (2,)))
+        self.assertEqual(
+            sorted(v.weight for v in a.tree.vertices),
+            sorted(v.weight for v in b.tree.vertices),
+        )
+        self.assertNotEqual(
+            unordered_abbreviated_fingerprint(a, 1),
+            unordered_abbreviated_fingerprint(b, 1),
+        )
+        decision = decide_partial_formal_reachability(a, b, 1, max_states=1)
+        self.assertEqual(decision.status, "excluded_by_necessary_invariant")
+        self.assertEqual(decision.examined_states, 0)
+
     def test_reachable_formal_pair_has_shortest_replay_certificate(self):
         for sign in (-1, 1):
             source, target = placement_presentations(3, 1, sign)[:2]
