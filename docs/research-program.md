@@ -277,3 +277,18 @@ ring-numbered data has an exact identity-root V4 gauge, preserving
 ring multiplicities and boundary labels. The proof and regression
 fixtures are for the source-defined **formal presentation moves**;
 neither genuine 3D isotopy nor complete F3′/R± canonicality follows.
+
+## A4.5 — guarded F3′ naturality under ring-number abbreviation
+
+[The A4.5 commuting-square proof](abbreviated-f3prime-naturality-a4-5.md)
+handles a strict source-modified F3′ move across a **surviving**
+weighted-tree edge. Parity-sensitive branch reversal and ξ/η
+V4 transformations agree before/after source-style §12.5
+abbreviation because pendant ring erasure does not change graph
+distances between surviving vertices. It requires unchanged strict
+recognition of every ring center, zero-sector bases, an explicitly
+surviving free-bond pivot, and unchanged per-base ring counts;
+unsupported cases fail closed. Nontrivial even/odd pivot witnesses
+verify the result as **indexed presentation data**. Full F3′,
+source canonicality exceptions and independent tangle isotopy
+are still open.
