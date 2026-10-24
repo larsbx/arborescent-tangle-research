@@ -187,16 +187,17 @@ and `r` identical disjoint ring caps. Exactly
 **single ring-numbered abbreviated presentation code**. At `d=r=n`,
 this is `~4^n/(2sqrt(pi n))`. This is a **negative control for
 unreduced presentation-to-abbreviation fibers** and demonstrates
-why bounded-valence and reduction must be named before making
+why ring-location normalization must precede
 any polynomial-fiber conjecture. It is NOT a calculation of tangle
 isotopy classes and does not refute a bounded-valence reduced
 normal-form hypothesis.
 
 **A3.2 stronger obstruction (bounded valence):** a path of `k` base
 vertices carrying one disjoint ring cap and one free bond at every
-base, with all degrees ≤4 and all fixed-sign weights in `{0,1,2}`,
-has exactly `2^k=2^{N/4}` distinct marked plane-tree presentation
-codes but one ring-numbered abbreviated code. This strictly strengthens
+base, with all degrees ≤4 and all weights in `{0,sign,2*sign}` for either fixed sign,
+has a selected binary family of exactly `2^k=2^{N/4}` distinct marked
+plane-tree presentation codes but one ring-numbered abbreviated code
+(the unrestricted fiber may be larger). This strictly strengthens
 the single high-valence corolla counterexample and proves **bounded
 valence alone does not imply polynomial raw-to-abbreviation fibers**.
 Only *after* a genuine ring-location normalization could a polynomial
