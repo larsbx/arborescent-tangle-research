@@ -21,7 +21,9 @@ class PhysicalConwayCollarTests(unittest.TestCase):
                 t=obj.topology()
                 self.assertEqual(t.components,1)
                 self.assertEqual(t.euler,0)
-                self.assertIn(t.boundary_components,(1,2))
+                self.assertEqual(t.orientable, sum(sector)%2==0)
+                self.assertEqual(t.boundary_components,
+                                 2 if sum(sector)%2==0 else 1)
                 self.assertEqual(t.orientable,t.boundary_components==2)
                 self.assertEqual(len(obj.collars),len(sector))
                 self.assertEqual(t.faces,len(obj.triangles()))
