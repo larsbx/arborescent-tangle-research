@@ -509,3 +509,22 @@ atomic embedding, orientation-reversing Conway seam, or verified modified
 R± isotopy. These deliberate incompletenesses are encoded in
 `OPEN_CHAIN_NOT_ATOMIC` and `UNVERIFIED_GEOMETRY`, not hidden behind a
 formal equality. Issues #33 and #16 remain open.
+
+
+## A5.2e1 — complete external *return strands*, incomplete source twisted ribbon
+
+The [exact returning-strand model](docs/global-return-strands-a5-2e1.md)
+removes A5.2d's artificial left sphere. It constructs precisely n
+genuinely marked Conway 2-spheres, all n signed half-twist sectors,
+and two disjoint long outer return arcs. Every one of the 4n
+punctures is an endpoint of exactly one of 2n embedded PL strands.
+An **independent exact-rational intersection checker** verifies every
+curve against every solid Conway cube and other curve segment,
+including self-intersections and false over/under collisions.
+
+This is an important **partial** spatial realization of Fig.12.8/12.29:
+the long *strands* are embedded, but the complete supporting
+**twisted band/ribbon surface**, source framing, exact source
+boundary-parametrization conventions and r>0 ring loops remain
+unconstructed. The status is `RETURN_STRANDS_SOURCE_UNVERIFIED`.
+The A5.1 `UNVERIFIED_GEOMETRY` gate and issues #39/#33/#16 stay open.
