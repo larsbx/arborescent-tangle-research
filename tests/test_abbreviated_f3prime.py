@@ -37,6 +37,10 @@ class AbbreviatedF3PrimeTests(unittest.TestCase):
                     # tangle W/S/P-or-N structural screen. This is not
                     # a proof that every source exception is modeled.
                     self.assertTrue(tangle_screen(source, polarity).passed)
+                    # The older *pair* Free-Bond condition F excludes
+                    # a free port on a weighted root; §12.7 *tangles*
+                    # do not require F. Do not conflate the screens.
+                    self.assertIn(("F", 0), source.tree.wfs_failures())
                     self.assertTrue(f3prime_abbreviation_square(
                         source, sign, "f0", "e0", from_side="before"
                     ))
