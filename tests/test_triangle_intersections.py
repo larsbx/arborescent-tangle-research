@@ -99,5 +99,20 @@ class ExactTriangleIntersectionTests(unittest.TestCase):
             ))
 
 
+
+    def test_current_collared_band_candidate_requires_true_geometry_audit(self):
+        # The previously built connected surface was validated only as
+        # a point-welded 2-complex. Test its *actual* triangle interiors.
+        from arborescent.atomic_plumbing_contract import AtomicInstruction
+        from arborescent.conway_roof_collars import build_spatial_collared_band
+        for weights in ((0,0),(1,0),(-1,1)):
+            with self.subTest(weights=weights):
+                candidate=build_spatial_collared_band(
+                    AtomicInstruction((),weights,0,1))
+                outcome=audit_embedded_triangle_mesh(candidate.triangles())
+                self.assertEqual(outcome.checked_pairs,
+                                 len(candidate.triangles())*
+                                 (len(candidate.triangles())-1)//2)
+
 if __name__ == "__main__":
     unittest.main()
