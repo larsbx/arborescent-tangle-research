@@ -69,9 +69,17 @@ class AtomicPlumbingInterfaceTests(unittest.TestCase):
                                  (1,)*k)
                 self.assertEqual(plan.rooted_instruction_code(),
                                  abbreviation.rooted_code())
-                self.assertEqual(tuple(f.v4 for f in plan.free),
-                                 tuple(range(k)) if k <= 4
-                                 else (0, 1, 2, 3, 0))
+                # Abstract free ports follow the source's rooted
+                # cyclic/DFS order, which need not be lexical f0,f1,...
+                # Each local V4 location is checked by the exact
+                # independent rooted-code round trip above.
+                self.assertEqual(
+                    sorted(f.v4 for f in plan.free),
+                    sorted(i % 4 for i in range(k)),
+                )
+                self.assertEqual(
+                    [f.v4 for f in plan.free if f.marked_root], [0]
+                )
                 self.assertEqual(sum(a.total_weight for a in plan.atoms), 0)
 
     def test_full_placement_fiber_is_identical_abstract_plumbing_input(self):
