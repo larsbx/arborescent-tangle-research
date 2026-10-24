@@ -262,3 +262,18 @@ isomorphism**, then replays the typed strict ring slides.
 The resulting marked rooted normal-form code is invariant under
 cyclic slot starts, bond renaming and vertex indexing, retaining
 all V4 labels. Still not an isotopy theorem or full R± calculus.
+
+## A4.4 — commutation of §12.5 abbreviation and F1/F2 V4 tangle flips
+
+[Primary-source proof and exhaustive small-instance tests]
+(abbreviated-flip-equivariance-a4-4.md): Bonahon–Siebenmann §12.7.1
+requires that F1/F2 flips also transform every free-bond V4 label.
+The restricted §12.5 abbreviation **commutes exactly with F1 and
+F2** on disjoint, uniformly signed ring caps with zero-sector
+attachment bases and no adjacent-ring exception. F2 pivot
+correspondence uses a named *surviving free bond*, not a stale
+integer vertex index. The induced four-element action on abbreviated
+ring-numbered data has an exact identity-root V4 gauge, preserving
+ring multiplicities and boundary labels. The proof and regression
+fixtures are for the source-defined **formal presentation moves**;
+neither genuine 3D isotopy nor complete F3′/R± canonicality follows.
