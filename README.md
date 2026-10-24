@@ -591,3 +591,19 @@ source-canonical off-boundary realization, local triangle
 intersection certification and band-preserving cyclic
 rotation witnesses are open. `COLLARED_BAND_SOURCE_UNVERIFIED`
 and A5.1 `UNVERIFIED_GEOMETRY` are unchanged by this progress.
+
+
+## A5.2e2b3a — independent exact triangle-intersection validator
+
+[The rational Q³ triangle-contact kernel](docs/exact-triangle-intersections-a5-2e2b3a.md)
+independently classifies skew and coplanar triangle intersections as
+disjoint, point, segment or overlapping positive area. Its all-pairs
+mesh checker accepts only the *declared common* mesh vertex or whole
+common edge, rejecting physically intersecting triangle interiors
+that a valid combinatorial vertex-link/Euler audit might miss.
+No floating tolerances are used; small rational separations are exact.
+
+This adds a necessary test for the chosen A5.2e2b2 collared-band
+candidate. It does **not** fix source Fig.12.10's Conway marking,
+off-boundary plumbing collar geometry or ambient-isotopy obligation.
+Results remain source-unverified; issue #46 and #33 stay open.
