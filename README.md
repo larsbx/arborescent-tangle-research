@@ -279,3 +279,22 @@ invariance under vertex/edge renumbering, cyclic starting slots,
 both ring signs, arbitrary path/corolla placements and V4 labels.
 Neither layer certifies actual tangle isotopy or a complete R±
 classification.
+
+## A4.4 — exact F1/F2-equivariance of restricted ring abbreviation
+
+[The A4.4 commuting-square theorem](docs/abbreviated-flip-equivariance-a4-4.md)
+implements the **source V4-labelled F1 and F2 flips** on the
+ring-numbered abbreviated representation. For disjoint strict
+±2–±1–±2 caps with zero sectors adjacent to each stem and no
+adjacent-ring exceptional case, performing each source flip before
+the §12.5 representation change yields **exactly** the same
+abbreviated object as flipping afterward. For F2 the pivot is a
+**surviving marked free bond**, so parity does not depend on erased
+vertex indices. Ring numbers remain fixed at surviving vertices,
+and all surviving V4 labels receive the correct ξ, η, ζ actions.
+The four-action subgroup admits an identity-root V4 gauge and
+rooted presentation key.
+
+This is an exact formal **equivariance theorem**, **not** an
+independent 3D isotopy proof, F3′ completion, or full canonical
+tangle classification.
