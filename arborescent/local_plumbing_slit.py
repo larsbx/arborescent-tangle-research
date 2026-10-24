@@ -221,6 +221,54 @@ class CutVertex:
             raise ValueError("invalid cut vertex/side")
 
 
+def _audit_cut_halves(
+    tetrahedra: tuple[tuple[CutVertex,CutVertex,CutVertex,CutVertex],...],
+    lower_faces: tuple[tuple[CutVertex,CutVertex,CutVertex],...],
+    upper_faces: tuple[tuple[CutVertex,CutVertex,CutVertex],...]
+) -> bool:
+    """Independently certify TWO cut 3-ball boundary 2-spheres.
+
+    Count actual cut-cell incidences instead of trusting source
+    midplane labels, including every face and closed boundary edge.
+    """
+    for side,declared in (("LOWER",lower_faces),("UPPER",upper_faces)):
+        tets=[t for t in tetrahedra
+              if any(v.side==side for v in t)]
+        if len(tets)!=6 or any(any(v.side not in (side,"EXTERIOR")
+                                  for v in tet) for tet in tets):
+            return False
+        face_count=Counter()
+        oriented=defaultdict(list)
+        for tet in tets:
+            for face in _tet_faces(tet):
+                face_count[frozenset(face)]+=1
+                oriented[frozenset(face)].append(face)
+        if any(n not in (1,2) for n in face_count.values()):
+            return False
+        for pair in oriented.values():
+            if len(pair)==2:
+                p,q=pair
+                if q not in ((p[1],p[0],p[2]),(p[0],p[2],p[1]),
+                              (p[2],p[1],p[0])):
+                    return False
+        boundary=[v[0] for v in oriented.values() if len(v)==1]
+        if len(boundary)!=12:
+            return False
+        actual_cut={frozenset(f) for f in boundary
+                    if all(v.side==side for v in f)}
+        if actual_cut != {frozenset(f) for f in declared}:
+            return False
+        vertices={v for f in boundary for v in f}
+        edges=Counter()
+        for i,j,k in boundary:
+            for a,b in ((i,j),(j,k),(k,i)):
+                edges[frozenset((a,b))]+=1
+        if (len(vertices)!=8 or any(n!=2 for n in edges.values())
+                or len(vertices)-len(edges)+len(boundary)!=2):
+            return False
+    return True
+
+
 @dataclass(frozen=True)
 class LocalSlitWitness:
     """Independent replay object for the *local* ambient PL 3-ball cut."""
@@ -256,6 +304,9 @@ class LocalSlitWitness:
             upper_faces=tuple(tuple(CutVertex(i,"UPPER") for i in
                                       (f[0],f[2],f[1])) for f in mid)
             if self.lower_cut!=low_faces or self.upper_cut!=upper_faces:
+                return False
+            if not _audit_cut_halves(self.cut_tetrahedra,
+                                     self.lower_cut,self.upper_cut):
                 return False
             for lo,hi in zip(self.lower_cut,self.upper_cut):
                 if frozenset(self.solid.vertices[v.original_index] for v in lo
