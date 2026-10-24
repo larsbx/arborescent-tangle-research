@@ -234,3 +234,18 @@ path it connects all `2^k` placements. These results are exact
 certify that each interchange is the published topological R±
 move for an arbitrary noncanonical presentation.
 The remaining direct plumbing and boundary proof is tracked in #16.
+
+## A4.2 — terminating and confluent strict *formal* ring normal form
+
+[The inversion-measure proof](ring-normal-form-a4-2.md) orients the
+A4.1 signed zero-sector, nonoverlapping-ring *presentation*
+interchange `RO↔OR` as `RO→OR`. At every base the total
+inversion number decreases by exactly one, and each anchored
+incident list reaches the **unique** stable form
+`O_1…O_o R_1…R_r`. Deterministic typed replay certificates
+verify every step. For structurally identical cap subtrees and
+a fixed rooted residual skeleton, the resulting marked
+normal-form code corresponds exactly to the restricted §12.5
+ring-numbered abbreviation code, up to the declared
+presentation-isomorphism relation. These are **syntactic**
+equivalence classes, not verified topological tangle isotopy.
