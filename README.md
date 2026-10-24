@@ -375,3 +375,24 @@ isomorphism quotient: renaming internal edges and reordering
 vertex storage can yield the *same* marked plane presentation
 outside that indexed orbit. No isotopy-class nonreachability
 or complete F3′/R± classification is claimed.
+
+## A4.9 — partial formal search modulo rooted presentation isomorphism
+
+[The A4.9 congruence proof and class-BFS audit](docs/rooted-class-quotient-a4-9.md)
+repairs the remaining A4.8 distinction between a **complete
+indexed** finite search and a complete search over **rooted
+weighted plane-tree presentation-isomorphism classes**. A4.9
+uses the existing faithful V4-labelled rooted plane code as
+a hash key. Each class's stored representative is expanded
+under all the *declared* A4.7 partial formal moves; tested
+generator congruence under vertex/edge renaming and cyclic
+slot rotation proves this class-level search is complete
+when its own class budget is not exhausted.
+
+Positive evidence consists of a replayable typed formal
+move path **plus an independently checked final marked
+presentation isomorphism**. A complete class graph can now
+exclude the target *within the declared partial formal
+calculus*; such exclusion is emphatically **not** evidence
+of different arborescent-tangle isotopy classes. Unknown
+budget cutoffs remain explicit.
