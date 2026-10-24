@@ -162,3 +162,18 @@ factor. For fixed q, the polynomial prefactor changes to
 `n^(q-3/2)`; summing all q keeps `n^(-3/2)` but changes
 exponential growth to `(R+1)*mu_m`. None of these claims yet
 identifies isotopy classes under the full modified ring calculus.
+
+## A3.1 — local grammar compatibility, beyond independent labels
+
+[Exact coupled equations, independently checked counts and proofs]
+(local-ring-constraints-a3-1.md): impose the predeclared
+**synthetic** restriction that adjacent forks cannot both carry a
+positive ring number. Two-type recursions produce an algebraic
+bivariate series and invalidate the naive independent
+`(R+1)^n a_n` factorization already at two forks. Despite this
+change, for any *fixed* ring grade q the leading coefficient still
+behaves as `a_n n^q/q!` by an edge-exclusion union bound. Summing all
+ring grades instead yields a strict exponential upper-rate gap
+from the independent model, using a matching of size ≥(n−1)/7.
+No claim is made that this local exclusion reproduces §12.5's
+actual exceptional adjacent-ring theorem or defines isotopy classes.
