@@ -113,3 +113,73 @@ counterexamples and restrict scope.
 
 A2 issue #4 remains open. No Catalan asymptotics under the full
 topological quotient are established here.
+
+## Independent source-diagram and adversarial audit
+
+The PDF linked above was independently downloaded and rendered for this
+review (SHA-256 `c887732f91421ce8bf424f32ab4c3b52b842a5c15f8bc95c62599b8d8baa88a6`).
+The inspected diagrams are printed pp.155,157–158,167 (PDF indices
+166,168–169,178). The following are observations from those pages:
+
+- **p.155:** each R+ and R− replacement retains the two terminal
+  vertices, center and attachment stem. The cap changes angular
+  location at its base. Its unit weight is in the wedge between its
+  two terminal bonds. No three-vertex deletion occurs.
+- **p.157:** ring numbers count erased attached subtrees at each
+  surviving base, rather than merely indicating presence. The example
+  includes multiplicity two. The source also admits the other two
+  central weight sectors, using F3′; our strict recognizer deliberately
+  handles only the directly pictured outer wedge.
+- **pp.157–158:** the two adjacent positive centers are an exception,
+  up to flips; the source assigns a special abbreviated representative.
+  We reject this configuration rather than implement that representative.
+  The ordinary construction uses bases of original valence at least three.
+- **p.167, §12.7.3:** the classification concerns canonical trees with
+  V4-labelled free bonds and includes flips as well as ring moves.
+  Abbreviated trees retain the labelled tangle setting. Merely comparing
+  our rooted presentation codes implements neither that flip quotient
+  nor the classification theorem.
+
+The negative implementation is the sign-reversed structural analogue.
+The orientation/sign correspondence is stated on printed p.154; §12.5
+itself develops the positive notation. Neither sign branch of this API
+checks all canonical-tree hypotheses. Arbitrary structurally valid
+inputs therefore receive only an encoding, never a topological certificate.
+Likewise zero adjacent base sectors are our conservative restriction,
+not a claimed general source requirement.
+
+The independent tests in `test_ring_abbreviation_adversarial.py` show:
+
+1. Four insertion positions include distinct original presentations but
+   the same ring-numbered code. This is intended loss of placement;
+   the source inputs are immutable, and no R± API is thereby implemented.
+2. Bare deletion (ring count zero) differs from abbreviation, and counts
+   zero through three remain distinct even when the surviving tree agrees.
+3. Counts at two different bases remain distinct; untouched nonzero
+   sectors and all four free-port V4 labels survive. Changing any of the
+   three labels in the angular-placement fixture changes its rooted code.
+4. Nonzero sectors beside a stem prevent abbreviation and are preserved.
+5. Opposite-sign adjacent centers exposed a guard gap in the original
+   head: selecting either sign erased one center and destroyed the other
+   cap's attachment. Such a mixed pair is outside the source's uniform
+   canonical-sign setting. The API now conservatively rejects a selected
+   cap whose base is *any* necessary ring center, regardless of sign or
+   sector eligibility. This extends refusal; it does not assert a new
+   mixed-sign source equivalence.
+
+The structural invariant remains: each encoded cap deletes three
+vertices and three internal bonds only in the new representation,
+adds one to exactly its surviving base's ring number, leaves a connected
+tree, and preserves every surviving sector total and free-bond label.
+Unsupported patterns may be left untouched; abbreviation need not be
+exhaustive, idempotent, or canonical under flips. Boundary bond names
+are presentation identifiers (the existing model permits their renaming);
+the chosen root, cyclic order and associated V4 data enter the code.
+
+Local acceptance after the correction: `python -m unittest discover -s tests -v` passes **72 tests**, and the workflow's prototype
+smoke command passes. Hosted Python 3.11 and 3.12 must pass on the updated
+head before merge; the earlier green run applies only to `f975ce8`.
+
+**Still open:** genuine R± relocation and its marked boundary bookkeeping;
+exceptional canonicality and the special adjacent-ring representative;
+independent plumbing soundness; full topological isotopy classification.
