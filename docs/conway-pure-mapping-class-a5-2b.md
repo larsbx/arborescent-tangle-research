@@ -35,6 +35,22 @@ https://dornsife.usc.edu/francis-bonahon/wp-content/uploads/sites/205/2023/06/Bo
 (§12.5 printed p.158, PDF zero-based p.169;
 §12.7 pp.166–167, PDF pp.177–178).
 
+### Independent mapping-class reference
+
+Jean-Luc Thiffeault, *Lectures on Braids and Dynamics* (2022),
+§2.2, printed p.11 (PDF zero-based p.12), explicitly presents
+the four-punctured-sphere mapping class group as the
+projective modular group extended by Klein-four half-turns,
+and derives the torus branched-double-cover description:
+https://people.math.wisc.edu/~thiffeault/talks/rio2022_lectures.pdf
+
+This independent geometry source supports the distinction
+between the **infinite** projective matrix subgroup and the
+**finite** puncture permutations. The proof below restricts
+further to the congruence subgroup that fixes every
+2-torsion/branch point. No claim of a source-specific Conway
+seam framing is inferred from the lecture notes.
+
 ## The double branched cover of a four-punctured sphere
 
 The two-fold branched covering
