@@ -314,3 +314,24 @@ guards for erased stems/unrecognized cap configurations.
 
 This proves a restricted **formal equivariance**, not a complete
 F3′/R± topology calculus or any claim of arborescent-tangle isotopy.
+
+## A4.6 — joint F1/F2 V4 gauge and strict ring-position normalization
+
+[The A4.6 formal quotient theorem and replay certificates]
+(docs/joint-flip-ring-quotient-a4-6.md) combine the **source F1/F2**
+four-action V4-labelled tangle flip subgroup with A4.1's
+**strict formal** signed ring-position slides. First choose the
+unique flip-group variant with identity root V4 label; then
+root-align cyclic slots and apply A4.2's terminating `RO→OR`
+ring-position normalizer.
+
+For a fixed residual rooted skeleton and identical signed disjoint
+ring caps on zero-sector bases, the resulting marked presentation
+key is invariant under **both** generators and agrees, as an
+equivalence criterion in the declared restricted domain, with the
+independently computed §12.5 abbreviated F1/F2-orbit key.
+Exact combined *indexed presentation* orbit counts are
+`4·binom(d+r-1,r)` for a corolla and `16·3^(k−2)`
+for a k-base bounded-valence path (k≥2).
+Typed joint-move BFS supplies shortest replayable witnesses with
+explicit cutoff status. **None of these counts are isotopy classes.**

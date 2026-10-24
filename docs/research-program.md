@@ -292,3 +292,19 @@ unsupported cases fail closed. Nontrivial even/odd pivot witnesses
 verify the result as **indexed presentation data**. Full F3′,
 source canonicality exceptions and independent tangle isotopy
 are still open.
+
+## A4.6 — joint formal F1/F2 plus ring-placement quotient
+
+[The A4.6 two-layer proof](joint-flip-ring-quotient-a4-6.md)
+integrates the source V4-labelled F1/F2 four-group with the
+rooted, terminating formal ring-location normalizer. A unique
+identity-root-V4 flip group variant is followed by cyclic parent
+alignment and stable `RO→OR` ring placement sorting. The resulting
+marked presentation key is invariant under both flip generators
+and all admitted strict formal ring slides. On a fixed residual
+skeleton with indistinguishable cap subtrees it agrees with the
+F1/F2 root-gauged §12.5 ring-number abbreviation criterion.
+Small explicit joint orbits have `4*binom(d+r-1,r)` corolla
+states and `16*3^(k-2)` bounded-valence path states. These are
+rigorous **formal indexed presentation** orbits, not
+Bonahon–Siebenmann topology-certified isotopy classes.
