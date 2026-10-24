@@ -396,3 +396,24 @@ exclude the target *within the declared partial formal
 calculus*; such exclusion is emphatically **not** evidence
 of different arborescent-tangle isotopy classes. Unknown
 budget cutoffs remain explicit.
+
+## A4.10 — Gaussian distance ranks and shortest formal ring-slide witnesses
+
+[The exact A4.10 metric theorem](docs/formal-ring-geodesics-a4-10.md)
+upgrades A4.1/A4.2's **restricted formal** ring-position
+connectivity to full distance distributions and explicit
+shortest paths. For o ordinary bonds and r identical ring
+caps, the distance-to-stable-form polynomial is the
+**Gaussian binomial** `[o+r choose r]_q`, enumerating
+ring-before-ordinary inversions. On the bounded-valence
+k-base path the exact polynomial factors as
+`(1+q)^2 (1+q+q^2)^(k-2)`, refining the earlier
+`4·3^(k-2)` orbit cardinality. For same-index
+presentations differing only by cap/ordinary interleavings,
+the shortest slide distance is the total L1 displacement of
+ordinary-bond counts before each ring. Code constructs
+and replays a typed geodesic with that minimal length,
+verified independently against exact BFS.
+
+These are **formal presentation metrics**, not independent
+Bonahon–Siebenmann R± or knot/tangle isotopy distances.

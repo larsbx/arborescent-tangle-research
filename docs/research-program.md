@@ -361,3 +361,21 @@ typed move trace and a checked final rooted isomorphism;
 a complete formal-class exclusion still does **not** establish
 different 3D tangle isotopy classes or source-complete
 canonical equivalence.
+
+## A4.10 — exact Gaussian-binomial metric for strict formal ring slides
+
+[The rank and geodesic proofs](formal-ring-geodesics-a4-10.md)
+determine the full inversion-distance enumerator for the A4.1
+strict anchored ring/ordinary-bond subsystem:
+`G_(o,r)(q)=[o+r choose r]_q`. This refines its
+ordinary binomial orbit count and specializes to the
+bounded-valence path distance law
+`H_k(q)=(1+q)^2(1+q+q²)^(k-2)`, with total
+`4*3^(k-2)`. The minimal number of typed strict slides
+between same-index presentations is exactly the sum over
+ring stems of the absolute displacement in **ordinary
+bonds preceding that ring**. A deterministic construction
+returns a replayable geodesic and verifies its length
+against the integer lower bound and independent BFS.
+The calculation is restricted to **formal positions**,
+not a topology-certified isotopy metric or full R±/F3′.
