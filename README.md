@@ -463,3 +463,29 @@ gluing. This kernel does **not yet realize** the source
 §12.5 **Fig.12.29 model atomic tangle with rings** or
 certify the modified R± moves. The A5.1 atomic sewing
 plans retain `UNVERIFIED_GEOMETRY`.
+
+## A5.2b — four puncture/V4 labels do NOT specify Conway seam topology
+
+[The A5.2b pure mapping-class obstruction](docs/conway-pure-mapping-class-a5-2b.md)
+makes precise why A5.2a's explicit puncture bijection cannot
+yet count as geometric plumbing. The four-punctured sphere
+has an **infinite pure mapping-class group**, represented
+via the torus double cover by the congruence subgroup
+`Gamma(2)/{±I}`. For every integer n the shear
+`T_n=[[1,2n],[0,1]]` fixes **each** of the four
+punctures, hence has the **same** V4/point permutation;
+yet it sends primitive slope `(0,1)` to `(2n,1)`,
+so all n give **different** marked-sphere mapping
+classes. An exact typed witness can attach these
+two distinct pure mapping classes to the **same
+existing A5.1 parent-child seam** while holding its
+four-puncture V4 matching fixed. The program
+checks all branch points and primitive slopes.
+
+This is a mathematically decisive **interface
+incompleteness obstruction**: the actual
+orientation-reversing Conway gluing and source's
+sector/ring-dependent pure twist conventions
+must be specified and independently validated.
+The code still refuses all 3D isotopy certification;
+actual §12.5 Fig.12.29 atoms and R± remain unimplemented.
