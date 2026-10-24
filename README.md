@@ -260,3 +260,22 @@ ring caps the rooted-presentation orbit contributes exactly
 This is a mathematically exact **formal syntax normalizer**, not an
 independently certified Bonahon–Siebenmann R± topological normal form
 or knot/tangle isotopy classifier.
+
+## A4.3 — rooted cyclic-storage invariant ring normal keys
+
+[The A4.3 correction](docs/root-aligned-ring-normal-form-a4-3.md)
+fixes a subtle presentation-isomorphism issue in A4.2:
+`Vertex.slots[0]` is **not intrinsic** for a cyclic incident-bond
+order. A cyclically rotated representation could be wrongly rejected
+or normalized differently simply because a ring stem moved into
+storage slot zero. A4.3 aligns every local cyclic order on the
+unique **incoming bond toward the marked free root**, rotating its
+sector weights simultaneously, before running A4.2's explicitly
+anchored stable ring sort.
+
+The root-alignment certificate distinguishes the **presentation
+isomorphism** from the typed **formal ring slides**; tests verify
+invariance under vertex/edge renumbering, cyclic starting slots,
+both ring signs, arbitrary path/corolla placements and V4 labels.
+Neither layer certifies actual tangle isotopy or a complete R±
+classification.
