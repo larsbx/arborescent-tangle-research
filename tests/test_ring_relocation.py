@@ -65,8 +65,12 @@ class RingRelocationTests(unittest.TestCase):
                     originals = bounded_valence_chain_presentations(k, sign)
                     orbit = explore_ring_slides(originals[0], sign)
                     self.assertTrue(orbit.complete)
-                    self.assertEqual(set(orbit.incoming), set(originals))
-                    self.assertEqual(len(orbit.incoming), 2**k)
+                    self.assertTrue(set(originals).issubset(set(orbit.incoming)))
+                    # At each interior degree-four base the cap has
+                    # THREE formal positions relative to the other
+                    # two nonanchor bonds (not merely the two in
+                    # the old A3.2 binary test subfamily).
+                    self.assertEqual(len(orbit.incoming), 4*3**(k-2))
                     self.assertEqual(
                         len({abbreviate_disjoint_rings(s, sign).rooted_code()
                              for s in orbit.incoming}), 1,
