@@ -154,3 +154,23 @@ ring subtrees and storing their multiplicity at attachment vertices.
 and explicit ring multiplicities. The exceptional case of one ring
 attached to another is rejected, not silently normalized. No full R±
 move, tangle isotopy classifier, or general Catalan quotient is claimed.
+
+## A3: exact ring-numbered abbreviated tree grammar
+
+[The A3 bivariate enumeration theorem](docs/ring-number-grammar-a3.md)
+counts *syntactic* abbreviated presentations with an independent
+ring number 0..R at each internal 2/3-ary fork, retaining explicit
+V4-marked weighted-plane-tree codes. With `m` finite leaf weights:
+
+```text
+F_(m,R)(x,y) = m+x*(1+y+...+y^R)*(F_(m,R)^2+F_(m,R)^3)
+[x^n y^q]F_(m,R) = a_n(m)*[y^q](1+y+...+y^R)^n
+sum_q [x^n y^q]F_(m,R) = (R+1)^n*a_n(m)
+```
+
+Summing over ring counts retains the tree square-root exponent
+`n^(-3/2)` while multiplying exponential growth by `R+1`.
+Holding total ring number q fixed instead yields a
+`n^(q-3/2)` polynomial prefactor. These are **combinatorial
+presentation results**, not classification of canonical tangles or
+a proven complete R± isotopy quotient.
