@@ -424,3 +424,24 @@ tangle is NOT a two-braid tile. It must still be realized
 independently, with actual punctured-sphere gluing and
 source-canonical R± equivalences, before any formal ring
 move becomes a topological certificate (issues #33 and #16).
+
+## A5.2b — the missing infinite Conway-seam mapping-class datum
+
+[The exact pure 4-puncture mapping-class proof]
+(conway-pure-mapping-class-a5-2b.md) identifies a
+structural obstacle to promoting A5.2a puncture
+matching into actual topological plumbing:
+`S²\{4 punctures}` has an infinite
+pure mapping-class subgroup
+`Gamma(2)/{±I}` via its torus double cover.
+The explicit shear family `[[1,2n],[0,1]]`
+fixes all four punctures for **every** integer n,
+but moves primitive slope `(0,1)` to `(2n,1)`;
+thus **no finite V4 action/permutation** can select
+a unique Conway seam homeomorphism up to isotopy.
+Exact integer action and determinant tests give
+independent pairwise nonidentity witnesses on
+the **same typed A5.1 seam**. The actual source
+Fig.12.29 sector/ring-dependent, orientation-
+reversing seam convention remains a separate
+geometric proof obligation, not inferred here.
