@@ -207,3 +207,39 @@ V4-boundary-parametrized isotopy data.
 None of A4.6's formal orbit numbers may be interpreted as
 arborescent-tangle isotopy counts; the A3/A3.3 square-root
 asymptotic theorems continue to describe **syntactic grammars**.
+
+
+## Correctness repair after PR #26
+
+PR #26 merged before its two inline findings were resolved. On that
+head, rotating the first corolla base so its ring stem occupied stored
+slot zero passed normalization but crashed joint successor generation;
+substituting another nested root or changing the outer sign also passed
+certificate verification. Both are implementation defects, not changes
+to the declared formal equivalence.
+
+Joint ring steps now align the source at the marked root before
+selecting or applying a slide. After the slide, each vertex is rotated
+back to its original starting bond, rotating its sectors identically.
+Both rotations are explicit deterministic presentation isomorphisms,
+not additional ring moves. The exact supplied source remains the BFS
+start and every typed move replays from it. Each orbit retains its
+per-vertex storage convention, so cyclic starts do not add extra states.
+F1/F2 already preserve those starting bonds. The count formulas above
+therefore apply within each fixed cyclic storage convention; they do
+not count all arbitrary storage rotations as separate states.
+
+The joint normal certificate now requires a strict integer sign ±1,
+equality of outer and nested roots, and equality of outer and innermost
+slide-certificate signs, in addition to source linkage and nested replay.
+
+`tests/test_flip_ring_quotient_adversarial.py` rejects substituted roots
+and signs (including no-cap and invalid-type cases), exercises every
+individual vertex start and simultaneous rotations on both signed
+corollas and paths, checks nondefault-root replay, and compares complete
+BFS sets with a separate binary-shuffle enumeration followed by the
+four V4 flip sheets. This enumeration uses no slide successor generator
+or normalizer. Corollas (d,r)=(3,0),(3,1),(3,2),(4,2) and paths k=2,3,4
+check the cardinality formulas and single normal key on each enumerated
+orbit. These finite checks support the declared restricted theorem;
+they remain formal presentation evidence, never tangle isotopy evidence.
