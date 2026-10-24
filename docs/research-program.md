@@ -402,3 +402,25 @@ proof. The machine-enforced `UNVERIFIED_GEOMETRY` status
 prevents interpreting a raw sewing graph or formal move trace
 as an isotopy certificate. A5.2 must discharge those
 geometry obligations before applying Theorem 12.21.
+
+## A5.2a — narrow genuine diagrammatic RII soundness, not Fig.12.29
+
+[The proof and exact crossing/port code](four-puncture-braid-kernel-a5-2a.md)
+add real **four-marked-endpoint, two-strand braid diagrams** with
+explicit over/under signs and full projected routes. Independent
+typed **Reidemeister-II** certificates prove positive
+boundary-relative diagram isotopy between two words whenever
+their braid exponents agree (the tiny braid group `B₂≅ℤ`).
+Exhaustive small signed crossing-word tests replay all reductions
+and reversed insertions; no negative general-tangle
+isotopy certificate is emitted. A separate **chosen** faithful V4
+double-transposition action on four clockwise named punctures
+and checked abstract seam endpoint matching provide a typed
+interface for later Conway gluing, but with
+`ABSTRACT_ONLY` status and no orientation/framing proof.
+
+Bonahon–Siebenmann's §12.5 Fig.12.29 **ring-atomic**
+tangle is NOT a two-braid tile. It must still be realized
+independently, with actual punctured-sphere gluing and
+source-canonical R± equivalences, before any formal ring
+move becomes a topological certificate (issues #33 and #16).
