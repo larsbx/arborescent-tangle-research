@@ -643,3 +643,26 @@ orientation still do not fix the source's required 3D seam/framing.
 No physical source homeomorphism or isotopy proof is inferred.
 Statuses remain `ARROW_FRAMING_SOURCE_UNVERIFIED` and
 `UNVERIFIED_GEOMETRY`. Issue #49 remains open.
+
+
+## A5.2e2b4b — source K is a distinguished proper subgraph of band boundary
+
+[The source knot-on-band properness audit](docs/distinguished-proper-knot-on-band-a5-2e2b4b.md)
+enforces the precise wording of Bonahon–Siebenmann §12.2:
+the twisted band has **boundary containing K**, not
+necessarily boundary **equal** to K. The entire χ=0
+annulus/Möbius auxiliary band boundary consists of closed
+circuits, but the source (M,K) tangle has **2n proper
+K-strand arcs terminating at all 4n marked Conway
+punctures**. A separate exact physical checker now proves
+that every K edge is an *exposed* triangle-mesh boundary
+edge, the graph K alone has degree one **only** at those
+punctures, and every puncture has a nonzero boundary-normal
+PL approach. Extra collar-rim band edges stay unmarked.
+This avoids incorrectly promoting a completed surface
+boundary loop to a proper boundary-marked tangle.
+
+The positive result concerns the *chosen-coordinate candidate*,
+not the source's full framed Fig12.10 isomorphism or isotopy.
+The `MARKED_KNOT_SOURCE_UNVERIFIED` and A5.1
+`UNVERIFIED_GEOMETRY` guards remain mandatory.
