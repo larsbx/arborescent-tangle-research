@@ -146,6 +146,72 @@ def algebraic_slope_det(
     return abs(p*s - q*r)
 
 
+# Coordinates for A5.2a's clockwise puncture enumeration:
+# NW=(0,0), NE=(1,0), SE=(1,1), SW=(0,1) in torus 2-torsion.
+# An affine half-translation by (tx/2,ty/2) acts as V4 on these points.
+BRANCH_COORDINATES = ((0, 0), (1, 0), (1, 1), (0, 1))
+
+
+@dataclass(frozen=True)
+class AffineConwayBoundaryClass:
+    """A pure Gamma(2) linear part plus a 2-torsion affine translation.
+
+    The map z |-> M z + t/2 commutes with z |-> -z on T² whenever
+    t=(tx,ty) has binary entries, because 2(t/2) is integral.
+    It therefore descends to the four-branch-point sphere.
+
+    Gamma(2) reduces to identity mod 2, so the induced labelled
+    puncture permutation depends ONLY on the half-translation
+    and matches the explicitly chosen A5.2a V4 action.
+
+    This is still an ORIENTATION-PRESERVING boundary self-map class,
+    NOT an oriented Conway gluing between two sphere boundaries.
+    """
+    pure: PureConwayMappingClass
+    v4: int
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.pure, PureConwayMappingClass):
+            raise ValueError("exact pure matrix part required")
+        if type(self.v4) is not int or self.v4 not in range(4):
+            raise ValueError("exact V4 affine translation required")
+
+    @property
+    def translation(self) -> tuple[int, int]:
+        return self.v4 & 1, (self.v4 >> 1) & 1
+
+    def puncture_permutation(self) -> tuple[int, int, int, int]:
+        """Compute branch-point action from affine torus data, not a lookup."""
+        tx, ty = self.translation
+        images = []
+        for x, y in BRANCH_COORDINATES:
+            mapped = (
+                (self.pure.a*x+self.pure.b*y+tx) % 2,
+                (self.pure.c*x+self.pure.d*y+ty) % 2,
+            )
+            images.append(BRANCH_COORDINATES.index(mapped))
+        return tuple(images)
+
+    def projective_key(self) -> tuple[tuple[int, int, int, int], int]:
+        return self.pure.projective_key(), self.v4
+
+    def image_slope(self, p: int, q: int) -> tuple[int, int]:
+        """Half-translation does not change torus homology slopes."""
+        return self.pure.image_slope(p, q)
+
+    def compose(self, other: "AffineConwayBoundaryClass"
+                ) -> "AffineConwayBoundaryClass":
+        if not isinstance(other, AffineConwayBoundaryClass):
+            raise ValueError("typed affine Conway boundary mapping class required")
+        # Since each pure part is identity mod 2, M*u + t = u+t mod 2.
+        return AffineConwayBoundaryClass(
+            self.pure.compose(other.pure), self.v4 ^ other.v4
+        )
+
+    def inverse(self) -> "AffineConwayBoundaryClass":
+        return AffineConwayBoundaryClass(self.pure.inverse(), self.v4)
+
+
 @dataclass(frozen=True)
 class ConwaySeamAmbiguityWitness:
     """Two different PURE mapping classes with identical puncture bijection."""
