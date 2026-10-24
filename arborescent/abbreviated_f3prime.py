@@ -16,6 +16,7 @@ exception, or independent isotopy theorem is asserted.
 from __future__ import annotations
 
 from .ring_abbreviation import Abbreviated, abbreviate_disjoint_rings, strict_ring_caps
+from .ring_signatures import ring_signatures
 from .abbreviated_flips import _free_owner
 from .tangle_labels import V4LabeledTree, tangle_flip_f3prime
 
@@ -63,6 +64,8 @@ def f3prime_abbreviation_square(
     # Ensure that every necessary ring motif is in the strict
     # supported cap representation *before* any reduction.
     original_caps = strict_ring_caps(source, sign)
+    if len(original_caps) != len(ring_signatures(source)):
+        raise ValueError("incomplete source ring-signature recognition")
     abbreviation = abbreviate_disjoint_rings(source, sign)
     if sum(abbreviation.rings) != len(original_caps):
         raise ValueError("incomplete source cap recognition")
