@@ -176,3 +176,14 @@ why bounded-valence and reduction must be named before making
 any polynomial-fiber conjecture. It is NOT a calculation of tangle
 isotopy classes and does not refute a bounded-valence reduced
 normal-form hypothesis.
+
+**A3.2 stronger obstruction (bounded valence):** a path of `k` base
+vertices carrying one disjoint ring cap and one free bond at every
+base, with all degrees ≤4 and all fixed-sign weights in `{0,1,2}`,
+has exactly `2^k=2^{N/4}` distinct marked plane-tree presentation
+codes but one ring-numbered abbreviated code. This strictly strengthens
+the single high-valence corolla counterexample and proves **bounded
+valence alone does not imply polynomial raw-to-abbreviation fibers**.
+Only *after* a genuine ring-location normalization could a polynomial
+fiber theorem be plausible for a canonical grammar. Full topology
+classification remains separately open.
