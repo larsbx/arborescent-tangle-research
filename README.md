@@ -174,3 +174,15 @@ Holding total ring number q fixed instead yields a
 `n^(q-3/2)` polynomial prefactor. These are **combinatorial
 presentation results**, not classification of canonical tangles or
 a proven complete R± isotopy quotient.
+
+## A3.2: exact exponential *presentation* fibers of ring abbreviation
+
+[The explicit ring-location fiber theorem](docs/ring-placement-fibers-a3-2.md)
+constructs a marked zero-sector base with `d` V4-labelled free legs
+and `r` attached disjoint ±2–±1–±2 ring caps. There are exactly
+`binom(d+r-1,r)` different rooted cyclic placement codes, but all
+have **one** identical ring-numbered abbreviated code. For `d=r=n`,
+this fiber is `binom(2n-1,n)~4^n/(2sqrt(pi n))`—exponential.
+This proves **no polynomial-fiber bound for unreduced placements at
+unbounded base valence**. It says nothing by itself about fibers of
+already-reduced bounded-valence grammars or topological isotopy.
