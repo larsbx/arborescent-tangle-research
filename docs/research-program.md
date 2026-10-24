@@ -217,3 +217,19 @@ nondegenerate characteristic singularity. Thus total guarded
 `mu` specified by the critical system. An exact degree-11
 polynomial and rational root bracket are included for m=2,R=1.
 Nothing here transfers the exponent to genuine arborescent isotopy.
+
+## A4.1 — finite formal ring-position connectivity, not isotopy
+
+[Proof, guards and replay certificates](ring-relocation-a4-1.md):
+A2.6's lost ring locations can be explored using a **conservative
+formal adjacent interchange** of a strict ring cap's full attachment
+stem with a neighboring ordinary bond at a zero-sector base.
+Unlike the retracted PR #11, the full cap remains present.
+The restricted §12.5 abbreviated code is verified unchanged.
+On the A3.2 corolla the presentation-move graph connects all
+`binom(d+r-1,r)` placements; on the bounded-valence k-base
+path it connects all `2^k` placements. These results are exact
+**syntactic** connectivity theorems and deliberately do **not**
+certify that each interchange is the published topological R±
+move for an arbitrary noncanonical presentation.
+The remaining direct plumbing and boundary proof is tracked in #16.
