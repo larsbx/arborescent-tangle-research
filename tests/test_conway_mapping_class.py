@@ -63,10 +63,14 @@ class PureConwayMappingClassTests(unittest.TestCase):
                 self.assertTrue(pure.fixes_four_punctures())
                 seen.add(pure.projective_key())
                 self.assertEqual(
-                    tuple(fixed_punctures.apply(p)
-                          for p in ("NW", "NE", "SE", "SW")),
-                    tuple(fixed_punctures.apply(p)
-                          for p in ("NW", "NE", "SE", "SW")),
+                    pure.branch_point_action(),
+                    ((0, 0), (1, 0), (0, 1), (1, 1)),
+                )
+                # The non-pure, separately chosen V4 permutation is
+                # identical independently of the hidden pure twist.
+                self.assertEqual(
+                    fixed_punctures.image_indices,
+                    PuncturePermutation(v4).image_indices,
                 )
             self.assertEqual(len(seen), 13)
 
