@@ -3,7 +3,7 @@ import unittest
 from math import comb
 
 from arborescent.placement_fibers import (
-    placement_fiber_experiment, placement_fiber_formula, placement_presentations,
+    placement_fiber_experiment, placement_fiber_formula, placement_presentations,\n    bounded_valence_chain_presentations, bounded_valence_fiber_experiment,
 )
 from arborescent.ring_abbreviation import abbreviate_disjoint_rings
 from arborescent.tangle_labels import V4LabeledTree
@@ -55,6 +55,31 @@ class RingPlacementFiberTests(unittest.TestCase):
             abbreviate_disjoint_rings(source, 1).rooted_code(),
             abbreviate_disjoint_rings(relabeled, 1).rooted_code(),
         )
+
+    def test_bounded_valence_four_still_has_exponential_raw_fibers(self):
+        # Unlike the star corolla, degree is UNIFORMLY <=4 as k grows.
+        # Independent local cap placements produce 2^k distinct
+        # weighted-plane codes; source-style ring abbreviation
+        # remembers one ring at each base and forgets the placements.
+        for k in range(2, 7):
+            for sign in (-1, 1):
+                with self.subTest(k=k, sign=sign):
+                    self.assertEqual(
+                        bounded_valence_fiber_experiment(k, sign),
+                        (2**k, 2**k, 1, 4 if k >= 3 else 3),
+                    )
+
+    def test_bounded_chain_preserves_each_base_ring_and_v4(self):
+        for t in bounded_valence_chain_presentations(3, -1):
+            ab = abbreviate_disjoint_rings(t, -1)
+            self.assertEqual(ab.rings, (1, 1, 1))
+            self.assertEqual(ab.labeled.labels,
+                             (("f0", 0), ("f1", 0), ("f2", 0)))
+            self.assertEqual(len(t.tree.vertices), 12)
+            self.assertEqual(len(ab.labeled.tree.vertices), 3)
+        for k, sign in ((1, 1), (2, 0), (2, True)):
+            with self.subTest(k=k, sign=sign), self.assertRaises(ValueError):
+                bounded_valence_chain_presentations(k, sign)
 
     def test_negative_controls_invalid_inputs(self):
         for d, r in ((2, 1), (0, 0), (3, -1), (True, 1),
