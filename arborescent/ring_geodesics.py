@@ -37,14 +37,24 @@ def _validate(o: int, r: int) -> None:
         raise ValueError("o and r must be nonnegative integers")
 
 
-@lru_cache(maxsize=None)
 def gaussian_ring_polynomial(o: int, r: int) -> tuple[int, ...]:
-    """Exact coefficients of q-binomial [o+r choose r]_q."""
+    """Exact q-binomial coefficients, validating types BEFORE cache lookup.
+
+    Python bool and int have equal hashes (True == 1, False == 0);
+    a public lru_cache decorator could silently return valid integer
+    results for explicitly forbidden bool parameters. The cache lives
+    only on the private helper after strict public validation.
+    """
     _validate(o, r)
+    return _cached_gaussian_ring_polynomial(o, r)
+
+
+@lru_cache(maxsize=None)
+def _cached_gaussian_ring_polynomial(o: int, r: int) -> tuple[int, ...]:
     if o == 0 or r == 0:
         return (1,)
-    first = gaussian_ring_polynomial(o, r-1)
-    second = (0,) * r + gaussian_ring_polynomial(o-1, r)
+    first = _cached_gaussian_ring_polynomial(o, r-1)
+    second = (0,) * r + _cached_gaussian_ring_polynomial(o-1, r)
     return tuple(
         (first[i] if i < len(first) else 0)
         + (second[i] if i < len(second) else 0)
