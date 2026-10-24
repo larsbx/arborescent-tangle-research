@@ -15,6 +15,7 @@ remains UNVERIFIED_GEOMETRY.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from fractions import Fraction
 from typing import Literal
 
 from .atomic_plumbing_contract import AtomicInstruction
@@ -35,7 +36,7 @@ class ExteriorConwayCollar:
     """An actual PL ribbon collar with interior outside the solid cube.
 
     Longitudinal x-z profile from west cap to east cap:
-       (west,0) -> (west-1,4) -> (east+1,4) -> (east,0).
+       (west,0) -> (west-1/4,4) -> (east+1/4,4) -> (east,0).
     Each cross-section has y=-2,0,2. The first/last chords are
     exactly the existing ribbon patch cap meshes on marked spheres.
     All other collar points are outside the CLOSED solid cube.
@@ -64,7 +65,7 @@ class ExteriorConwayCollar:
             raise ValueError("unsupported Conway collar type/status")
         w,e=self.cube.west,self.cube.east
         expected=tuple(Point3(x,y,z)
-                       for x,z in ((w,0),(w-1,4),(e+1,4),(e,0))
+                       for x,z in ((w,0),(w-Fraction(1,4),4),(e+Fraction(1,4),4),(e,0))
                        for y in (-2,0,2))
         if self.vertices!=expected:
             raise ValueError("off-boundary collar coordinates or framing mutated")
@@ -94,7 +95,7 @@ def exterior_collar(cube: MarkedConwayCube) -> ExteriorConwayCollar:
         raise ValueError("Conway sphere required")
     w,e=cube.west,cube.east
     vertices=tuple(Point3(x,y,z)
-                   for x,z in ((w,0),(w-1,4),(e+1,4),(e,0))
+                   for x,z in ((w,0),(w-Fraction(1,4),4),(e+Fraction(1,4),4),(e,0))
                    for y in (-2,0,2))
     faces=[]
     for i in range(3):
