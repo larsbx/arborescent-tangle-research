@@ -379,3 +379,26 @@ returns a replayable geodesic and verifies its length
 against the integer lower bound and independent BFS.
 The calculation is restricted to **formal positions**,
 not a topology-certified isotopy metric or full R±/F3′.
+
+## A5.1 — canonical source's atomic-ring-tangle *input* contract
+
+[The A5.1 §12.5 figure audit and typed round-trip](atomic-ring-plumbing-interface-a5-1.md)
+uses primary-source **printed p.158, Figures 12.28–12.29** to
+specify the geometric implementation boundary. Every vertex
+of a ring-numbered tree determines an *instruction* for the
+model atomic tangle carrying its full cyclic integer sector
+weights and ring multiplicity; every internal bond is an
+unoriented abstract sewing seam, and each free port retains
+its exact V4 label. A canonical marked-root address avoids
+arbitrary vertex numbering, interior edge names and cyclic
+storage starts. Full port/seam partition and rooted-code
+round-trip are checked independently and fail closed if any
+presentation information is lost.
+
+Crucially, this **does not yet implement** the source's 3D
+model atomic tangle strands, actual Conway boundary
+parametrization maps, seam gluing or independent R± isotopy
+proof. The machine-enforced `UNVERIFIED_GEOMETRY` status
+prevents interpreting a raw sewing graph or formal move trace
+as an isotopy certificate. A5.2 must discharge those
+geometry obligations before applying Theorem 12.21.
