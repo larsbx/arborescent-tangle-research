@@ -29,7 +29,7 @@ from .abbreviated_flips import abbreviated_flip_orbit_key, _free_owner
 from .ring_abbreviation import abbreviate_disjoint_rings
 from .ring_normalizer import (
     RootAlignedRingCertificate, normalize_rooted_ring_positions,
-    _supported,
+    align_rooted_cyclic_slots,
 )
 from .ring_relocation import RingSlide, apply_ring_slide, ring_slide_successors
 from .tangle_labels import (
@@ -62,6 +62,11 @@ class FlipRingNormalCertificate:
 
     def verify(self) -> bool:
         if type(self.flip_index) is not int or self.flip_index not in range(4):
+            return False
+        if type(self.sign) is not int or self.sign not in (-1, 1):
+            return False
+        if (self.slide.root != self.root
+                or self.slide.slide_certificate.sign != self.sign):
             return False
         group = tangle_flip_group(self.source, self.root)
         if self.flip_gauge != group[self.flip_index]:
@@ -144,7 +149,19 @@ def apply_joint(
     if move.kind == "F2":
         return tangle_flip_f2(source, pivot)
     if move.kind == "R-formal":
-        return apply_ring_slide(source, move.slide)
+        # Slot zero is a rooted anchor, never an arbitrary storage start.
+        aligned = align_rooted_cyclic_slots(source, root)
+        target = apply_ring_slide(aligned, move.slide)
+        # Restore the caller's cyclic storage convention at EVERY vertex.
+        # This is only a presentation isomorphism; it preserves exact replay
+        # and avoids counting cyclic starts as extra indexed orbit states.
+        from .weighted_trees import Vertex, WeightedPlaneTree
+        vertices = []
+        for before, after in zip(source.tree.vertices, target.tree.vertices):
+            offset = after.slots.index(before.slots[0])
+            vertices.append(Vertex(after.slots[offset:] + after.slots[:offset],
+                                   after.sectors[offset:] + after.sectors[:offset]))
+        return V4LabeledTree(WeightedPlaneTree(tuple(vertices)), target.labels)
     raise AssertionError("invalid move passed constructor")
 
 
@@ -156,8 +173,10 @@ def joint_successors(
     moves = [(JointMove("F1"), apply_joint(source, JointMove("F1"), root)),
              (JointMove("F2"), apply_joint(source, JointMove("F2"), root))]
     moves.extend(
-        (JointMove("R-formal", slide), child)
-        for slide, child in ring_slide_successors(source, sign)
+        (JointMove("R-formal", slide),
+         apply_joint(source, JointMove("R-formal", slide), root))
+        for slide, _ in ring_slide_successors(
+            align_rooted_cyclic_slots(source, root), sign)
     )
     seen = set()
     distinct = []
@@ -228,3 +247,4 @@ def explore_joint(
             incoming[child] = (state, move)
             todo.append(child)
     return JointOrbit(source, root, incoming, True)
+
