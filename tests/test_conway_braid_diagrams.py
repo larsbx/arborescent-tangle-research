@@ -9,7 +9,8 @@ from arborescent.conway_braid_diagrams import (
     PUNCTURES, PERMUTATIONS, FourPunctureFrame,
     PuncturePermutation, AbstractPunctureMatching,
     Braid2Diagram, Crossing, RIIEdit, Braid2IsotopyCertificate,
-    frames_for_plan, reduce_two_braid, prove_two_braid_equivalence,
+    frames_for_plan, proposed_seam_puncture_matching,
+    reduce_two_braid, prove_two_braid_equivalence,
 )
 from arborescent.atomic_plumbing_contract import (
     Port, atomic_plumbing_plan,
@@ -78,6 +79,38 @@ class PunctureGeometryTests(unittest.TestCase):
             FourPunctureFrame(Port((), 0), ("NW", "SE", "NE", "SW"))
         with self.assertRaises(ValueError):
             frames_for_plan(None)
+
+    def test_concrete_ports_are_checked_against_declared_abstract_seams(self):
+        original = bounded_valence_chain_presentations(3, 1)[0]
+        plan = atomic_plumbing_plan(abbreviate_disjoint_rings(original, 1))
+        self.assertEqual(len(plan.seams), 2)
+        for seam in plan.seams:
+            for v4 in range(4):
+                result = proposed_seam_puncture_matching(
+                    plan, seam.parent, seam.child, v4
+                )
+                self.assertEqual(result.parent.port, seam.parent)
+                self.assertEqual(result.child.port, seam.child)
+                self.assertEqual(len({right for _, right in result.pairs()}), 4)
+                self.assertEqual(result.mapping.v4, v4)
+                self.assertEqual(result.status, "ABSTRACT_ONLY")
+        seam = plan.seams[0]
+        with self.assertRaises(ValueError):
+            proposed_seam_puncture_matching(
+                plan, seam.child, seam.parent, 0
+            )
+        with self.assertRaises(ValueError):
+            proposed_seam_puncture_matching(
+                plan, Port((), 999), seam.child, 0
+            )
+        with self.assertRaises(ValueError):
+            proposed_seam_puncture_matching(
+                plan, seam.parent, seam.child, True
+            )
+        with self.assertRaises(ValueError):
+            proposed_seam_puncture_matching(
+                None, seam.parent, seam.child, 0
+            )
 
     def test_invalid_v4_puncture_elements_and_names(self):
         for bad in (True, -1, 4, 1.0, None):
