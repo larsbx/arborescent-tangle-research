@@ -325,3 +325,21 @@ A signed seven-vertex example verifies one actual strict-F3′ /
 confluence or genuine tangle isotopy. The F3′-extended calculus
 has **no asserted complete normal form**; A4.6's stable formal
 key remains limited to its earlier subsystem.
+
+## A4.8 — necessary rooted weighted-ring invariant and evidence types
+
+[The A4.8 exact proof](mixed-necessary-invariants-a4-8.md)
+adds a rooted, **unordered** residual weighted-ring skeleton
+fingerprint to the partial A4.7 formal graph. Every F1/F2,
+strict surviving-edge F3′ and *formal* ring-position step
+preserves the rooted tree incidence, the total integer
+weight at each vertex and its §12.5 ring multiplicity.
+The fingerprint deliberately ignores cyclic sector
+locations and mutable V4 free labels. Different fingerprints
+thus give a valid *restricted formal nonreachability* witness,
+but equal fingerprints do not imply any equivalence.
+The search API now distinguishes **replayable reachability,
+necessary-invariant exclusion, complete *indexed* target
+nonreachability, and unresolved cutoff**. Even fully completed
+indexed BFS is not a topological-isotopy decision procedure,
+or even a quotient under arbitrary vertex/bond renaming.
