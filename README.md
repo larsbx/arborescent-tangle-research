@@ -298,3 +298,19 @@ rooted presentation key.
 This is an exact formal **equivariance theorem**, **not** an
 independent 3D isotopy proof, F3′ completion, or full canonical
 tangle classification.
+
+## A4.5 — guarded F3′/abbreviation commuting squares
+
+[The A4.5 restricted naturality theorem](docs/abbreviated-f3prime-naturality-a4-5.md)
+extends the A4.4 V4-labelled F1/F2 commuting-square checks to the
+previously implemented strict **F3′** flip on a **surviving** internal
+edge at a pivot identified by a **surviving free bond**. For disjoint
+±2–±1–±2 caps on zero-sector attachment bases that remain strictly
+recognized after F3′, abbreviation before or after the flip yields
+**exactly** the same ring-numbered weighted planar-tree data.
+Tests exercise both signs, odd/even pivot weights, parity-dependent
+η changes to nonroot V4 labels, inverse moves, and fail-closed
+guards for erased stems/unrecognized cap configurations.
+
+This proves a restricted **formal equivariance**, not a complete
+F3′/R± topology calculus or any claim of arborescent-tangle isotopy.
