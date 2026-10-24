@@ -4,6 +4,7 @@ import unittest
 from arborescent.conway_mapping_class import (
     PureConwayMappingClass, pure_twist, algebraic_slope_det,
     seam_ambiguity_witness, ConwaySeamAmbiguityWitness,
+    AffineConwayBoundaryClass, BRANCH_COORDINATES,
 )
 from arborescent.conway_braid_diagrams import (
     PuncturePermutation, proposed_seam_puncture_matching,
@@ -107,6 +108,42 @@ class PureConwayMappingClassTests(unittest.TestCase):
                                 cert.second.require_verified_conway_gluing()
                             with self.assertRaises(NotImplementedError):
                                 cert.matching.certify_seam_isotopy()
+
+    def test_affine_torus_lift_derives_exact_a5_v4_permutations(self):
+        from arborescent.conway_braid_diagrams import PERMUTATIONS
+        self.assertEqual(BRANCH_COORDINATES,
+                         ((0, 0), (1, 0), (1, 1), (0, 1)))
+        for power in range(-7, 8):
+            for v4 in range(4):
+                m = AffineConwayBoundaryClass(pure_twist(power), v4)
+                self.assertEqual(m.puncture_permutation(), PERMUTATIONS[v4])
+                self.assertEqual(m.translation,
+                                 (v4 & 1, (v4 >> 1) & 1))
+                self.assertEqual(m.image_slope(0, 1),
+                                 pure_twist(power).image_slope(0, 1))
+                self.assertEqual(
+                    m.compose(m.inverse()).projective_key(),
+                    AffineConwayBoundaryClass(pure_twist(0), 0).projective_key(),
+                )
+                for v4_other in range(4):
+                    other = AffineConwayBoundaryClass(
+                        pure_twist(2-power), v4_other
+                    )
+                    composed = m.compose(other)
+                    self.assertEqual(
+                        composed.puncture_permutation(),
+                        PERMUTATIONS[v4 ^ v4_other],
+                    )
+                    self.assertEqual(
+                        composed.pure.projective_key(),
+                        pure_twist(2).projective_key(),
+                    )
+        with self.assertRaises(ValueError):
+            AffineConwayBoundaryClass(None, 1)
+        with self.assertRaises(ValueError):
+            AffineConwayBoundaryClass(pure_twist(1), True)
+        with self.assertRaises(ValueError):
+            AffineConwayBoundaryClass(pure_twist(1), 0).compose(None)
 
     def test_generator_distinguishes_slopes_even_though_punctures_fixed(self):
         identity = pure_twist(0)
