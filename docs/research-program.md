@@ -202,3 +202,18 @@ valence alone does not imply polynomial raw-to-abbreviation fibers**.
 Only *after* a genuine ring-location normalization could a polynomial
 fiber theorem be plausible for a canonical grammar. Full topology
 classification remains separately open.
+
+## A3.3 — square-root universality for a nonindependent local grammar
+
+[The A3.3 proof](guarded-critical-growth-a3-3.md) applies the
+Flajolet–Sedgewick/Meir–Moon smooth implicit-function schema to the
+A3.1 synthetic positive-ring adjacency exclusion after setting y=1.
+The two-state polynomial specification reduces to
+`G=H(x,G)` where `A=m+x(G²+G³)` and
+`H=A+R*x(A²+A³)`. For fixed `m>=1,R>=1`, the coefficientwise
+solution is positive and aperiodic, with a unique positive
+nondegenerate characteristic singularity. Thus total guarded
+**syntax** counts satisfy `K*mu^n*n^(-3/2)`, with algebraic
+`mu` specified by the critical system. An exact degree-11
+polynomial and rational root bracket are included for m=2,R=1.
+Nothing here transfers the exponent to genuine arborescent isotopy.
