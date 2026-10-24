@@ -190,3 +190,23 @@ when all grades are counted, a matching argument proves a **strict
 exponential deficit** relative to the unrestricted grammar.
 This is a falsifiable demonstration of finite-local sequence
 classification, not a Bonahon–Siebenmann canonicality theorem.
+
+## A3.2: exact exponential *presentation* fibers of ring abbreviation
+
+[The explicit ring-location fiber theorem](docs/ring-placement-fibers-a3-2.md)
+constructs a marked zero-sector base with `d` V4-labelled free legs
+and `r` attached disjoint ±2–±1–±2 ring caps. There are exactly
+`binom(d+r-1,r)` different rooted cyclic placement codes, but all
+have **one** identical ring-numbered abbreviated code. For `d=r=n`,
+this fiber is `binom(2n-1,n)~4^n/(2sqrt(pi n))`—exponential.
+This proves **no polynomial-fiber bound for unreduced placements at
+unbounded base valence**. It says nothing by itself about fibers of
+already-reduced bounded-valence grammars or topological isotopy.
+
+**Stronger A3.2 negative control:** an exact path-of-bases family has
+**maximum bond valence four** and one ring cap at each of `k` bases.
+Its two local cyclic cap positions per base produce **2^k** different
+marked presentation codes, yet §12.5 ring-number abbreviation gives
+**one** identical code with one ring at each base. Thus bounded
+valence **alone** cannot give polynomial unreduced-placement fibers;
+ring-location normalization is essential. This is not an isotopy count.
