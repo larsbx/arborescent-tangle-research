@@ -343,3 +343,21 @@ necessary-invariant exclusion, complete *indexed* target
 nonreachability, and unresolved cutoff**. Even fully completed
 indexed BFS is not a topological-isotopy decision procedure,
 or even a quotient under arbitrary vertex/bond renaming.
+
+## A4.9 — exact partial *formal* quotient modulo rooted isomorphism
+
+[The A4.9 proof and independent regressions](rooted-class-quotient-a4-9.md)
+replace fixed-index A4.7 BFS's storage-sensitive equality
+with the faithful rooted V4-labelled plane-tree presentation
+code. All coded F1/F2, strict surviving-edge F3′ and
+**formal** ring-slide successors respect marked presentation
+isomorphism: moving source vertex/edge indices and cyclic
+starting slots commutes with enumerating available moves.
+One representative per code therefore suffices for exact
+bounded BFS on *presentation-isomorphism classes*, with a
+qualified `complete=True` closure result for the declared
+partial move rules. Positive witnesses combine an executable
+typed move trace and a checked final rooted isomorphism;
+a complete formal-class exclusion still does **not** establish
+different 3D tangle isotopy classes or source-complete
+canonical equivalence.
