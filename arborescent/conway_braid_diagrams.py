@@ -124,6 +124,29 @@ def frames_for_plan(plan: AtomicPlumbingPlan) -> tuple[FourPunctureFrame, ...]:
     )
 
 
+def proposed_seam_puncture_matching(
+    plan: AtomicPlumbingPlan, parent: Port, child: Port, v4: int,
+) -> AbstractPunctureMatching:
+    """Match four explicitly named punctures on a DECLARED A5.1 seam.
+
+    Validates that both ports are joined by exactly the specified
+    atomic sewing edge. The chosen V4 permutation is a proposed
+    combinatorial identification; this does NOT select an
+    orientation-reversing 3D Conway seam homeomorphism or certify
+    the source's actual boundary parametrization.
+    """
+    if not isinstance(plan, AtomicPlumbingPlan):
+        raise ValueError("A5.1 typed plumbing plan required")
+    if not isinstance(parent, Port) or not isinstance(child, Port):
+        raise ValueError("typed seam endpoints required")
+    if not any(s.parent == parent and s.child == child for s in plan.seams):
+        raise ValueError("specified ports are not a directed A5.1 seam")
+    return AbstractPunctureMatching(
+        FourPunctureFrame(parent), FourPunctureFrame(child),
+        PuncturePermutation(v4),
+    )
+
+
 @dataclass(frozen=True)
 class Crossing:
     """Projection crossing with exact over/under input-strand identity.
