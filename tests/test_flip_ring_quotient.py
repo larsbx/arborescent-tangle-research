@@ -75,10 +75,8 @@ class JointFormalQuotientTests(unittest.TestCase):
                     cert = normalize_flip_ring(q, sign)
                     self.assertTrue(cert.verify())
                     self.assertEqual(cert.flip_gauge.label("f0"), 0)
-                    self.assertEqual(
-                        len(cert.slide.slide_certificate.moves),
-                        len(cert.slide.slide_certificate.moves)
-                    )
+                    self.assertEqual(cert.slide.slide_certificate.sign, sign)
+                    self.assertTrue(cert.slide.slide_certificate.verify())
                     self.assertEqual(len(q.tree.vertices),
                                      len(cert.normal.tree.vertices))
                     self.assertEqual(
