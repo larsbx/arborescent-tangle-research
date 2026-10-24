@@ -335,3 +335,20 @@ Exact combined *indexed presentation* orbit counts are
 for a k-base bounded-valence path (k≥2).
 Typed joint-move BFS supplies shortest replayable witnesses with
 explicit cutoff status. **None of these counts are isotopy classes.**
+
+## A4.7 — guarded mixed F1/F2/F3′/formal ring move graph
+
+[The A4.7 replayable partial-calculus note](docs/mixed-partial-calculus-a4-7.md)
+extends A4.6's strictly formal F1/F2/adjacent-ring actions with
+the **source-scoped strict surviving-edge F3′** move, provided its
+A4.5 ring-abbreviation commuting square passes. Every step rechecks
+complete signed ring-cap recognition, per-base ring counts, V4
+boundary data, and marked-root cyclic presentation alignment.
+A bounded BFS supplies executable **positive transformation
+certificates**, marking `complete=False` on search cutoff.
+Unlike A4.6, **no complete normal form is claimed for the
+F3′-extended graph**. A real seven-vertex witness verifies a
+specific F3′/formal-ring-slide commuting diamond (both ring signs,
+positive/negative odd/even root weights); zero-weight corollas
+recover the earlier finite formal flip+slide orbit. No 3D
+isotopy or source-complete R±/F3′ claim is made.
