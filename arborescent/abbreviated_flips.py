@@ -72,6 +72,8 @@ def abbreviated_flip_group(
     source: Abbreviated, root: str = "f0"
 ) -> tuple[Abbreviated, Abbreviated, Abbreviated, Abbreviated]:
     """Exactly the four source F1/F2 actions, preserving ring numbers."""
+    if not isinstance(source, Abbreviated):
+        raise ValueError("expected ring-numbered abbreviated presentation")
     _free_owner(source.labeled, root)
     f2 = abbreviated_flip_f2(source, root)
     return (
