@@ -48,7 +48,7 @@ There are three layers, each with the same four rectangular vertices at `z=4−h
     = (B.x−A.x)(D.y−A.y) · 2h.
 ```
 
-A valid *local* three-dimensional triangulation therefore exists independently of any planar diagram or formal plumbing instruction.
+A valid *local* three-dimensional triangulation therefore exists independently of any planar diagram or formal plumbing instruction. After cutting, an **additional independently reconstructed check** examines the actual tetrahedral faces of EACH of the two halves: exactly six tetrahedra per side, twelve boundary triangles, eight boundary vertices, every boundary edge with two incident boundary triangles, and boundary Euler characteristic two. It checks the two real cut triangles appear on the respective 3-ball boundaries; a missing tetrahedron or forged cut face fails this separate check.
 
 ## Slitting and exact reglue
 
