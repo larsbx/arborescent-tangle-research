@@ -308,3 +308,20 @@ Small explicit joint orbits have `4*binom(d+r-1,r)` corolla
 states and `16*3^(k-2)` bounded-valence path states. These are
 rigorous **formal indexed presentation** orbits, not
 Bonahon–Siebenmann topology-certified isotopy classes.
+
+## A4.7 — partial mixed flip/F3′/ring-slide graph with replay witnesses
+
+[The source-scoped A4.7 note](mixed-partial-calculus-a4-7.md)
+constructs a typed finite-index **formal** transition graph for
+V4-labelled F1/F2, strict F3′ on surviving pivot edges, and
+the restricted A4.1 ring-attachment interchange. Each accepted
+source-defined flip must pass the independently implemented
+§12.5-abbreviation commuting square; every intermediate
+presentation is root-cyclic-aligned and must preserve the
+per-base signed ring-count vector. The graph supports replayable
+shortest positive witnesses and honest `complete=False` cutoffs.
+A signed seven-vertex example verifies one actual strict-F3′ /
+**formal** ring-slide diamond; it does not establish general
+confluence or genuine tangle isotopy. The F3′-extended calculus
+has **no asserted complete normal form**; A4.6's stable formal
+key remains limited to its earlier subsystem.
