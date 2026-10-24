@@ -7,8 +7,9 @@ The previous Catalan-skeleton discussion proposed polynomial fibers
 from reduced decorated trees to topological classes. That question is
 not decided here. This note establishes that a *different map*, from
 unreduced locations of ring subtrees to source-style ring-numbered
-abbreviated trees, can have **exponentially large fibers** when the
-base's degree increases with presentation size. It therefore warns
+abbreviated trees, has **exponentially large fibers**, even with maximum bond valence
+four and a fixed finite weight alphabet (Theorem A3.2.3). The corolla
+family first demonstrates the effect with growing valence. It therefore warns
 against transferring any polynomial bound between these distinct
 representation levels.
 
@@ -25,7 +26,9 @@ irrelevant *under its ring-move and canonicity hypotheses*. The
 abbreviated representation erases suitable ring subtrees while
 counting their multiplicities at the surviving attachment base.
 Its exceptional case of adjacent rings is not part of this example:
-all our ring subtrees are pairwise disjoint and have the same base.
+all ring subtrees used here are pairwise disjoint. In the corolla
+family they share one base; in the bounded-valence family each cap
+has its own surviving base, and no cap is attached to another cap.
 
 This experiment uses only the *safe, highly restricted* abbreviation
 implementation already merged in PR #12. In particular it does
@@ -137,10 +140,14 @@ a free port, two path edges, one ring cap. All cap centers have
 valence three, and their terminals valence one. Thus the maximum
 bond valence is at most four.
 
-At each base there are **two** permitted cyclic placements of the cap,
+At each base we select **two** permitted cyclic placements of the cap,
 distinguished by which side of a fixed ordinary incident bond its
 stem occupies. These choices are independent at all `k` bases and
-define `2^k` marked rooted weighted-plane-tree codes.
+define `2^k` marked rooted weighted-plane-tree codes. This is the
+cardinality of the selected binary family, not a claim that it exhausts
+the entire fiber among all unreduced presentations: interior bases
+allow additional insertion positions. The full fiber has **at least**
+`2^k` elements, which suffices for the exponential lower bound.
 
 **Proof.** The root `f0` fixes the path's direction, so no automorphism
 can exchange base vertices at different root distances. Within each
@@ -174,12 +181,14 @@ The family is realized by
 `bounded_valence_chain_presentations(k, sign)`; the independent
 abbreviation execution compares all `2^k` codes for small `k`.
 
-**Important qualifications:
+**Important qualifications:**
 
-- This does **not** refute a polynomial-fiber conjecture for an
-  *already reduced, fixed bounded-valence* grammar. Our base's
-  valence `d+r=2n` grows with `n`; that violates a bounded-valence
-  hypothesis.
+- The corolla violates a bounded-valence hypothesis, but Theorem
+  A3.2.3 does not: bounded valence alone is insufficient. Both
+  constructions use **unreduced** ring-location presentations.
+  Neither decides a polynomial-fiber conjecture whose domain
+  consists of already-normalized representations with discarded
+  ring-location choices removed.
 - This is not a count of different topological tangles mapping to
   the same tangle; it is precisely a count of **presentation codes**
   lost by changing representation. The source's own equivalence
@@ -189,7 +198,7 @@ abbreviation execution compares all `2^k` codes for small `k`.
   are indispensable in the abbreviated code; ignoring them would
   create further artificial identification.
 
-## Next: isolate bounded-valence canonical subclasses
+## Remaining question: fibers from normalized representations
 
 This negative control narrows the research objective: predeclare
 a canonical weighted planar-tree subclass with declared local labels,
@@ -199,3 +208,27 @@ abbreviation, not their discarded raw ring placements; test the
 full topological quotient separately. The exact A3/A3.1 generating
 functions remain statements about syntax, independent of these
 topology obligations.
+
+A precise remaining question is conditional on a declared normalized
+language `C`, a size function `s`, a specified equivalence relation `E`,
+and a well-defined map `q: C -> C/E`: is there a polynomial `p` such that
+`|{c in C : s(c)<=n and q(c)=x}| <= p(n)` for every class `x`?
+Require `C` to have already removed raw ring-location choices and to
+retain per-base ring numbers, angular sectors, root marking and V4
+boundary data. Declare the finite grammar, weight/valence restrictions,
+ring-number encoding and exceptional cases before testing the bound.
+Normalization itself and this bound remain unproved. If `E` is tangle
+isotopy, constructing `q` additionally requires verifying the source's
+canonicity and topology hypotheses; equality of abbreviation codes
+alone does not supply that map.
+
+### Independent verification and negative controls
+
+The tests decode the binary choices directly from local incidence and
+sector data, without calling either rooted-code routine or the ring
+recognizer. They compare every output to a separately constructed
+ring-numbered path, including all sectors and boundary labels. Vertex
+permutation, bond renaming and cyclic starting-slot rotation preserve
+codes. Changing a nonroot V4 label, moving a ring count between bases,
+or putting a cap-center weight in the wrong wedge must be detected.
+These checks validate representation behavior only.
