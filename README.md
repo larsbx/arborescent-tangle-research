@@ -417,3 +417,25 @@ verified independently against exact BFS.
 
 These are **formal presentation metrics**, not independent
 Bonahon–Siebenmann R± or knot/tangle isotopy distances.
+
+## A5.1 — source-backed atomic tangle *plumbing-input* contract
+
+[The A5.1 source-image audit and lossless sewing proof](docs/atomic-ring-plumbing-interface-a5-1.md)
+addresses the missing geometric bridge rather than inventing
+additional formal quotient moves. Bonahon–Siebenmann §12.5
+printed p.158, Figures 12.28–12.29, defines **model atomic
+tangles with rings** at weighted vertices and plumbs them
+according to internal edges. New typed code extracts a
+storage-independent **abstract instruction graph**:
+per-vertex cyclic integer sector weights and ring numbers,
+one exact port for every incident bond, explicit seam
+endpoints, and every free-bond V4 label. An independent
+recursive reconstruction is proven/tested to equal the
+original marked `Abbreviated.rooted_code`, with guards
+against lost ports, multiplicities, sectors or labels.
+
+**No 3D Conway strand diagram or boundary gluing is constructed
+yet.** `topology_status=UNVERIFIED_GEOMETRY` is enforced
+and any purported isotopy certification fails closed. This
+is the correct input contract for an independently verified
+Figure-12.29 realization, not an isotopy classifier.
