@@ -162,3 +162,17 @@ factor. For fixed q, the polynomial prefactor changes to
 `n^(q-3/2)`; summing all q keeps `n^(-3/2)` but changes
 exponential growth to `(R+1)*mu_m`. None of these claims yet
 identifies isotopy classes under the full modified ring calculus.
+
+## A3.2 — raw ring-location ambiguity can be exponential
+
+[The A3.2 proof and exact exhaustive witnesses](ring-placement-fibers-a3-2.md)
+construct a corolla with `d` identical V4 free legs (one marked root)
+and `r` identical disjoint ring caps. Exactly
+`binom(d+r-1,r)` marked plane presentation codes collapse to a
+**single ring-numbered abbreviated presentation code**. At `d=r=n`,
+this is `~4^n/(2sqrt(pi n))`. This is a **negative control for
+unreduced presentation-to-abbreviation fibers** and demonstrates
+why bounded-valence and reduction must be named before making
+any polynomial-fiber conjecture. It is NOT a calculation of tangle
+isotopy classes and does not refute a bounded-valence reduced
+normal-form hypothesis.
