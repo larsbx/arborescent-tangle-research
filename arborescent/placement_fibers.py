@@ -105,3 +105,75 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+
+def bounded_valence_chain_presentations(
+    bases: int, sign: int = 1
+) -> tuple[V4LabeledTree, ...]:
+    """2^k distinct placements; max weighted-tree bond valence is four.
+
+    For k>=2 connect k zero-sector base vertices in a path. Each base
+    has one marked/V4-zero free port and one identical signed ring cap.
+    The ring cap attaches in either of two local angular positions,
+    while the chain and free-port order is kept fixed. This produces
+    two independent source-pattern placements at *each* base.
+
+    Every abbreviation gives the SAME ring-numbered path with one
+    ring recorded at each base. This shows that even bounded valence
+    does not give polynomial fibers for UNREDUCED placements.
+    """
+    from itertools import product
+
+    if type(bases) is not int or bases < 2:
+        raise ValueError("at least two path bases required")
+    if type(sign) is not int or sign not in (-1, 1):
+        raise ValueError("sign must be ±1")
+    def spine(j: int) -> str:
+        return f"e{3*bases+j}"
+    presentations = []
+    for bits in product((0, 1), repeat=bases):
+        vertices: list[Vertex] = []
+        for i in range(bases):
+            cap = f"e{3*i}"
+            free = f"f{i}"
+            if i == 0:
+                other = spine(0)
+                slots = (free, other, cap) if bits[i] == 0 else (free, cap, other)
+            elif i == bases-1:
+                incoming = spine(i-1)
+                slots = ((incoming, free, cap) if bits[i] == 0
+                         else (incoming, cap, free))
+            else:
+                incoming, outgoing = spine(i-1), spine(i)
+                slots = ((incoming, outgoing, free, cap) if bits[i] == 0
+                         else (incoming, outgoing, cap, free))
+            vertices.append(Vertex(slots, (0,)*len(slots)))
+        for i in range(bases):
+            stem, left, right = (f"e{3*i+j}" for j in range(3))
+            vertices.extend((
+                Vertex((stem, left, right), (0, sign, 0)),
+                Vertex((left,), (2*sign,)),
+                Vertex((right,), (2*sign,)),
+            ))
+        labels = tuple((f"f{i}", 0) for i in range(bases))
+        presentations.append(V4LabeledTree(WeightedPlaneTree(tuple(vertices)), labels))
+    return tuple(presentations)
+
+
+def bounded_valence_fiber_experiment(bases: int, sign: int = 1
+                                   ) -> tuple[int, int, int, int]:
+    """Return (source count, unique sources, abbreviation codes, max valence)."""
+    source = bounded_valence_chain_presentations(bases, sign)
+    originals = {t.labelled_rooted_code() for t in source}
+    reduced = set()
+    highest_valence = 0
+    for t in source:
+        highest_valence = max(highest_valence, *(len(v.slots) for v in t.tree.vertices))
+        if len(strict_ring_caps(t, sign)) != bases:
+            raise AssertionError("all k ring caps should be eligible")
+        abbr = abbreviate_disjoint_rings(t, sign)
+        if abbr.rings != (1,)*bases:
+            raise AssertionError("lost a ring number or attachment base")
+        reduced.add(abbr.rooted_code())
+    return len(source), len(originals), len(reduced), highest_valence
