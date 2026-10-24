@@ -3,7 +3,8 @@ import unittest
 from math import comb
 
 from arborescent.placement_fibers import (
-    placement_fiber_experiment, placement_fiber_formula, placement_presentations,\n    bounded_valence_chain_presentations, bounded_valence_fiber_experiment,
+    placement_fiber_experiment, placement_fiber_formula, placement_presentations,
+    bounded_valence_chain_presentations, bounded_valence_fiber_experiment,
 )
 from arborescent.ring_abbreviation import abbreviate_disjoint_rings
 from arborescent.tangle_labels import V4LabeledTree
