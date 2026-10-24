@@ -83,15 +83,21 @@ tangles.
 The test family has a weighted root vertex with V4 free port f0,
 root sector weight a=±3 (odd) or a=±4 (even), and a surviving
 interior edge e0 to a separate zero-sector base. This base
-has another V4-labelled free port f1, a weighted terminal
-branch, and a ±2—±1—±2 ring cap attached through a different
-edge e2. The cap is fully recognized by A2.6.
+has another V4-labelled free port f1, terminal branches
+weighted 3s and 2s for the chosen ring sign s, and a
+signed ±2—±1—±2 ring cap attached through a different edge e2. The cap is fully recognized by A2.6.
 
 The strict F3′ move at the weighted root transports a across
 the **surviving edge e0**. For odd a, it reverses the first
 surviving base's cyclic order (distance one) and applies the
 source's η transformation to f1. For even a the base and f1
 are unaffected. In both cases, f0 remains outside the branch.
+
+Both the source witness and its transported image pass the
+implemented nonexceptional branched **W/S/P** (s=+1) or **W/S/N**
+(s=-1) structural screen. This is a necessary source-canonicity
+check, not independent topological validation or complete treatment
+of all exceptional trees.
 
 Independent computation along each route verifies equality of
 the full `Abbreviated` objects, not merely equality of
