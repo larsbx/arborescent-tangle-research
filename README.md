@@ -224,3 +224,22 @@ specified degree-11 polynomial whose positive characteristic root
 has `mu≈58.8432259437452`. Exact integer recurrence and rational
 root-bracketing tests are included. This does **not** establish a
 canonical tangle growth law or an isotopy quotient.
+
+## A4.1 — source-motivated formal ring *relocation* (no cap deletion)
+
+[The A4.1 proof and tested finite certificates](docs/ring-relocation-a4-1.md)
+add a conservative, typed **adjacent ring-position slide** on
+zero-sector weighted plane-tree presentations. It swaps a full
+±2–±1–±2 ring subtree's stem with an adjacent ordinary bond **at
+the same base**; it never deletes vertices or changes V4 labels,
+and preserves the §12.5 abbreviated code. Overlapping rings, mixed
+signs, nonzero base sectors, root-anchor crossings and ring-ring
+swaps are rejected.
+
+For the previously established A3.2 families, the finite formal
+slide graph is connected on all binomially many corolla
+placements and all `2^k` bounded-valence path placements, with
+replayable shortest move witnesses. These are **presentation graph
+moves**, not independently certified 3D R± tangle isotopies.
+Complete Bonahon–Siebenmann Theorem 12.21 compatibility remains
+open in issue #16.
