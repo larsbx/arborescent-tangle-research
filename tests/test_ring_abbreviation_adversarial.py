@@ -88,5 +88,39 @@ class AdversarialRingTests(unittest.TestCase):
             self.assertEqual(r.labeled,changed)
             self.assertEqual(sum(r.rings),0)
 
+
+    def test_source_other_center_sector_variants_not_normalized(self):
+        # Printed §12.5 p.157 includes ring subtree variants with the
+        # central unit weight in other sectors (related by F3').
+        # This strict encoder does not invoke F3' to move that weight.
+        for sign in (-1, 1):
+            with self.subTest(sign=sign):
+                source = V4LabeledTree(WeightedPlaneTree((
+                    Vertex(('f0', 'e0', 'e3'), (0, 0, 0)),
+                    Vertex(('e0', 'e1', 'e2'), (sign, 0, 0)),
+                    Vertex(('e1',), (2 * sign,)),
+                    Vertex(('e2',), (2 * sign,)),
+                    Vertex(('e3',), (3 * sign,)),
+                )), (('f0', 3),))
+                from arborescent.ring_signatures import ring_signatures
+                from arborescent.ring_abbreviation import strict_ring_caps
+                self.assertEqual(len(ring_signatures(source)), 1)
+                self.assertEqual(strict_ring_caps(source, sign), ())
+                encoded = abbreviate_disjoint_rings(source, sign)
+                self.assertEqual(encoded.rings, (0,) * 5)
+                self.assertEqual(encoded.labeled, source)
+
+    def test_same_sign_adjacent_centers_rejected_for_negative_trees(self):
+        # Complements the original positive and mixed-sign exception
+        # controls: the sign-reversed pictured configuration also raises.
+        source = V4LabeledTree(WeightedPlaneTree((
+            Vertex(('e0', 'e1', 'e2'), (0, -1, 0)),
+            Vertex(('e0', 'e3', 'e4'), (0, -1, 0)),
+            Vertex(('e1',), (-2,)), Vertex(('e2',), (-2,)),
+            Vertex(('e3',), (-2,)), Vertex(('e4',), (-2,)),
+        )), ())
+        with self.assertRaisesRegex(ValueError, 'rings attached to rings'):
+            abbreviate_disjoint_rings(source, -1)
+
 if __name__ == '__main__':
     unittest.main()
