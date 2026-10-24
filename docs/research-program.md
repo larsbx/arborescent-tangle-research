@@ -249,3 +249,16 @@ normal-form code corresponds exactly to the restricted §12.5
 ring-numbered abbreviation code, up to the declared
 presentation-isomorphism relation. These are **syntactic**
 equivalence classes, not verified topological tangle isotopy.
+
+## A4.3 — corrected rooted cyclic isomorphism before formal ring sorting
+
+[Rooted cyclic-normalization proof and tests](root-aligned-ring-normal-form-a4-3.md):
+A4.2's anchored ring bubble-sort was dependent on the chosen first
+**storage** slot at each cyclic vertex; that first slot is not a
+mathematical plane-tree invariant. A4.3 first cyclically rotates
+the bond **and sector** lists at every vertex to the unique incoming
+edge toward a marked root free bond, as a **presentation
+isomorphism**, then replays the typed strict ring slides.
+The resulting marked rooted normal-form code is invariant under
+cyclic slot starts, bond renaming and vertex indexing, retaining
+all V4 labels. Still not an isotopy theorem or full R± calculus.

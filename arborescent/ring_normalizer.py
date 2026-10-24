@@ -123,9 +123,112 @@ def normalize_ring_positions(
     return certificate
 
 
-def strict_ring_normal_key(source: V4LabeledTree, sign: int) -> tuple:
-    """A marked rooted *presentation* code modulo supported slides.
+def align_rooted_cyclic_slots(
+    source: V4LabeledTree, root: str = "f0"
+) -> V4LabeledTree:
+    """Align each cyclic vertex list at the incident bond toward root.
 
-    Matching keys are not certificates of topological isotopy or full R±.
+    Cyclic slot rotations are *presentation isomorphisms*, not ring
+    slides. They must be normalized BEFORE applying the slot-zero
+    anchor-dependent A4.2 stable sort, or the key would depend on an
+    arbitrary storage position chosen for each vertex.
+
+    This method preserves sectors by the SAME cyclic rotation and
+    preserves all V4 labels. It makes no assertion about F1/F2 flips.
     """
-    return normalize_ring_positions(source, sign).normal.labelled_rooted_code()
+    from .weighted_trees import Vertex, WeightedPlaneTree
+
+    if not isinstance(source, V4LabeledTree):
+        raise ValueError("V4-labelled presentation required")
+    if not isinstance(root, str) or not root.startswith("f"):
+        raise ValueError("root must name a marked free bond")
+    owners: dict[str, list[int]] = {}
+    for i, vertex in enumerate(source.tree.vertices):
+        for bond in vertex.slots:
+            owners.setdefault(bond, []).append(i)
+    if len(owners.get(root, ())) != 1:
+        raise ValueError("root must occur on exactly one vertex")
+    new = list(source.tree.vertices)
+    seen: set[int] = set()
+    todo = [(owners[root][0], root)]
+    while todo:
+        i, incoming = todo.pop()
+        if i in seen:
+            raise ValueError("malformed cyclic parent traversal")
+        seen.add(i)
+        vertex = source.tree.vertices[i]
+        idx = vertex.slots.index(incoming)
+        new[i] = Vertex(
+            vertex.slots[idx:] + vertex.slots[:idx],
+            vertex.sectors[idx:] + vertex.sectors[:idx],
+        )
+        for bond in vertex.slots:
+            if bond == incoming or bond.startswith("f"):
+                continue
+            ends = owners[bond]
+            if len(ends) != 2:
+                raise ValueError("interior bond must have two endpoints")
+            other = next(j for j in ends if j != i)
+            if other not in seen:
+                todo.append((other, bond))
+    if len(seen) != len(new):
+        raise ValueError("disconnected vertex graph")
+    aligned = V4LabeledTree(WeightedPlaneTree(tuple(new)), source.labels)
+    if aligned.labelled_rooted_code(root) != source.labelled_rooted_code(root):
+        raise AssertionError("root alignment changed rooted plane presentation")
+    return aligned
+
+
+@dataclass(frozen=True)
+class RootAlignedRingCertificate:
+    """One explicit cyclic-isomorphism step then formal slide witnesses."""
+    source: V4LabeledTree
+    aligned: V4LabeledTree
+    slide_certificate: RingNormalForm
+    root: str
+
+    def verify(self) -> bool:
+        return (
+            self.aligned == align_rooted_cyclic_slots(self.source, self.root)
+            and self.source.labelled_rooted_code(self.root)
+                == self.aligned.labelled_rooted_code(self.root)
+            and self.slide_certificate.start == self.aligned
+            and self.slide_certificate.verify()
+        )
+
+    @property
+    def normal(self) -> V4LabeledTree:
+        return self.slide_certificate.normal
+
+
+def normalize_rooted_ring_positions(
+    source: V4LabeledTree, sign: int, root: str = "f0",
+    max_moves: int | None = None
+) -> RootAlignedRingCertificate:
+    """Storage-independent strict normalization for a marked root.
+
+    First canonicalize cyclic starting-slot choices via a rooted tree
+    traversal (which is a *presentation isomorphism*). Only after that
+    invoke the same strictly guarded A4.1 formal slide normalizer.
+    """
+    aligned = align_rooted_cyclic_slots(source, root)
+    steps = normalize_ring_positions(aligned, sign, max_moves)
+    result = RootAlignedRingCertificate(source, aligned, steps, root)
+    if not result.verify():
+        raise AssertionError("root-aligned normalization replay failed")
+    return result
+
+
+def strict_ring_normal_key(
+    source: V4LabeledTree, sign: int, root: str = "f0"
+) -> tuple:
+    """Marked rooted code modulo cyclic-start choices and strict slides.
+
+    Matching keys are NOT certificates of topological isotopy/full R±.
+    Unlike normalize_ring_positions (which is *already* slot-anchored),
+    the key canonicalizes the arbitrary cyclic start slot at EVERY
+    vertex using the marked root bond first.
+    """
+    return normalize_rooted_ring_positions(
+        source, sign, root
+    ).normal.labelled_rooted_code(root)
