@@ -110,6 +110,28 @@ cap and one V4-identity free port, the two distinguished positions
 at every base are related by one strict adjacent swap. The k
 independent commuting choices connect the full set of `2^k`
 marked representations, while keeping maximum bond valence ≤4.
+In fact the **complete strictly allowed indexed move orbit** is
+larger than the 2^k binary seed family. At each endpoint base the
+anchored list has two nonanchor slots, so the ring has **two**
+reachable positions. At each interior base the anchored list has
+three nonanchor slots (forward spine, free leg, cap), so the ring has
+**three** reachable positions, connected by adjacent ordinary-bond
+interchanges. The positions at distinct bases change independently
+and the source's zero-sector and non-overlapping-cap restrictions
+remain satisfied. Therefore the exact formal orbit size is
+
+```text
+4 * 3^(k-2)   for k >= 2.
+```
+
+This is larger than 2^k when k>=3; our first hosted test mistakenly
+asserted that the 2^k seed subfamily was the *entire* orbit.
+That test failed, revealing a genuine additional set of placements.
+The corrected test checks inclusion of all 2^k designated seed
+presentations, the exact 4*3^(k-2) full orbit size, and unchanged
+abbreviation codes throughout. This distinction is essential when
+reporting raw presentation fibers.
+
 Again this is **presentation-graph connectivity**, not
 independently established isotopy-class connectivity.
 
