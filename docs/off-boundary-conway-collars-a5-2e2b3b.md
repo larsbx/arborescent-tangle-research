@@ -15,14 +15,14 @@ Primary PDF: https://dornsife.usc.edu/francis-bonahon/wp-content/uploads/sites/2
 For a Conway cube `C=[w,e]×[-3,3]×[-3,3]` with east/west faces `x=e,w`, construct a four-station ribbon profile in x–z:
 
 ```
-(w,0) → (w−1,4) → (e+1,4) → (e,0).
+(w,0) → (w−¼,4) → (e+¼,4) → (e,0).
 ```
 
 At every station create width vertices with `y∈{−2,0,2}`. The exact 12 vertices and 12 triangles form three continuous 2-rectangle portions, with 2 triangles per half-width rectangle. The west/east end caps contain exactly the three coordinates of the existing inbound/outbound ribbon cap edges; those are genuinely **shared Q³ mesh edges**, not names identifying distant abstract vertices.
 
-For any point in the **relative interior** of the western slope, `x<w` and `z=4(w−x)>0`; therefore it lies outside closed C. On the eastern slope, `x>e` and `z=4(x−e)>0`; on the central roof, `z=4>3`. The collar thus has no contact with its own solid cube except the two specified end-cap chords `x=w,e; z=0; -2≤y≤2`.
+For any point in the **relative interior** of the western slope, `x<w` and `z=16(w−x)>0`; therefore it lies outside closed C. On the eastern slope, `x>e` and `z=16(x−e)>0`; on the central roof, `z=4>3`. The collar thus has no contact with its own solid cube except the two specified end-cap chords `x=w,e; z=0; -2≤y≤2`.
 
-Other Conway cubes lie in disjoint longitudinal slabs. The nearest neighbor's face may be only **one unit away** for zero-weight sectors, but the collar reaches that neighboring slab only at `z=4`, strictly above the cube's `z≤3` roof. The exact `_clip_cube` algorithm is independently applied to **every triangle against every solid Conway cube**, and permits only points on the designated source-candidate end-cap chords.
+Other Conway cubes lie in disjoint longitudinal slabs. The nearest neighbor's face may be only **one unit away** for zero-weight sectors. The roof overhang is only ¼ on either side, leaving at least a **½-unit horizontal gap** between adjacent collar roofs. This smaller overhang is essential: an initial full-unit offset caused two neighboring collars to meet along an illegal entire segment in a zero-weight gap, which the new independent triangle-pair checker detected and rejected. The restricted ¼-unit geometry removes that collision while retaining `z=4>3` roof clearance. The exact `_clip_cube` algorithm is independently applied to **every triangle against every solid Conway cube**, and permits only points on the designated source-candidate end-cap chords.
 
 ## Independent *two-part* embedding verification
 
