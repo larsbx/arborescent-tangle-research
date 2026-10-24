@@ -607,3 +607,23 @@ This adds a necessary test for the chosen A5.2e2b2 collared-band
 candidate. It does **not** fix source Fig.12.10's Conway marking,
 off-boundary plumbing collar geometry or ambient-isotopy obligation.
 Results remain source-unverified; issue #46 and #33 stay open.
+
+
+## A5.2e2b3b — off-boundary embedded Conway collar candidate
+
+The [off-boundary exact-PL collar construction](docs/off-boundary-conway-collars-a5-2e2b3b.md)
+replaces A5.2e2b2's roof strips lying on cubical Conway faces.
+It physically connects each original ribbon to its neighbor using
+an exact outer U-strip with roof height z=4 (> Conway-ball z=3),
+meeting each Conway sphere **only at its two end-cap chords**.
+An exact triangle-vs-solid-cube audit checks all collars against
+every removed ball. The new independent triangle/triangle kernel
+checks **all** physical mesh-face pairs in addition to the
+vertex-link/Euler/orientability topology checker.
+
+This is a *verified embedding of a chosen-coordinate PL band*,
+**not a source-certified Fig.12.10 twisted band or plumbing
+parametrization**. Source-relative isotopy, cyclic band-preserving
+moves, r-ring embeddings and R± still require separate proofs.
+The model stays `OFF_BOUNDARY_BAND_SOURCE_UNVERIFIED`; A5.1
+`UNVERIFIED_GEOMETRY` remains mandatory.
