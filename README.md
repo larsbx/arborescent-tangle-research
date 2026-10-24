@@ -439,3 +439,27 @@ yet.** `topology_status=UNVERIFIED_GEOMETRY` is enforced
 and any purported isotopy certification fails closed. This
 is the correct input contract for an independently verified
 Figure-12.29 realization, not an isotopy classifier.
+
+## A5.2a — actual 4-ended braid diagrams, typed puncture maps and RII certificates
+
+[The A5.2a exact limited-topology theorem and source comparison]
+(docs/four-puncture-braid-kernel-a5-2a.md) introduce a **real
+geometric diagram kernel** rather than another abstract tree
+rewrite: explicit over/under crossing events for monotone
+two-strand braids with four individually marked endpoints,
+complete projected strand paths and deterministic SVG inspection
+drawings. A typed **Reidemeister-II cancellation/insertion
+certificate** is independently replayable and proves positive
+diagrammatic isotopy relative to those endpoints when the two
+braid exponents agree. The exact statement is scoped to
+**two-strand braids B₂≅Z**, not all tangles.
+
+The four cyclically named punctures `(NW,NE,SE,SW)`
+admit an explicit faithful V4 permutation convention.
+A proposed A5.1 Conway seam map is checked against
+existing parent/child ports, but remains `ABSTRACT_ONLY`;
+it does **not** implement orientation-correct 3D Conway
+gluing. This kernel does **not yet realize** the source
+§12.5 **Fig.12.29 model atomic tangle with rings** or
+certify the modified R± moves. The A5.1 atomic sewing
+plans retain `UNVERIFIED_GEOMETRY`.
