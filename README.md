@@ -549,3 +549,24 @@ parametrizations are not established; no ring embeddings,
 Conway 3D sewing, R± equivalences or classification follows.
 `RIBBON_PATCHES_SOURCE_UNVERIFIED` and A5.1
 `UNVERIFIED_GEOMETRY` remain mandatory. Issue #41 stays open.
+
+
+## A5.2e2b1 — source band attachment is missing mathematical data
+
+[The independent abstract PL ribbon quotient validator]
+(docs/abstract-ribbon-gluing-a5-2e2b1.md) checks proposed
+three-vertex cap attachments between previously constructed
+ribbon disks, deriving surface connectedness, Euler characteristic,
+oriented-face consistency, individual vertex links and exact
+boundary circuits from the supplied face tables and glue maps.
+
+Crucially, gluing the *same* original patch ends with different
+width orientation can produce an **annulus** or a **Möbius band**.
+Thus correct signed braid strands, four marked points and real
+individual ribbon disks do **not** alone determine the desired
+global Fig.12.10 twisted-band topology. This is a computable
+attachment-data obstruction; it does not say the source is ambiguous.
+The quotient is **abstract only**: the glued caps remain physically
+disjoint in Q³ until a source-checked 3D attaching construction is
+provided. The result is `ABSTRACT_SURFACE_SOURCE_UNVERIFIED`,
+never a Conway/plumbing or ambient-isotopy certificate.
