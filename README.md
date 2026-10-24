@@ -489,3 +489,23 @@ sector/ring-dependent pure twist conventions
 must be specified and independently validated.
 The code still refuses all 3D isotopy certification;
 actual §12.5 Fig.12.29 atoms and R± remain unimplemented.
+
+
+## A5.2c/d — actual *partial* spatial geometry, not the source atomic tangle
+
+[Exact local 3D sector-braid embeddings](docs/spatial-sector-geometry-a5-2c.md)
+supply rational PL strands with true height-separated signed crossings and
+independent Reidemeister-II step replay. The follow-up
+[four-marked PL Conway boundary patches](docs/marked-conway-geometry-a5-2d.md)
+adds genuine oriented cubical 2-spheres with four distinct punctures per
+A5.1 port and disjoint exact two-strand braid corridors in their complement.
+All signed sector weights are preserved in order and their spatial curves are
+checked against the physically embedded boundary surfaces.
+
+**NOT YET FIG.12.29:** the linear model has an *artificial anchor sphere*
+and two open ends instead of the source's long returning band. It has no
+actual ring loops, source-certified puncture parametrizations, complete
+atomic embedding, orientation-reversing Conway seam, or verified modified
+R± isotopy. These deliberate incompletenesses are encoded in
+`OPEN_CHAIN_NOT_ATOMIC` and `UNVERIFIED_GEOMETRY`, not hidden behind a
+formal equality. Issues #33 and #16 remain open.
