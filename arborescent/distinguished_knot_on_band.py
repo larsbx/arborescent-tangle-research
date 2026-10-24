@@ -89,6 +89,19 @@ class DistinguishedKnotAudit:
         "MARKED_KNOT_SOURCE_UNVERIFIED"
     )
 
+    def __post_init__(self) -> None:
+        if (self.status != "MARKED_KNOT_SOURCE_UNVERIFIED"
+                or any(type(x) is not int or x<0 for x in (
+                    self.band_boundary_loops,self.band_boundary_edges,
+                    self.distinguished_knot_arcs,self.marked_conway_endpoints,
+                    self.knot_edges,self.complementary_band_edges))
+                or self.distinguished_knot_arcs*2 != self.marked_conway_endpoints
+                or self.band_boundary_edges != (
+                    self.knot_edges+self.complementary_band_edges)
+                or not self.band_boundary_loops
+                or not self.complementary_band_edges):
+            raise ValueError("distinguished K audit is not a source isotopy certificate")
+
 
 def verify_distinguished_knot(
     triangles: tuple[Triangle,...],
