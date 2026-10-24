@@ -627,3 +627,19 @@ parametrization**. Source-relative isotopy, cyclic band-preserving
 moves, r-ring embeddings and R± still require separate proofs.
 The model stays `OFF_BOUNDARY_BAND_SOURCE_UNVERIFIED`; A5.1
 `UNVERIFIED_GEOMETRY` remains mandatory.
+
+
+## A5.2e2b4a — source Fig12.6–12.7 oriented Conway arrows and signed boundary maps
+
+[The primary-source arrow/framing audit](docs/source-arrowed-conway-frames-a5-2e2b4a.md)
+adds a previously omitted boundary datum: Bonahon–Siebenmann §12.1's
+**oriented equatorial slope-zero arrow**. Fig12.7 demands that both
+plumbing arrows emanate from a common puncture along *distinct*
+adjacent arcs. Code checks a real (CHOSEN) boundary arrow on each
+Conway cube and an exact determinant −1 signed GL₂(Z) boundary
+mapping-class proposal with full puncture/slope action. Pure-twist
+negative controls demonstrate that the arrow, four points and gluing
+orientation still do not fix the source's required 3D seam/framing.
+No physical source homeomorphism or isotopy proof is inferred.
+Statuses remain `ARROW_FRAMING_SOURCE_UNVERIFIED` and
+`UNVERIFIED_GEOMETRY`. Issue #49 remains open.
