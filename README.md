@@ -210,3 +210,17 @@ marked presentation codes, yet §12.5 ring-number abbreviation gives
 **one** identical code with one ring at each base. Thus bounded
 valence **alone** cannot give polynomial unreduced-placement fibers;
 ring-location normalization is essential. This is not an isotopy count.
+
+## A3.3: square-root theorem for the constrained ring grammar
+
+[The A3.3 analytic and exact-algebraic proof](docs/guarded-critical-growth-a3-3.md)
+shows the A3.1 **synthetic finite-local** ring exclusion retains
+`K*mu^n*n^(-3/2)` total presentation growth for all fixed finite
+leaf alphabet sizes `m>=1` and positive ring alphabet sizes `R>=1`.
+Eliminating the two grammar states gives the scalar smooth implicit
+function `G=H(x,G)`, with a positive nondegenerate critical pair.
+For `m=2,R=1`, the exact critical discriminant contains a
+specified degree-11 polynomial whose positive characteristic root
+has `mu≈58.8432259437452`. Exact integer recurrence and rational
+root-bracketing tests are included. This does **not** establish a
+canonical tangle growth law or an isotopy quotient.
