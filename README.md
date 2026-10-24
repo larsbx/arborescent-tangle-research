@@ -243,3 +243,20 @@ replayable shortest move witnesses. These are **presentation graph
 moves**, not independently certified 3D R± tangle isotopies.
 Complete Bonahon–Siebenmann Theorem 12.21 compatibility remains
 open in issue #16.
+
+## A4.2 — stable normalization of the strict formal ring slides
+
+[The A4.2 proof and replay certificates](docs/ring-normal-form-a4-2.md)
+orient the A4.1 formal adjacent ring/ordinary-bond slide as
+`RO→OR`. The inversion count `#(R before O)` decreases exactly by
+one on each step. Thus the finite slide system has a **unique
+stable normal form** placing every ring after all ordinary
+nonanchor bonds at its base, preserving their respective relative
+orders. An implementation replays every typed move and checks
+termination. For a base with `o` ordinary bonds and `r` identical
+ring caps the rooted-presentation orbit contributes exactly
+`binom(o+r,r)` positions; factors multiply over independent bases.
+
+This is a mathematically exact **formal syntax normalizer**, not an
+independently certified Bonahon–Siebenmann R± topological normal form
+or knot/tangle isotopy classifier.
