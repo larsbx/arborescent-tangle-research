@@ -528,3 +528,24 @@ the long *strands* are embedded, but the complete supporting
 boundary-parametrization conventions and r>0 ring loops remain
 unconstructed. The status is `RETURN_STRANDS_SOURCE_UNVERIFIED`.
 The A5.1 `UNVERIFIED_GEOMETRY` gate and issues #39/#33/#16 stay open.
+
+
+## A5.2e2a — actual 2D PL ribbon patches; source band still unverified
+
+The [explicit oriented triangulated ribbon patch construction]
+(docs/pl-ribbon-patches-a5-2e2a.md) thickens the A5.2e1
+global return-strand candidate into **n genuine embedded
+2D PL disk patches** with exact rational triangle tables.
+Independent mesh validation checks oriented internal edges,
+surface Euler characteristic, nonzero triangle area, the
+complete two-rail-plus-cap boundary, exact clipping against
+all n solid Conway balls, and exterior-arch/interior-sector
+disjointness. Unsupported ridge/frame mutations are rejected.
+
+**These are not yet the source's complete framed twisted
+band or its Fig.12.8/12.29 isotopy class.** The source-specific
+global band attachment, crossing/framing signs and boundary
+parametrizations are not established; no ring embeddings,
+Conway 3D sewing, R± equivalences or classification follows.
+`RIBBON_PATCHES_SOURCE_UNVERIFIED` and A5.1
+`UNVERIFIED_GEOMETRY` remain mandatory. Issue #41 stays open.
