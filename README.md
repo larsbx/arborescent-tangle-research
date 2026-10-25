@@ -711,3 +711,27 @@ original `UNVERIFIED_GEOMETRY` remain enforced. Issue #54
 still requires a globally connected ambient manifold, real
 source plumbing patch positions and four actual knot piercings
 per source Conway boundary.
+
+
+## A5.2e2b4c2b — connected exact 3D tetrahedral roof ambient (not S³)
+
+[The connected physical roof-slab construction](docs/connected-roof-ambient-slab-a5-2e2b4c2b.md)
+bridges A5.2e2b4c2a's n separated 3D slit charts with **real
+face-compatible oriented tetrahedral material**. One exact PL 3-ball
+now contains all n source-candidate oriented roof patches as
+two-sided **internal mesh faces**, with a separate coordinate-only
+3D checker for signed tetrahedral volumes, interior face orientation,
+Euler-2 closed boundary, connectivity and each vertex's *2-disk/
+2-sphere link*. Its 2n−1 longitudinal slabs have 12(2n−1)
+tetrahedra and exact volume `4h·(x_last−x_first)`.
+
+However, this is only a **connected roof slab** far above the
+physically embedded proper knot K, NOT an ambient triangulation
+of the full source S³ or tangle manifold. Detaching a pair
+of tetrahedral **dual faces** is not yet a complete edge-split
+PL manifold slit; the chosen midplane disks have **zero K
+piercings**, so no source four-punctured Conway boundaries
+have been reconstructed. The typed flags
+`CONNECTED_ROOF_SLAB_NOT_SOURCE_AMBIENT` and
+`DUAL_FACE_BARRIERS_NOT_PL_MANIFOLD_SLIT` preserve the
+source's `UNVERIFIED_GEOMETRY` requirement.
