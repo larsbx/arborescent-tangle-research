@@ -46,39 +46,6 @@ def _mul(a:Vec,t:Fraction)->Vec:
 def _interp(a:Vec,b:Vec,t:Fraction)->Vec:
     return _add(_mul(a,1-t),_mul(b,t))
 
-def _clip(poly:tuple[Vec,...],axis:int,sign:int)->tuple[Vec,...]:
-    """Sutherland–Hodgman clip of a rational polygon: sign*x_axis <=3/4."""
-    if axis not in (0,1,2) or sign not in (-1,1):
-        raise ValueError("valid oriented rational tip halfspace needed")
-    if not poly:
-        return ()
-    result=[]
-    for i,q in enumerate(poly):
-        p=poly[i-1]
-        fp=sign*p[axis]-C
-        fq=sign*q[axis]-C
-        if (fp<0 and fq>0) or (fp>0 and fq<0):
-            result.append(_interp(p,q,fp/(fp-fq)))
-        elif fp>0 and fq==0:
-            pass
-        if fq<=0:
-            if fp>0 and fq<0:
-                result.append(_interp(p,q,fp/(fp-fq)))
-            result.append(q)
-        elif fp<0:
-            # Endpoint just departed the kept region.
-            # The first conditional already added this intersection.
-            pass
-    # The branch fp>0,fq<0 appended the intersection twice above;
-    # polygon identity is based on exact coordinates, so remove repeats.
-    unique=[]
-    for p in result:
-        if not unique or p!=unique[-1]:
-            unique.append(p)
-    if len(unique)>1 and unique[0]==unique[-1]:
-        unique.pop()
-    return tuple(unique)
-
 def _clip_clean(poly:tuple[Vec,...],axis:int,sign:int)->tuple[Vec,...]:
     """Standard single-intersection-per-crossing rational polygon clipping."""
     out=[]
@@ -154,8 +121,13 @@ def _geometry(original:RationalKCornerStar):
         transverse=[j for j in range(3) if j!=axis]
         # Four vertices of the diamond |x_trans1|+|x_trans2|=1-C.
         ring=[]
-        for j,s in ((transverse[0],1),(transverse[1],1),
-                    (transverse[0],-1),(transverse[1],-1)):
+        directions=((transverse[0],1),(transverse[1],1),
+                    (transverse[0],-1),(transverse[1],-1))
+        # The physical cap normals must point OUT of the compact
+        # convex 3-ball: +x incoming; +y or -x outgoing.
+        if (axis,sign) in ((1,1),(0,-1)):
+            directions=tuple(reversed(directions))
+        for j,s in directions:
             a=list(center)
             a[j]=Fraction(s)*(1-C)
             ring.append(add(tuple(a)))
@@ -215,6 +187,22 @@ class DoublyTruncatedKCorner:
         if (set(i for face in self.incoming_faces for i in face) &
                 set(i for face in self.outgoing_faces for i in face)):
             raise ValueError("incoming/outgoing K cap disks must be DISJOINT")
+        # Independent signed outer normal check on every true exposed
+        # 2-simplex. The two different K cap planes point along
+        # the distinct incoming and outgoing source K rays.
+        k_path=self.original.candidate.patches.strands.embedded_arcs()[
+            self.original.arc]
+        before,p,after=k_path[self.original.corner-1:
+                               self.original.corner+2]
+        for faces,normal_direction in (
+            (self.incoming_faces,_minus(_xyz(before),_xyz(p))),
+            (self.outgoing_faces,_minus(_xyz(after),_xyz(p)))
+        ):
+            for face in faces:
+                a,b,c=(_xyz(self.vertices[i]) for i in face)
+                if _dot(_cross(_minus(b,a),_minus(c,a)),
+                        normal_direction)<=0:
+                    raise ValueError("K cap exterior face normal is reversed")
         if (_link_cycle(self.tetrahedra,0,self.incoming_center)!=(4,4)
                 or _link_cycle(self.tetrahedra,0,self.outgoing_center)!=(4,4)):
             raise ValueError("two true K core mesh rays require circular edge links")
@@ -229,10 +217,6 @@ class DoublyTruncatedKCorner:
         if collisions.pair_count!=276:
             raise ValueError("not all 3D tetrahedron intersections checked")
         # Re-derive source-K subedge positions at ray fraction C*r.
-        k_path=self.original.candidate.patches.strands.embedded_arcs()[
-            self.original.arc]
-        before,p,after=k_path[self.original.corner-1:
-                               self.original.corner+2]
         frac=C*self.original.radius
         for index,terminal in ((self.incoming_center,before),
                                (self.outgoing_center,after)):
