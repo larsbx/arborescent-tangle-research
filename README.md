@@ -979,3 +979,28 @@ neighborhood, **not** complete source K, global ribbon/Conway
 ambient or source Fig12.5 new four-punctured slitting/isotopy.
 `TWO_K_RAYS_LOCAL_NOT_SOURCE_AMBIENT` and
 `UNVERIFIED_GEOMETRY` stay fail-closed.
+
+
+## A5.2e2b4c2e3 — ONE K tube between TWO doubly truncated true vertices
+
+[The reusable shared-tube/two-corner PL 3-ball](docs/one-shared-k-tube-dual-corners-a5-2e2b4c2e3.md)
+joins the outgoing four-triangle diamond cap of one genuine
+source-candidate K vertex to a **SINGLE real original K tube**,
+then joins its far square cap to the next K vertex's incoming
+diamond. The 24+12+12+12+24 actual tetrahedra form an
+independently checked **40-vertex / 84-tetrahedron PL 3-ball**.
+Every one of **3,486 physical tetrahedron pairs** is checked
+for nonconforming collision, and the source K segment is a
+five-edge properly ordered tetrahedral **1-skeleton chain**.
+The two unused opposite K-corner caps remain exposed for
+future larger-chain construction.
+
+This avoids the subtle mistake of unioning two individually
+certified PR #75 neighborhoods at successive K vertices:
+both would contain the SAME original K tube material, so
+their tetrahedra would **overlap in positive volume**.
+No whole-K or source-ribbon/Conway ambient result follows,
+and no Fig. 12.5 newly slit four-K-punctured Conway sphere,
+framed isotopy or ring R± has been established. The
+`ONE_SHARED_K_TUBE_NOT_WHOLE_SOURCE_AMBIENT` and
+`UNVERIFIED_GEOMETRY` gates remain strict.
