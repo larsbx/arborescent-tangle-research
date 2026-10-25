@@ -8,13 +8,17 @@ from arborescent.shared_tube_between_k_vertices import (
     SharedTubeBetweenKVertices,build_one_shared_k_tube,_assemble,
 )
 from arborescent.exact_tetrahedron_contacts import audit_embedded_tetrahedra
+from arborescent.connected_roof_ambient_slab import verify_connected_tetrahedral_ball
 
 
 class OneSharedTubeKVertexTests(unittest.TestCase):
     def test_bent_to_bent_actual_k_edge_has_one_shared_mesh_tube(self):
         atom=AtomicInstruction((),(0,0),0,1)
         obj=build_one_shared_k_tube(atom,0,1)
-        topology=obj.audit()
+        # Construction already performs an independent 3,486-pair
+        # exact physical collision audit. Recheck topology separately
+        # instead of replaying the expensive collision proof twice.
+        topology=verify_connected_tetrahedral_ball(obj.vertices,obj.tetrahedra)
         self.assertEqual(obj.status,"ONE_SHARED_K_TUBE_NOT_WHOLE_SOURCE_AMBIENT")
         self.assertEqual((topology.vertices,topology.tetrahedra),(40,84))
         self.assertEqual((topology.boundary_components,
@@ -35,8 +39,10 @@ class OneSharedTubeKVertexTests(unittest.TestCase):
         self.assertEqual(len(obj.tetrahedra),84)
         self.assertEqual(obj.left.original.corner,4)
         self.assertEqual(obj.right.original.corner,5)
-        self.assertEqual((obj.audit().boundary_components,
-                          obj.audit().boundary_euler),(1,2))
+        topology=verify_connected_tetrahedral_ball(
+            obj.vertices,obj.tetrahedra)
+        self.assertEqual((topology.boundary_components,
+                          topology.boundary_euler),(1,2))
 
     def test_corrupt_shared_tube_faces_source_status_and_geometry_fail(self):
         atom=AtomicInstruction((),(0,0),0,1)
