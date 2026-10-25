@@ -756,3 +756,24 @@ The connected roof 3-ball of A5.2e2b4c2b is disjoint from K
 and produces **zero** source 4-punctured boundaries. Never
 conflate these objects: `EXISTING_CUBES_NOT_SOURCE_CUT_DERIVED`
 and `UNVERIFIED_GEOMETRY` remain mandatory.
+
+
+## A5.2e2b4c2d1 — a FULL edge/vertex-aware slit of the connected roof 3-ball
+
+[The complete rational PL midplane slit](docs/full-roof-midplane-pl-slit-a5-2e2b4c2d1.md)
+replaces the earlier incomplete **tetrahedral dual-face barrier** with
+a true two-sided cut along the entire separating z=4 disk in the
+connected roof slab. Every cut-plane **vertex, edge and triangle**
+has distinct LOWER/UPPER mesh identities and opposite outward
+normals. An independent 3D PL checker reconstructs two genuine
+3-balls, each with Euler-2 boundary and valid per-vertex link,
+and verifies disk Euler-1, exact volume conservation and inverse
+tetrahedral regluing.
+
+**Only the slab is cut.** This full disk includes auxiliary
+connector strips, is NOT the source's Figure 12.10 plumbing-patch
+set, and it has **zero K piercings**: K lies outside the slab.
+No source four-punctured Conway sphere, ambient framed isotopy or
+R± certification follows. The flag
+`FULL_ROOF_PL_SLIT_NOT_SOURCE_CONWAY` and existing
+`UNVERIFIED_GEOMETRY` restrictions remain mandatory.
