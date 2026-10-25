@@ -101,6 +101,11 @@ class RationalKCornerStarTests(unittest.TestCase):
             _edge_link(((0,1,3,5),),1)
         with self.assertRaises(ValueError):
             build_rational_k_corner_star(atom,0,0)
+        # An untwisted two-vertex corridor carries one straight K
+        # segment, not a middle K corner. Reject fake intermediate
+        # vertices instead of fabricating triangulation geometry.
+        with self.assertRaises(ValueError):
+            build_rational_k_corner_star(atom,2,1)
         with self.assertRaises(ValueError):
             build_rational_k_corner_star(atom,0,1,Fraction(0))
         with self.assertRaises(ValueError):
