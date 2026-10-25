@@ -862,3 +862,29 @@ PR #63 knot tube remains open; no global knot ambient or
 source Figure 12.10 Conway 4-puncture cut has been certified.
 The `TRUNCATED_K_CORNER_CAP_NOT_GLUED` and
 `UNVERIFIED_GEOMETRY` statuses remain fail-closed.
+
+
+## A5.2e2b4c2d2d2 — exact 3D tetrahedron collision proof and conforming one-corner K weld
+
+[The rational tetrahedral collision/transition implementation](docs/welded-k-corner-edge-a5-2e2b4c2d2d2.md)
+independently computes the **physical convex intersection of every
+pair of actual tetrahedra**, rejecting geometric crossings and
+overlaps not explained by a literal shared mesh vertex, edge or
+whole face. The verifier uses exact rational supporting-plane
+triple intersections, not floating-point approximations or
+combinatorial topology alone.
+
+The construction joins PR #66's **exposed five-vertex diamond
+corner cap** to PR #63's **five-vertex square edge-tube cap** by
+four coherently triangulated three-dimensional sector prisms,
+adding 12 transition tetrahedra. It welds the original 16 corner
+and 12 tube tetrahedra by **actual physical coordinates**,
+then independently checks all 3D manifold vertex links,
+complete nonlocal tetrahedral intersections, source K 1-skeleton
+continuity, exterior physical knot-segment contact and Conway
+solid clearance. This is one knot-corner/outgoing-edge attachment,
+**not** the entire K-conforming source manifold.
+
+The current objects remain `ONE_K_CORNER_EDGE_GLUE_NOT_SOURCE_AMBIENT`;
+full source Figure 12.10 ambient slitting, four NEW Conway
+punctures, signed/pure framed isotopy and R± remain open.
