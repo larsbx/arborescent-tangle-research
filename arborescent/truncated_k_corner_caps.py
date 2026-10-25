@@ -27,11 +27,9 @@ from typing import Literal
 
 from .atomic_plumbing_contract import AtomicInstruction
 from .connected_roof_ambient_slab import verify_connected_tetrahedral_ball
-from .k_conforming_tetrahedral_tubes import _core_edge_link
 from .local_plumbing_slit import _volume6
 from .rational_k_corner_stars import (
-    RationalKCornerStar, _generators, _vertices, _edge_link,
-    build_rational_k_corner_star,
+    RationalKCornerStar, _generators, build_rational_k_corner_star,
 )
 from .spatial_twist_blocks import Point3
 
@@ -151,6 +149,42 @@ def _cap_disk(
     return len(used),len(edges),len(triangles)
 
 
+def _link_cycle(tets:tuple[Tetrahedron,...],
+                center:int,target:int)->tuple[int,int]:
+    """Independently certify a whole tetrahedral edge's link is a circle.
+
+    Triangular boundary refinements can increase the degree, so
+    unlike the source octahedron no hardcoded 'four' is assumed.
+    """
+    opposite=[]
+    for tet in tets:
+        if center in tet and target in tet:
+            opposite.append(frozenset(v for v in tet
+                                       if v not in (center,target)))
+    if len(opposite)<3 or len(set(opposite))!=len(opposite):
+        raise ValueError("missing or repeated K-edge link faces")
+    graph={}
+    for edge in opposite:
+        if len(edge)!=2:
+            raise ValueError("collapsed K edge link")
+        a,b=tuple(edge)
+        graph.setdefault(a,set()).add(b)
+        graph.setdefault(b,set()).add(a)
+    if (len(graph)!=len(opposite) or
+            any(len(nbr)!=2 for nbr in graph.values())):
+        raise ValueError("K edge link is not a simple cycle")
+    remaining=set(graph)
+    stack=[remaining.pop()]
+    while stack:
+        for next_vertex in graph[stack.pop()]:
+            if next_vertex in remaining:
+                remaining.remove(next_vertex)
+                stack.append(next_vertex)
+    if remaining:
+        raise ValueError("K edge link is disconnected")
+    return len(graph),len(opposite)
+
+
 @dataclass(frozen=True)
 class TruncatedKCorner:
     """Real K 3D corner with a positive-area outgoing attachment disk."""
@@ -193,24 +227,12 @@ class TruncatedKCorner:
                 incidence[frozenset(tri)]+=1
         if any(incidence[frozenset(face)]!=1 for face in self.cap_faces):
             raise ValueError("cap face is buried rather than boundary-attached")
-        if _edge_link(self.tetrahedra,self.incoming_vertex)!=(4,4):
-            raise ValueError("incoming K mesh edge has incorrect PL link")
-        # The outgoing K core P->cap center similarly must have the
-        # regular degree-four interior K-edge link.
-        ring=[]
-        for tet in self.tetrahedra:
-            if self.k_center in tet and self.cap_center in tet:
-                ring.append(frozenset(v for v in tet if v not in
-                                     (self.k_center,self.cap_center)))
-        if len(ring)!=4 or len(set(ring))!=4:
-            raise ValueError("outgoing K cap mesh edge link is not a four-cycle")
-        links={}
-        for edge in ring:
-            a,b=tuple(edge)
-            links.setdefault(a,set()).add(b)
-            links.setdefault(b,set()).add(a)
-        if len(links)!=4 or any(len(s)!=2 for s in links.values()):
-            raise ValueError("outgoing K edge link is not closed")
+        incoming=_link_cycle(self.tetrahedra,
+                             self.k_center,self.incoming_vertex)
+        outgoing=_link_cycle(self.tetrahedra,
+                             self.k_center,self.cap_center)
+        if incoming!=(6,6) or outgoing!=(4,4):
+            raise ValueError("truncated K bend has wrong edge link refinement")
         # Removing the half-size cone over one octahedron tip costs
         # det(u,v,w)/12, leaving (5/4)det(u,v,w) of volume.
         before,p,after=self.original.candidate.patches.strands.embedded_arcs()[
