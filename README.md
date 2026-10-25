@@ -934,3 +934,24 @@ face-conforming ambient, source Figure 12.5 slit producing
 four NEW punctures, framed isotopy or R± proof follows.
 `TWO_CORNER_K_EDGE_NOT_WHOLE_SOURCE_AMBIENT` and
 `UNVERIFIED_GEOMETRY` remain mandatory.
+
+
+## A5.2e2b4c2e1 — ONE true K corner core with TWO positive-area caps
+
+[The doubly truncated shared K-corner core](docs/doubly-truncated-shared-k-corner-a5-2e2b4c2e1.md)
+replaces the invalid strategy of overlapping an incoming-only and
+outgoing-only 3D corner star at the same actual knot vertex.
+One exact-rational convex octahedral K corner is instead clipped
+at BOTH K rays, using a guarded cut fraction 3/4. The resulting
+candidate contains **15 genuine Q³ vertices / 24 tetrahedra**
+and **two disjoint, physically exposed 5-vertex/4-face cap disks**,
+with distinct true K center-to-cap 1-simplex edges. Its exact volume
+is **63/64 of the original octahedron**, and all 276 tetrahedral
+pairs undergo independent rational convex intersection tests.
+
+This is a **shared corner with two actual positive-area interfaces**,
+NOT YET a two-edge conforming K neighborhood. True welding of both
+adjacent K tubes, whole-K source ambient and source Figure 12.10
+four-NEW-puncture reconstruction remain OPEN under #72.
+`DUAL_CAP_K_CORE_NOT_EDGE_GLUED` / `UNVERIFIED_GEOMETRY`
+remain fail-closed.
