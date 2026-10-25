@@ -138,7 +138,10 @@ class SharedTubeBetweenKVertices:
                 or L.arc!=R.arc or L.arc!=self.tube.arc
                 or R.corner!=L.corner+1 or self.tube.segment!=L.corner):
             raise ValueError("adjacent genuine K source vertices and same tube required")
-        self.left.audit();self.tube.audit();self.right.audit()
+        # Cheap canonical-geometry comparison comes BEFORE expensive
+        # independently replayed component/collision validation. This
+        # prevents forged fields from forcing repeated O(N^2) audits;
+        # every accepted candidate still receives ALL audits below.
         expected=_assemble(
             self.left,self.tube,self.right,
             self.left_rotation,self.right_rotation,
@@ -147,6 +150,7 @@ class SharedTubeBetweenKVertices:
                 self.near_diamond,self.near_square,self.far_square,self.far_diamond)
         if actual!=expected:
             raise ValueError("forged physical K mesh or incorrect cap mapping")
+        self.left.audit();self.tube.audit();self.right.audit()
         if (len(self.vertices)!=40 or len(self.tetrahedra)!=84 or
                 len(self.near_bridge)!=12 or len(self.far_bridge)!=12):
             raise ValueError("missing shared tube / corners / 3D transition cells")
@@ -257,6 +261,15 @@ def build_one_shared_k_tube(
                     for rot_b in range(4):
                         try:
                             mesh=_assemble(left,tube,right,rot_a,rot_b,rev_a,rev_b)
+                            # Reject invalid 3D interface arrangements
+                            # BEFORE rerunning component audits + the
+                            # 3,486-pair nonlocal collision proof. A
+                            # successful final object STILL checks all.
+                            verify_connected_tetrahedral_ball(mesh[0],mesh[1])
+                            exposed=_boundary_faces(mesh[1])
+                            if any(frozenset(face) in exposed
+                                   for faces in mesh[4:8] for face in faces):
+                                continue
                             return SharedTubeBetweenKVertices(
                                 left,tube,right,rot_a,rot_b,rev_a,rev_b,*mesh)
                         except ValueError:
