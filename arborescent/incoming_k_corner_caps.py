@@ -122,7 +122,7 @@ class IncomingTruncatedKCorner:
             self.tetrahedra,self.k_center,self.cap_center)
         outgoing_link=_link_cycle(
             self.tetrahedra,self.k_center,self.outgoing_vertex)
-        tip,outgoing_tip,_=_tip(self.original)
+        outgoing_tip,_,_=_tip(self.original)
         if incoming_link!=(4,4) or outgoing_link!=(
             (4,4) if outgoing_tip==2 else (6,6)
         ):
@@ -136,11 +136,12 @@ class IncomingTruncatedKCorner:
             raise ValueError("incoming geometric truncation volume mismatch")
         if self.vertices[self.k_center]!=p:
             raise ValueError("original K corner was moved")
-        if self.vertices[self.cap_center]!=_average(p,before) and self.vertices[self.cap_center]!=Point3(
-            *(Fraction(getattr(p,k))+
-              self.original.radius*(Fraction(getattr(before,k))-Fraction(getattr(p,k)))/2
-              for k in ("x","y","z"))
-        ):
+        expected_k_cap=Point3(*(
+            Fraction(getattr(p,k))+
+            self.original.radius*(
+                Fraction(getattr(before,k))-Fraction(getattr(p,k)))/2
+            for k in ("x","y","z")))
+        if self.vertices[self.cap_center]!=expected_k_cap:
             raise ValueError("incoming cap point not on original physical K edge")
         return topology
 
