@@ -797,3 +797,25 @@ surfaces into one connected ambient 3-manifold, and cannot certify
 new four-punctured Conway spheres, source-isotopy or R±.
 `LOCAL_K_EDGE_CONFORMING_NOT_GLOBAL_AMBIENT` and
 `UNVERIFIED_GEOMETRY` remain in force under Issue #60.
+
+
+## A5.2e2b4c2d2b — exact arbitrary-direction tetrahedral K subedge stars
+
+[The rational K-segment frame and 3D tube kernel](docs/rational-arbitrary-k-edge-stars-a5-2e2b4c2d2b.md)
+generalizes the two horizontal return-rail tetrahedral tubes in
+PR #61 to **any selected existing physical source-candidate K
+segment**, including transverse vertical rails and signed braid
+crossings with nonzero z heights. Rational cross-product frames
+construct a real oblique tetrahedral 3-ball (10 physical vertices,
+12 positively oriented tetrahedra) with an exact K interior mesh
+edge and audited four-cycle link. A separate exact 3D segment–
+parallelepiped clip checks EVERY other K segment; a rational
+separating-axis checker proves closed-solid clearance from EVERY
+Conway cube. Radius shrinks deterministically until all geometry
+passes or the bounded search reports UNVERIFIED.
+
+These stars cover only proper **interiors** of original K edges.
+They do not yet include vertex/corner junctions or form a connected
+3D ambient whose mesh conforms to all K edges, ribbon and Conway
+surfaces. They are source-unverified; Issue #62 and A5.1
+`UNVERIFIED_GEOMETRY` remain open.
