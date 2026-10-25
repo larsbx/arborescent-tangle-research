@@ -231,8 +231,14 @@ class TruncatedKCorner:
                              self.k_center,self.incoming_vertex)
         outgoing=_link_cycle(self.tetrahedra,
                              self.k_center,self.cap_center)
-        if incoming!=(6,6) or outgoing!=(4,4):
-            raise ValueError("truncated K bend has wrong edge link refinement")
+        tip,_,_=_tip(self.original)
+        # In a bend the incoming and outgoing axes are adjacent,
+        # splitting two original adjacent facets, yielding 6 faces
+        # around the incoming K edge. For a straight continuation
+        # their tips are opposite, so its link remains a 4-cycle.
+        incoming_expected=(4,4) if tip==2 else (6,6)
+        if incoming!=incoming_expected or outgoing!=(4,4):
+            raise ValueError("truncated K corner has wrong edge-link refinement")
         # Removing the half-size cone over one octahedron tip costs
         # det(u,v,w)/12, leaving (5/4)det(u,v,w) of volume.
         before,p,after=self.original.candidate.patches.strands.embedded_arcs()[
