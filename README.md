@@ -819,3 +819,23 @@ They do not yet include vertex/corner junctions or form a connected
 3D ambient whose mesh conforms to all K edges, ribbon and Conway
 surfaces. They are source-unverified; Issue #62 and A5.1
 `UNVERIFIED_GEOMETRY` remain open.
+
+
+## A5.2e2b4c2d2c — true K vertices with TWO conforming 3D tetrahedral edges
+
+[The exact knot-corner octahedral 3-ball](docs/rational-k-corner-stars-a5-2e2b4c2d2c.md)
+adds a real convex 7-vertex, 8-tetrahedron **PL 3-ball
+centered on an actual 2-valent knot vertex**. Both incoming
+and outgoing physical K subsegments are independently checked
+as tetrahedral mesh edges with their own circular 4-cycle
+links. It works for bent and straight continuation vertices
+with exact rational cross-product frames, positive tetrahedral
+volumes, all vertex links, and exact 3D convex segment clipping
+against EVERY other K edge and removed Conway cube.
+
+These are still **independent local corner stars**, not
+geometrically attached to PR #63's interior edge tubes or
+assembled into one complete knot-containing 3-manifold.
+No source-generated Conway four-punctured boundary, framed
+isotopy, or R± theorem follows. `LOCAL_CORNER_STAR_NOT_WHOLE_K_AMBIENT`
+and `UNVERIFIED_GEOMETRY` remain mandatory.
