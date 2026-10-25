@@ -955,3 +955,27 @@ adjacent K tubes, whole-K source ambient and source Figure 12.10
 four-NEW-puncture reconstruction remain OPEN under #72.
 `DUAL_CAP_K_CORE_NOT_EDGE_GLUED` / `UNVERIFIED_GEOMETRY`
 remain fail-closed.
+
+
+## A5.2e2b4c2e2 — two actual K edge tubes through ONE shared core
+
+[The two-direction physically welded shared-corner construction](docs/shared-corner-two-k-rays-a5-2e2b4c2e2.md)
+joins incoming and outgoing proper source-K segment tubes to the TWO
+disjoint, positive-area cap disks of the **same single shared K corner**
+from PR #73. A four-prism, 12-tetrahedron rational transition is
+placed on each side. The intended connected mesh has **35 exact Q³
+vertices / 72 oriented tetrahedra**, with all eight fan attachment
+triangles welded as genuinely internal physical faces; the original
+knot centerline is a conforming, strictly ordered 1-skeleton chain
+across the actual original shared K vertex. Independent PL manifold
+vertex-link checks, **2,556** exact physical tetrahedron-pair
+intersections, source-K strand exclusion and Conway solid clearance
+are mandatory.
+
+Unlike a naive union of incoming-only/outgoing-only corner
+octahedra, this construction never superposes two overlapping
+3D solids at the same true K vertex. It is only a LOCAL two-ray
+neighborhood, **not** complete source K, global ribbon/Conway
+ambient or source Fig12.5 new four-punctured slitting/isotopy.
+`TWO_K_RAYS_LOCAL_NOT_SOURCE_AMBIENT` and
+`UNVERIFIED_GEOMETRY` stay fail-closed.
