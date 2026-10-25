@@ -910,3 +910,27 @@ welded** to that far square tube interface. The full two-ended
 K edge and source Figure 12.10 ambient remain open in #69.
 `INCOMING_K_CAP_NOT_TUBE_GLUED` and
 `UNVERIFIED_GEOMETRY` remain mandatory.
+
+
+## A5.2e2b4c2d2d3b — actual TWO-ENDED knot edge in one PL 3-ball
+
+[The verified two-ended K-edge construction](docs/two-ended-k-edge-a5-2e2b4c2d2d3b.md)
+joins the existing physical PR #68 corner/outgoing-edge 40-tet
+3-ball to the actual *next K vertex's* PR #70 positive-area
+incoming diamond cap. A four-sector 12-tetrahedron transition
+welds the far tube square to that cap, producing one intended
+**32-vertex / 68-tetrahedron PL 3-ball** with an actual
+five-edge K 1-skeleton chain between two original K vertices.
+Both attachment fans must become genuine internal faces.
+An independent exact convex 3D collision checker audits all
+2,278 tetrahedron pairs; all vertex links, signed volumes,
+source K edge parameter order and closed Conway clearance
+are separately checked.
+
+This remains one source-candidate K **edge between two
+corners**, NOT a mesh of every K arc or a connected
+Bonahon–Siebenmann tangle (M,K). No full ribbon/Conway
+face-conforming ambient, source Figure 12.5 slit producing
+four NEW punctures, framed isotopy or R± proof follows.
+`TWO_CORNER_K_EDGE_NOT_WHOLE_SOURCE_AMBIENT` and
+`UNVERIFIED_GEOMETRY` remain mandatory.
