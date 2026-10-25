@@ -888,3 +888,25 @@ solid clearance. This is one knot-corner/outgoing-edge attachment,
 The current objects remain `ONE_K_CORNER_EDGE_GLUE_NOT_SOURCE_AMBIENT`;
 full source Figure 12.10 ambient slitting, four NEW Conway
 punctures, signed/pure framed isotopy and R± remain open.
+
+
+## A5.2e2b4c2d2d3a — positive-area INCOMING K-corner attachment disk
+
+[The incoming octahedral K cap construction](docs/incoming-k-corner-cap-a5-2e2b4c2d2d3a.md)
+supplies the dual of PR #66's outgoing cap: a **11-vertex,
+16-tetrahedron physically embedded rational PL 3-ball** clipped
+at the *actual incoming knot ray*, with a **five-vertex,
+four-triangle exposed positive-area disk** centered on the
+same physical K segment. Both original K ray edges remain
+genuine mesh 1-simplices with independently checked link
+cycles. Exact volume is 15/16 of the original K-corner
+octahedron, and all vertex links and cap face incidences
+are independently audited.
+
+This corrects the **zero-area next-corner apex** obstruction
+preventing PR #68's outgoing K-edge tube from being attached
+at its *far* end. **The incoming cap is not yet physically
+welded** to that far square tube interface. The full two-ended
+K edge and source Figure 12.10 ambient remain open in #69.
+`INCOMING_K_CAP_NOT_TUBE_GLUED` and
+`UNVERIFIED_GEOMETRY` remain mandatory.
