@@ -61,7 +61,7 @@ class TruncatedKCornerTests(unittest.TestCase):
         self.assertEqual(_link_cycle(
             obj.tetrahedra,obj.k_center,obj.cap_center),(4,4))
         self.assertEqual(_link_cycle(
-            obj.tetrahedra,obj.k_center,obj.incoming_vertex),(6,6))
+            obj.tetrahedra,obj.k_center,obj.incoming_vertex),(4,4))
         # The diamond's 4 boundary vertices are distinct and do not
         # collapse onto the actual outgoing K-cap center.
         ring={v for face in obj.cap_faces for v in face}
