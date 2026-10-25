@@ -53,7 +53,10 @@ class RationalKCornerStarTests(unittest.TestCase):
         for weights,chosen in (
             ((0,0),((0,1),(0,2),(1,3))),
             ((1,-1),((0,1),(1,2),(2,1))),
-            ((-1,0,1),((0,2),(2,1),(3,1))),
+            # Sector a1=0 has two-vertex straight connector arcs
+            # (2,3) with NO internal 2-valent vertices. Test true
+            # corners of the signed a2=1 sector (arcs 4,5) instead.
+            ((-1,0,1),((0,2),(4,1),(5,1))),
         ):
             atom=AtomicInstruction((),weights,0,1)
             for arc,corner in chosen:
