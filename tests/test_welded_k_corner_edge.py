@@ -86,6 +86,20 @@ class WeldedKCornerToTubeTests(unittest.TestCase):
         self.assertEqual((result.vertices,result.tetrahedra),(21,40))
         self.assertEqual(len(obj.near_faces),len(obj.far_faces))
 
+    def test_signed_braid_skew_corner_to_outgoing_k_edge(self):
+        # Internal source-candidate corridor a2=+1 genuinely contains
+        # a z-height-changing braid segment; this is not a return rail.
+        atom=AtomicInstruction((),(-1,0,1),0,1)
+        obj=build_welded_k_corner_to_edge(atom,4,1)
+        result=obj.audit()
+        self.assertEqual((result.vertices,result.tetrahedra),(21,40))
+        self.assertEqual(result.boundary_euler,2)
+        arcs=obj.corner.original.candidate.patches.strands.embedded_arcs()
+        a,b=arcs[4][1:3]
+        self.assertNotEqual(a.z,b.z)
+        self.assertEqual(obj.tube.arc,4)
+        self.assertEqual(obj.tube.segment,1)
+
     def test_wrong_seam_and_status_fail_closed(self):
         atom=AtomicInstruction((),(0,0),0,1)
         obj=build_welded_k_corner_to_edge(atom,0,1)
