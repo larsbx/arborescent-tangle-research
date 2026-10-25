@@ -57,11 +57,11 @@ class ExactTetrahedralContactTests(unittest.TestCase):
         p=lambda *a:Point3(*a)
         tetra=(p(0,0,0),p(2,0,0),p(0,2,0),p(0,0,2))
         self.assertEqual(_clip_segment_tet(
-            p(-1,0,0),p(3,0,0),tet),(Fraction(1,4),Fraction(3,4)))
+            p(-1,0,0),p(3,0,0),tetra),(Fraction(1,4),Fraction(3,4)))
         self.assertIsNone(_clip_segment_tet(
-            p(3,3,3),p(4,3,3),tet))
+            p(3,3,3),p(4,3,3),tetra))
         with self.assertRaises(ValueError):
-            _clip_segment_tet(p(0,0,0),p(0,0,0),tet)
+            _clip_segment_tet(p(0,0,0),p(0,0,0),tetra)
 
 
 class WeldedKCornerToTubeTests(unittest.TestCase):
@@ -103,7 +103,7 @@ class WeldedKCornerToTubeTests(unittest.TestCase):
             build_welded_k_corner_to_edge(atom,False,1)
         with self.assertRaises(ValueError):
             build_welded_k_corner_to_edge(atom,0,1,Fraction(0))
-        with self.assertRaisesRegex(ValueError,"UNVERIFIED_GEOMETRY"):
+        with self.assertRaisesRegex(NotImplementedError,"UNVERIFIED_GEOMETRY"):
             build_welded_k_corner_to_edge(
                 AtomicInstruction((),(0,0),1,1),0,1)
 
