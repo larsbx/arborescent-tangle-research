@@ -46,6 +46,8 @@ The deterministic radius search tests `r_max/2ᵏ` for `k=0,…,23`; unsuccessfu
 
 Run hosted Python 3.11/3.12 on the exact final PR head and post-merge `main`.
 
+A first hosted test run exposed a **fixture—not a geometry-counterexample—error**: an untwisted (zero-weight) corridor consists of a single K segment with only two vertices, hence it has **no actual interior two-valent knot corner**. The tests were corrected to select physical corners in the neighboring nonzero signed sector, and an explicit negative test now requires fabricated zero-sector corners to fail rather than silently creating a point. The final PR head must independently pass both Python versions.
+
 **This is NOT a conforming global K neighborhood yet:** the previously merged arbitrary segment tubes intentionally cover only proper **edge interiors** and this PR supplies separate **vertex-centered** 3-balls; those solids are not glued to each other. A genuine connected conforming PL knot neighborhood must align each tube's transverse triangulated boundary with its adjacent vertex-star boundary through explicit mesh subdivision, preserving actual K geometry and links without collisions.
 
 Further required: conforming 2D ribbon/conway surfaces within a single tetrahedral ambient, source Fig12.10 patch identification and framed GL₂ boundary transport, an edge/vertex-aware global cut producing **NEW** four-K-puncture Conway spheres, and an independently replayed source-relative isotopy. No ring R± or arborescent classification is established.
