@@ -777,3 +777,23 @@ No source four-punctured Conway sphere, ambient framed isotopy or
 R± certification follows. The flag
 `FULL_ROOF_PL_SLIT_NOT_SOURCE_CONWAY` and existing
 `UNVERIFIED_GEOMETRY` restrictions remain mandatory.
+
+
+## A5.2e2b4c2d2a — actual K as an edge of an oriented tetrahedral 3-ball
+
+[The exact knot-conforming 3D tube constructor](docs/k-conforming-tetrahedral-tubes-a5-2e2b4c2d2a.md)
+now places **real physical subsegments of the two outer return
+K rails** as bona fide 1-simplices in a 12-tetrahedron PL
+3-ball apiece. Their center-to-center mesh edge has an independently
+checked 4-cycle link. The separate manifold validator checks signed
+volumes, oriented face incidence, a closed Euler-2 boundary and every
+3D vertex link. Exact rational segment/solid clipping verifies each
+tube is disjoint from **every other physical K segment** and every
+removed Conway cube; the two tubes are mutually disjoint.
+
+This is a deliberately **local** knot-conforming 3D meshing
+primitive. It does NOT mesh the entire K, ribbon or source-sphere
+surfaces into one connected ambient 3-manifold, and cannot certify
+new four-punctured Conway spheres, source-isotopy or R±.
+`LOCAL_K_EDGE_CONFORMING_NOT_GLOBAL_AMBIENT` and
+`UNVERIFIED_GEOMETRY` remain in force under Issue #60.
