@@ -255,6 +255,10 @@ def build_shared_corner_two_k_directions(
             or type(max_radius) is not Fraction
             or not 0<max_radius<=Fraction(1,4)):
         raise ValueError("typed actual K corner / guarded exact radius required")
+    if atom.ring_count!=0 or atom.valence<2:
+        raise NotImplementedError(
+            "UNVERIFIED_GEOMETRY: ringed or valence-one source "
+            "K neighborhoods are not physically realized")
     for exponent in range(8):
         radius=max_radius/Fraction(2**exponent)
         try:
