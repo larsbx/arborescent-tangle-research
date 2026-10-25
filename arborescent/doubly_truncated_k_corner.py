@@ -48,6 +48,8 @@ def _interp(a:Vec,b:Vec,t:Fraction)->Vec:
 
 def _clip_clean(poly:tuple[Vec,...],axis:int,sign:int)->tuple[Vec,...]:
     """Standard single-intersection-per-crossing rational polygon clipping."""
+    if axis not in (0,1,2) or sign not in (-1,1):
+        raise ValueError("invalid exact rational clipping halfspace")
     out=[]
     for i,q in enumerate(poly):
         p=poly[i-1]
@@ -217,15 +219,27 @@ class DoublyTruncatedKCorner:
         if collisions.pair_count!=276:
             raise ValueError("not all 3D tetrahedron intersections checked")
         # Re-derive source-K subedge positions at ray fraction C*r.
-        frac=C*self.original.radius
-        for index,terminal in ((self.incoming_center,before),
-                               (self.outgoing_center,after)):
-            q=Point3(*(
-                Fraction(getattr(p,k))+frac*(
-                    Fraction(getattr(terminal,k))-Fraction(getattr(p,k)))
-                for k in ("x","y","z")))
-            if self.vertices[index]!=q:
-                raise ValueError("two-sided capped K edge left original K segment")
+        u,v,w,_,outgoing_axis=_generators(
+            before,p,after,self.original.radius)
+        expected_rays=(
+            (self.incoming_center,u,before),
+            (self.outgoing_center,v if outgoing_axis==3
+             else tuple(-coordinate for coordinate in u),after),
+        )
+        for index,ray,terminal in expected_rays:
+            expected=Point3(*(
+                Fraction(getattr(p,k))+C*ray[i]
+                for i,k in enumerate(("x","y","z"))))
+            if self.vertices[index]!=expected:
+                raise ValueError("two-sided K cap does not match exact ray")
+            source=_minus(_xyz(terminal),_xyz(p))
+            offset=_minus(_xyz(self.vertices[index]),_xyz(p))
+            if _cross(source,offset)!=(0,0,0):
+                raise ValueError("K cap center deviated from original K edge")
+            axis=next(i for i,v in enumerate(source) if v!=0)
+            t=offset[axis]/source[axis]
+            if not Fraction(0)<t<Fraction(1):
+                raise ValueError("K cap center not in proper original K subedge")
         return stats
 
     def require_global_source_ambient(self)->None:
