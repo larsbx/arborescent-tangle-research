@@ -86,11 +86,14 @@ class FullRoofMidplaneSlitTests(unittest.TestCase):
             _disk_topology(())
         with self.assertRaises(ValueError):
             _disk_topology((cut.lower_faces[0],cut.lower_faces[0]))
-        # A full independent check must reject deleting a tetrahedron:
-        # there is no special cap-name trust to bypass the 3D link audit.
+        # A missing boundary tetrahedron may leave a valid 3-ball;
+        # the generic manifold checker must NOT falsely reject that.
+        # Exact completeness is enforced by the parent slab contract.
+        # A duplicated 3-simplex is unconditionally invalid, however.
         with self.assertRaises(ValueError):
             verify_connected_tetrahedral_ball(
-                cut.slab.vertices,cut.slab.tetrahedra[:-1])
+                cut.slab.vertices,
+                cut.slab.tetrahedra+(cut.slab.tetrahedra[0],))
 
     def test_zero_k_and_unsupported_ring_or_valence_do_not_certify_source(self):
         cut=slit_complete_roof_midplane(
