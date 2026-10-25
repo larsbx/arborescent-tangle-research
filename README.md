@@ -839,3 +839,26 @@ assembled into one complete knot-containing 3-manifold.
 No source-generated Conway four-punctured boundary, framed
 isotopy, or R± theorem follows. `LOCAL_CORNER_STAR_NOT_WHOLE_K_AMBIENT`
 and `UNVERIFIED_GEOMETRY` remain mandatory.
+
+
+## A5.2e2b4c2d2d1 — genuine positive-area outgoing caps on K corners
+
+[Truncated exact rational K corner 3-balls](docs/truncated-k-corner-cap-a5-2e2b4c2d2d1.md)
+resolve the specific **zero-area apex** obstruction identified
+in Issue #65: the PR #64 octahedral corner star is truncated
+halfway along its outgoing actual K edge and independently
+retriangulated into an embedded **11-vertex / 16-tetrahedron
+PL 3-ball**. The newly exposed physical attachment cap is a
+**five-vertex, four-triangle, positive-area disk** (χ=1)
+with a real outgoing K mesh edge ending at the cap center.
+Independent 3D manifold, oriented volume, exact cap-edge
+incidence and incoming/outgoing knot edge-link audits validate
+the construction. Its exact volume is 15/16 of the original
+convex corner octahedron.
+
+**A positive-area cap is not yet a 3D tube attachment.** An
+explicit interface transition to the independently meshed
+PR #63 knot tube remains open; no global knot ambient or
+source Figure 12.10 Conway 4-puncture cut has been certified.
+The `TRUNCATED_K_CORNER_CAP_NOT_GLUED` and
+`UNVERIFIED_GEOMETRY` statuses remain fail-closed.
